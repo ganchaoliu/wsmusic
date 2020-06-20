@@ -2,9 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <style type="text/css">
+        .first{
+            float: left;
+            background-color: gold;
+        }
+        .second{
+            background-color: #31c27c;
+        }
+
+        .pre,.nex,.play{
+            display: inline-block;
+            width: 37px;
+            height: 37px;
+            margin-right: 5px;
+            background: url("../../assets/img/playbar.png") no-repeat -40px -204px;
+        }
+
+    </style>
 </head>
 <body>
-$END$
+
+<div>
+    <div class="first">1234</div>
+    <span class="second">4566</span>
+
+    <div class="btns">
+        <div class="btns">
+            <a href="" class="pre">上</a>
+            <a href="" class="play">播</a>
+            <a href="" class="nex">下</a>
+        </div>
+    </div>
+
+    <audio src="https://music.163.com/song/media/outer/url?id=167654.mp3" controls></audio>
+</div>
+
 </body>
 </html>

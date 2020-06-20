@@ -30,6 +30,10 @@ a{
     text-decoration: none;
 }
 
+a:hover{
+    color: #31c27c;
+}
+
 .clear-fix::after{
     clear: both;
     content: '';

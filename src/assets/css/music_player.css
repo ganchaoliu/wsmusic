@@ -1,0 +1,235 @@
+.music_player{
+    margin: 0px auto;
+    width: 980px;
+    position: relative;
+}
+.btns,.music_head,.play,.music_ctrl{
+    float: left;
+    margin: 6px 20px 0 0;
+}
+
+.btns{
+    width: 137px;
+    height: 42px;
+    padding:6px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.btns .pla,.pause{
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin-right: 8px;
+    position: absolute;
+    right: 40px;
+    top: 4px;
+    background: url("../../assets/img/playbar.png") no-repeat 0px -204px;
+}
+
+.btns .pause{
+    background-position:  0px -165px;
+}
+
+.btns .pre{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    margin: 0px 8px 0px 0px;
+    position: absolute;
+    right: 82px;
+    background: url("../../assets/img/playbar.png") no-repeat 0px -128px;
+}
+
+.btns .nex{
+    display: inline-block;
+    width: 28px;
+    position: absolute;
+    right: 15px;
+    height: 28px;    background: url("../../assets/img/playbar.png") no-repeat -80px -128px;
+}
+
+.btns .pre:hover{
+    background: url("../../assets/img/playbar.png") no-repeat -30px -128px;
+}
+
+.btns .nex:hover{
+    background: url("../../assets/img/playbar.png") no-repeat -110px -128px;
+}
+
+.btns .pla:hover{
+    background-position:  -40px -204px;
+}
+
+.btns .pause:hover{
+    background-position: -40px -165px;
+}
+
+.music_head{
+    height: 40px;
+    width:40px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.play{
+    height: 100%;
+    width: 600px;
+}
+
+.play .m_words{
+    height: 13px;
+    font-size: 13px;
+    padding-top: 5px;
+}
+
+.play .m_words a{
+    color: white;
+}
+
+.play .m_words a:hover{
+    color: gold;
+}
+
+.m_progress{
+    width: 100%;
+    height: 30px;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+.m_progress .progress{
+    position: absolute;
+    height: 20px;
+    width: 480px;
+    margin-right: 20px;
+    line-height: 20px;
+    padding: 0;
+    color: #b1191a;
+    top:-3px
+}
+
+.m_progress .m_time{
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 20px;
+    color: white;
+    background-color: green;
+    line-height: 20px;
+    top:5px
+}
+
+.music_ctrl{
+    position: relative;
+    z-index: 10;
+    width: 113px;
+    padding-left: 13px;
+
+    background-position: -147px -238px;
+}
+
+.music_ctrl .icon_vol,.icon_loop,.icon_loop1,.icon_loop2{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin: 11px 2px 0 0;
+}
+
+.music_ctrl .icon_vol,.icon_loop,.icon_loop1,.icon_loop2,.tip,.icon_playlist{
+    background: url("../../assets/img/playbar.png");
+}
+
+.music_ctrl .icon_vol{
+    background-position: -2px -248px;
+}
+
+.music_ctrl .icon_loop{
+    background-position: -3px -344px;
+}
+.music_ctrl .icon_loop1{
+    background-position: -66px -344px;
+}
+
+.music_ctrl .icon_loop1:hover{
+    background-position: -93px -344px;
+}
+
+.music_ctrl .icon_loop2{
+    background-position: -65px -248px;
+}
+
+.music_ctrl .icon_loop2:hover{
+    background-position: -92px -248px;
+}
+
+.music_ctrl .icon_vol:hover{
+    background-position: -31px -248px;
+}
+
+.music_ctrl .icon_loop:hover{
+    background-position: -33px -344px;
+}
+
+.v_slider{
+    height: 70px;
+    width: 20px;
+    position: absolute;
+    bottom: 46px;
+    left: 12px;
+    background-color: rgba(0,0,0,.8);
+}
+
+.volume{
+    position: absolute;
+    height: 65px;
+    right: 10px;
+    top:5px;
+}
+
+.music_ctrl .tip{
+    position: absolute;
+    top: -54px;
+    left: -15px;
+    clear: both;
+    width: 152px;
+    height: 49px;
+    background-position: 0 -287px;
+    text-align: center;
+    color: #fff;
+    line-height: 37px;
+}
+
+.music_ctrl .icon_playlist{
+    display: inline-block;
+    width: 38px;
+    margin: 11px 2px 0px 0px;
+    padding-left: 21px;
+    background-position: -42px -68px;
+    line-height: 27px;
+    text-align: center;
+    color: #666;
+    text-shadow: 0 1px 0 #080707;
+    text-indent: 0;
+    text-decoration: none;
+    position: absolute;
+
+}
+
+.music_ctrl .icon_playlist:hover{
+    background-position: -42px -98px;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+.playlist_con{
+    position: absolute;
+    top:-50px;
+}
+

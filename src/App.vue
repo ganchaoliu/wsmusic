@@ -1,28 +1,37 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/img/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="app">
+    <Header></Header>
+    <router-view ></router-view>
+<!--    <audio-play></audio-play>-->
+    <music-player class="music_player"></music-player>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+  import Header from "./components/content/Header";
+  import MusicPlayer from "./components/content/MusicPlayer";
+  import AudioPlay from "./views/AudioPlay";
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Header,
+    MusicPlayer,
+    // AudioPlay
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+  @import "assets/css/base.css";
+  .music_player {
+    width: 100%;
+    height: 53px;
+    position: fixed;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .8);
+    width:100%;
+  }
+
+
+
 </style>

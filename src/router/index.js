@@ -1,38 +1,37 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import App from '../App'
+import Layout from "../views/element/Layout";
 
 Vue.use(Router)
 
-const Home = () =>import('../views/home/Home')
-const Cart=()=>import('views/cart/Cart')
-const Category=()=>import('views/category/Category')
-const Profile=()=>import('views/profile/Profile')
+const Main=()=>import('../views/Main')
+const MusicPlayer=()=>import('../views/MusicPlayer')
+const PlayList=()=>import('../views/PlayList')
 
 const routes= [
-  // {
-  //   path: '/',
-  //   redirect: '/home'
-  // },
   {
-    path: '/home',
-    name: 'home',
-    component: Home
+    path: '/',
+    redirect: '/search'
   },
   {
-    path: '/cart',
-    name: 'Cart',
-    component: Cart
+    path: '/search',
+    name: 'main',
+    component: Main
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: Profile
+    path: '/play',
+    name: 'play',
+    component: MusicPlayer
   },
   {
-    path: '/category',
-    name: 'Category',
-    component: Category
+    path: '/layout',
+    name: 'layout',
+    component: Layout
+  },
+  {
+    path: '/playlist',
+    name: 'playlist',
+    component: PlayList
   }
 ]
 

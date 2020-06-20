@@ -1,0 +1,46 @@
+.main{
+    margin:20px auto;
+    width:1200px
+}
+
+.w{
+    width: 1200px;
+    margin:0 auto;
+}
+
+ul li{
+    list-style: none;
+}
+
+.nav ul li{
+    list-style: none;
+    float: left;
+    margin-right: 50px;
+}
+
+.main ul li:first-child a{
+    color:#31c27c;
+}
+
+.musiclist{
+    margin-top: 25px;
+}
+
+.listhd li,.listbd li{
+    display: inline-block;
+    width: 300px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-space: none;
+    text-overflow: ellipsis;
+}
+
+.list2{
+    background-color: rgba(0,0,0,0.02);
+}
+
+
+
+
+
