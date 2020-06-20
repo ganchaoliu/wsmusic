@@ -33,7 +33,7 @@
                 <a href="#" @click="change_loop" :class="icon_loop"></a>
                 <a href="#" class="icon_playlist" @click="playlist">{{$store.state.playlist.length}}</a>
                 <transition name="fade">
-                    <span class="tip" v-show="addsuccess">已添加{{$store.state.playlist.slice(-1).name}}到播放列表</span>
+                    <span class="tip" v-show="addsuccess">已添加到播放列表</span>
                 </transition>
 
             </div>
@@ -151,7 +151,7 @@
                 // this.play_next()
                 //如果是单曲循环则将当前歌曲重新播放一遍
                 //随机播放
-                this.playrandom()
+                this.playloop()
             },
             playrandom(){
                 let playlist = this.$store.state.playlist

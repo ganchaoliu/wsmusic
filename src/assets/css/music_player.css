@@ -199,6 +199,8 @@
     text-align: center;
     color: #fff;
     line-height: 37px;
+    text-space: none;
+    text-overflow: ellipsis;
 }
 
 .music_ctrl .icon_playlist{
