@@ -38,7 +38,7 @@
 
             </div>
             <play-list class="playlist_con"></play-list>
-            <audio ref="audio" :src="$store.state.currentsong.song.url"
+            <audio ref="audio" :src="song_url"
                    @play="onPlay" @pause="onPause"
                    @loadedmetadata="onLoadedmetadata"
                    @timeupdate="onTimeupdate"
@@ -119,6 +119,7 @@
             //参数为播放上一曲或者播放下一曲
             playloop(int){
                 //获取播放模式是2随机，0顺序，1单曲循环
+                console.log('变更音乐');
                 if(this.loop==0){
                     if(int==-1){
                         this.play_pre()
@@ -231,6 +232,9 @@
             },
             isupdate(){
                   return this.$store.state.playlist
+            },
+            song_url(){
+                return 'https://music.163.com/song/media/outer/url?id='+this.$store.state.currentsong.id+'.mp3'
             }
         },
         watch:{

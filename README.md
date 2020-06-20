@@ -1,5 +1,5 @@
 # wsmusic 
-# 此项目基于网易云音乐API本地服务器接口
+# 网易云音乐 Node.js API service
 
 ## Project setup
 ```
