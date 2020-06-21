@@ -16,6 +16,18 @@ const store = new Vuex.Store({
                 url:''
             }
         }
+    },
+    mutations:{
+        updateCurrentSong(state,song){
+            console.log(song);
+            state.currentsong = song
+        },
+        updateVolume(state,pos){
+            state.volume = pos
+        },
+        updateSongList(state,list){
+            state.songlist = list
+        }
     }
 })
 

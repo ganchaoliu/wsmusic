@@ -98,7 +98,8 @@
             playorpause(){
                 const currentsong = this.$store.state.currentsong.song.url
                 if(currentsong==""&&this.$store.state.playlist.length>0){
-                    this.$store.state.currentsong = this.$store.state.playlist[0]
+                    // this.$store.state.currentsong = this.$store.state.playlist[0]
+                    this.$store.commit('updateCurrentSong',this.$store.state.playlist[0])
                 }else{
                     this.audio.playing?this.pause():this.play()
                 }
@@ -112,9 +113,10 @@
             play_next(){
                 let pos = this.$store.state.playlist.indexOf(this.$store.state.currentsong)
                 if(pos+1<this.$store.state.playlist.length){
-                    this.$store.state.currentsong = this.$store.state.playlist[pos+1]
+                    // this.$store.state.currentsong = this.$store.state.playlist[pos+1]
+                    this.$store.commit('updateCurrentSong',this.$store.state.playlist[pos+1])
                 }else{
-                    this.$store.state.currentsong = this.$store.state.playlist[0]
+                    this.$store.commit('updateCurrentSong',this.$store.state.playlist[0])
                 }
             },
             //参数为播放上一曲或者播放下一曲
@@ -142,9 +144,12 @@
                 console.log('现在播放列表中有：'+playlist.length+'首歌')
                 let pos = this.$store.state.playlist.indexOf(this.$store.state.currentsong)
                 if(pos-1>=0){
-                    this.$store.state.currentsong = this.$store.state.playlist[pos-1]
+                    // this.$store.state.currentsong = this.$store.state.playlist[pos-1]
+                    this.$store.commit('updateCurrentSong',this.$store.state.playlist[pos-1])
                 }else{
-                    this.$store.state.currentsong = this.$store.state.playlist[len-1]
+                    // this.$store.state.currentsong = this.$store.state.playlist[len-1]
+                    this.$store.commit('updateCurrentSong',this.$store.state.playlist[len-1])
+
                 }
             },
             play_end(){
@@ -158,7 +163,8 @@
             playrandom(){
                 let playlist = this.$store.state.playlist
                 let pos = Math.floor(Math.random()*playlist.length);
-                this.$store.state.currentsong = playlist[pos]
+                // this.$store.state.currentsong = playlist[pos]
+                this.$store.commit('updateCurrentSong',playlist[pos])
                 this.play()
             },
             onPlay () {
@@ -192,8 +198,8 @@
                 this.$refs.audio.currentTime=res/100*this.audio.maxTime
             },
             //改变音量，由于进度条是1-100，音量范围是0-1所以需要进行替换
-            changeVolume(res){
-                this.$store.state.volume=res
+            changeVolume(pos){
+                this.$store.commit('updateVolume',pos)
                 this.$refs.audio.volume = this.$store.state.volume/100
             },
             change_vol_show(){

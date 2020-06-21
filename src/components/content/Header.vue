@@ -57,7 +57,7 @@
                     }
                 }).then((res)=>{
                     console.log(res);
-                    this.$store.state.songlist = res.data.result.songs
+                    this.$store.commit('updateSongList',res.data.result.songs)
                 })
                 this.$router.push({
                     path:'/search',
