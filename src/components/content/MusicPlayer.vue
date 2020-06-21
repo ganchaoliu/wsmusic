@@ -33,7 +33,7 @@
                 <a href="#" @click="change_loop" :class="icon_loop"></a>
                 <a href="#" class="icon_playlist" @click="playlist">{{$store.state.playlist.length}}</a>
                 <transition name="fade">
-                    <span class="tip" v-show="addsuccess">已添加到播放列表</span>
+                    <span class="tip" v-show="addsuccess">{{tip_message}}</span>
                 </transition>
 
             </div>
@@ -90,7 +90,8 @@
                 loop: 0,  //0：顺序播放 1：单曲循环 2：随机播放
                 vol_show:false,
                 position:'',
-                addsuccess:false
+                addsuccess:false,
+                tip_message:''
             }
         },
         methods:{
@@ -231,14 +232,25 @@
                 return 'icon_loop'+loop
             },
             isupdate(){
-                  return this.$store.state.playlist
+                //返回播放列表长度
+                return this.$store.state.playlist.length
             },
             song_url(){
                 return 'https://music.163.com/song/media/outer/url?id='+this.$store.state.currentsong.id+'.mp3'
             }
         },
         watch:{
-            isupdate:function () {
+            isupdate:function (new_data,old_data) {
+                //判断是添加播放列表还是删除
+                if(new_data>old_data){
+                    this.tip_message='添加播放列表成功'
+                }else{
+                    if(new_data!=0){
+                        this.tip_message='删除播放列表成功'
+                    }else{
+                        this.tip_message='播放列表为空'
+                    }
+                }
                 this.addsuccess = true
                 setTimeout(()=>{
                     this.addsuccess = false
