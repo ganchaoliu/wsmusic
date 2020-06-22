@@ -6,7 +6,7 @@
                 <li><a href="#">单曲</a></li>
                 <li><a href="#">专辑</a></li>
                 <li><a href="#">MV</a></li>
-                <li><a href="#">歌单</a></li>
+                <li><a href="/songlist">歌单</a></li>
                 <li><a href="#">用户</a></li>
                 <li><a href="#">歌词</a></li>
             </ul>
@@ -33,7 +33,6 @@
             </ul>
 
         </div>
-        <div class="add_playlist_success" v-if="true">添加成功</div>
     </div>
 </template>
 
@@ -77,6 +76,21 @@
                     }
                 });
             },
+            getSongDetail:async function(){
+                request({
+                    url:"/api/song/url",
+                    params:{
+                        id:id
+                    }
+                }).then((res)=>{
+                    console.log('获取歌曲详情'+res);
+                });
+            },
+            /*
+            * 添加歌曲到播放列表
+            * 1.判断在播放列表中是否存在
+            *
+            * */
             addtoplaylist(id,name){
                 request({
                     url:"/api/song/url",
@@ -103,7 +117,6 @@
                         }else{
                             this.$store.state.playlist.push(song)
                             console.log('添加'+id)
-                            console.log(this.$store.state.playlist)
                         }
                     }else{
                         console.log('url为空，没有版权哟！！')
@@ -123,9 +136,6 @@
                     console.log('获取url')
                     return res.data.data[0]
                  })
-            },
-            addplaylistsuccess(){
-                return true
             }
         }
     }

@@ -1,0 +1,28 @@
+.topbar{
+    width: 100%;
+    height: 105px;
+    background-color: gray;
+}
+
+.topheader{
+    width: 100%;
+    height: 70px;
+    background-color: #242424;
+}
+
+.m-top{
+    width: 980px;
+    height: 70px;
+    margin: 0px auto 0;
+}
+
+.logo{
+    float: left;
+    width: 176px;
+    height: 69px;
+    background: url('../../assets/img/topbar.png') no-repeat 0px 0px;
+}
+
+a{
+    text-decoration: none;
+}

@@ -19,8 +19,6 @@
                     <el-slider v-model="sliderTime" :format-tooltip="formatProcessToolTip" @change="changeCurrentTime" column="progress" class="progress" ></el-slider>
                     <el-tag type="info" class="m_time">
                         {{audio.currentTime|formatSecond}}/{{audio.maxTime| formatSecond}}
-<!--                        <el-tag type="info">{{ audio.currentTime | formatSecond}}</el-tag>-->
-<!--                        <el-tag type="info">{{ audio.maxTime | formatSecond}}</el-tag>-->
                     </el-tag>
                     <div class="clearfix"></div>
                 </div>
@@ -33,7 +31,7 @@
                 <a href="#" @click="change_loop" :class="icon_loop"></a>
                 <a href="#" class="icon_playlist" @click="playlist">{{$store.state.playlist.length}}</a>
                 <transition name="fade">
-                    <span class="tip" v-show="addsuccess">{{tip_message}}</span>
+                    <span class="tip" v-show="tip_show">{{tip_message}}</span>
                 </transition>
 
             </div>
@@ -50,7 +48,6 @@
 </template>
 
 <script>
-    import {request} from '../../network/request'
     const PlayList = ()=>import('./PlayList')
 
     // 将整数转换成 时：分：秒的格式
@@ -75,7 +72,6 @@
         name: "MusicPlayer",
         data(){
             return {
-                playicon:'el-icon-video-play',
                 song:{},
                 sliderTime:0,
                 lyric:'',
@@ -90,7 +86,7 @@
                 loop: 0,  //0：顺序播放 1：单曲循环 2：随机播放
                 vol_show:false,
                 position:'',
-                addsuccess:false,
+                tip_show:false,
                 tip_message:''
             }
         },
@@ -169,13 +165,13 @@
             },
             onPlay () {
                 this.audio.playing = true
+                this.$store.commit('updatePlayStatus',true)
                 this.$refs.audio.volume = this.$store.state.volume/100
-                this.playicon = "el-icon-video-pause"
             },
             // 当音频暂停
             onPause () {
                 this.audio.playing = false
-                this.playicon = "el-icon-video-play"
+                this.$store.commit('updatePlayStatus',false)
             },
             onLoadedmetadata(res) {
                 this.audio.maxTime = parseInt(res.target.duration)
@@ -257,9 +253,9 @@
                         this.tip_message='播放列表为空'
                     }
                 }
-                this.addsuccess = true
+                this.tip_show = true
                 setTimeout(()=>{
-                    this.addsuccess = false
+                    this.tip_show = false
                 },1000)
             }
         },

@@ -14,7 +14,8 @@ const store = new Vuex.Store({
             name:'',
             song:{
                 url:''
-            }
+            },
+            playing:false
         }
     },
     mutations:{
@@ -27,7 +28,10 @@ const store = new Vuex.Store({
         },
         updateSongList(state,list){
             state.songlist = list
-        }
+        },
+        updatePlayStatus(state,status){
+            state.currentsong.playing = status
+        },
     }
 })
 

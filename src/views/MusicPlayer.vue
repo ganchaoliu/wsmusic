@@ -47,7 +47,6 @@
         name: "MusicPlayer",
         data(){
           return {
-              playicon:'el-icon-video-play',
               song:{},
               sliderTime:0,
               lyric:'',
@@ -79,7 +78,6 @@
             // 当音频暂停
             onPause () {
                 this.audio.playing = false
-                this.playicon = "el-icon-video-play"
             },
             onLoadedmetadata(res) {
                 this.audio.maxTime = parseInt(res.target.duration)
@@ -120,15 +118,6 @@
         },
         created() {
             this.song = this.$store.state.currentsong
-            // request({
-            //     url:"/api/song/url",
-            //     params:{
-            //         id:this.$route.query.id
-            //     }
-            // }).then((res)=>{
-            //     console.log(res);
-            //     this.song=res.data.data[0];
-            // });
             request({
                 url:"/api/lyric",
                 params:{
@@ -137,53 +126,7 @@
             }).then((res)=>{
                 console.log(res);
                 this.lyric = res.data.lrc.lyric.replace(/(\r\n)|(\n)/g,'<br/><br/>')
-
             })
-
-
-
-
-
-        // },
-        // computed:{
-        //     url(){
-        //         console.log('调用计算属性');
-        //         const that = this
-        //         return function(id){
-        //             console.log(id);
-        //             request({
-        //             url:"/api/song/url",
-        //             params:{
-        //                 id:that.$route.query.id
-        //             }
-        //         }).then((res)=>{
-        //             console.log(res);
-        //             that.song=res.data.data[0];
-        //             return that.song.url
-        //         })
-        //     }
-        //     }
-        //     function getSong(id){
-        //         return request({
-        //             url:"/api/song/url",
-        //             params:{
-        //                 id:id
-        //             }
-        //         })
-        //     }
-        //     function getLyric(id){
-        //         return request({
-        //             url:"/api/lyric",
-        //             params:{
-        //                 id:id
-        //             }
-        //         })
-        //     }
-        //     const id = this.$route.query.id
-        //     request.all([getSong(id),getLyric(id)]).then(request.spread(function () {
-        //         console.log('多请求执行完成');
-        //             this.lyrc = res.lyc.lyric
-        //     }))
         }
     }
 </script>

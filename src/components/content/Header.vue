@@ -47,7 +47,7 @@
             }
         },
         methods:{
-            searchMusic(){
+             searchMusic(){
                 console.log('搜索歌曲');
                 request({
                     url:"/api/search",
@@ -55,8 +55,14 @@
                         keywords:this.searchvalue,
                         limit:50
                     }
-                }).then((res)=>{
-                    console.log(res);
+                }).then(async (res)=>{
+                    //重新封装歌曲列表，将后续有可能用到的数据都在这里全部获取到
+                    let songs = res.data.result.songs
+                    console.log(songs)
+                    let ids = new Array()
+                    for(let i=0;i<songs.length;i++){
+                        ids.push(songs[i].id)
+                    }
                     this.$store.commit('updateSongList',res.data.result.songs)
                 })
                 this.$router.push({
@@ -65,19 +71,8 @@
                         keywords:this.searchvalue
                     }
                 })
-                // console.log('搜索歌曲');
-                // request({
-                //     url:"/api/search",
-                //     params:{
-                //         keywords:this.searchvalue,
-                //         limit:20
-                //     }
-                // }).then((res)=>{
-                //     console.log(res);
-                //     this.$store.state.songlist = res.data.result.songs
-                // })
             },
-        }
+        },
 
     }
 </script>

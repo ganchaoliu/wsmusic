@@ -41,7 +41,7 @@
                 //判断是否是当前播放的歌曲
                 let currentSong = this.$store.state.currentsong
                 let currentIndex = this.$store.state.playlist.indexOf(currentSong)
-                if(currentIndex===index){
+                if(currentIndex===index&&this.$store.state.currentsong.playing){
                     this.tip_message='正在播放中'
                     this.tip_show=true
                     setTimeout(()=>{
@@ -61,5 +61,5 @@
 </script>
 
 <style scoped>
-    @import "../assets/css/PlayList.css";
+    @import "../assets/css/playList.css";
 </style>

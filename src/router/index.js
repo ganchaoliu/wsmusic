@@ -7,6 +7,7 @@ Vue.use(Router)
 const Main=()=>import('../views/Main')
 const MusicPlayer=()=>import('../views/MusicPlayer')
 const PlayList=()=>import('../views/PlayList')
+const SongList=()=>import('../views/SongList')
 
 const routes= [
   {
@@ -32,6 +33,11 @@ const routes= [
     path: '/playlist',
     name: 'playlist',
     component: PlayList
+  },
+  {
+    path: '/songlist',
+    name: 'songlist',
+    component: SongList
   }
 ]
 
