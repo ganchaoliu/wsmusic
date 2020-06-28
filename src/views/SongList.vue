@@ -22,5 +22,28 @@
 </script>
 
 <style scoped>
-@import '../assets/css/songlist.css';
+    .bgw{
+    width: 980px;
+    height: 500px;
+    margin: 20px auto 0;
+    background-color: pink;
+}
+
+.songlist{
+    padding: 40px;
+}
+
+.head{
+    height: 42px;
+    border-bottom: 2px solid green;
+    background-color: yellow;
+}
+
+h3{
+    float: left;
+}
+
+.orderby{
+    float: right;
+}
 </style>

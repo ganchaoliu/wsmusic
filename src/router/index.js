@@ -8,6 +8,7 @@ const Main=()=>import('../views/Main')
 const MusicPlayer=()=>import('../views/MusicPlayer')
 const PlayList=()=>import('../views/PlayList')
 const SongList=()=>import('../views/SongList')
+const Login = () => import('../views/Login')
 
 const routes= [
   {
@@ -38,6 +39,11 @@ const routes= [
     path: '/songlist',
     name: 'songlist',
     component: SongList
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
   }
 ]
 
