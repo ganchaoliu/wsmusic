@@ -113,6 +113,7 @@
                     this.$store.commit('updateCurrentSong',this.$store.state.playlist[pos+1])
                 }else{
                     this.$store.commit('updateCurrentSong',this.$store.state.playlist[0])
+                    this.play()
                 }
             },
             //参数为播放上一曲或者播放下一曲

@@ -24,6 +24,7 @@ ul li{
 
 .musiclist{
     margin-top: 25px;
+    position: relative;
 }
 
 .listhd li,.listbd li{
@@ -40,6 +41,19 @@ ul li{
     background-color: rgba(0,0,0,0.02);
 }
 
+.musiclist .tip{
+    position: absolute;
+    z-index: 1000;
+    top: 30px;
+    left: 500px;
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: rgba(0,0,0,.8);
+    font-size: 25px;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+}
 
 
 

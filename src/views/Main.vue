@@ -31,7 +31,9 @@
                 </li>
                 <br />
             </ul>
-
+            <transition name="fade">
+                <span class="tip" v-show="tip_show">{{tipMessage}}</span>
+            </transition>
         </div>
     </div>
 </template>
@@ -43,7 +45,9 @@
         date(){
             return {
                 currentKeywords:'',
-                addplaylistsuccess:true
+                addplaylistsuccess:true,
+                tipmessage:'嘿嘿小样',
+                tipshow:true,
             }
         },
         methods:{
@@ -67,14 +71,14 @@
                             }
                         })
                         if(checkresult){
-                            console.log('已在播放列表中')
+                            this.tip_message='已在播放列表中'
                         }else{
                             this.$store.state.playlist.push(song)
                         }
                     }else{
                         alert('url为空无法播放')
                     }
-                });
+                })
             },
             getSongDetail:async function(){
                 request({
@@ -113,13 +117,13 @@
                             }
                         })
                         if(checkresult){
-                            console.log('已在播放列表中')
+                            alert('已在播放列表中')
                         }else{
                             this.$store.state.playlist.push(song)
                             console.log('添加'+id)
                         }
                     }else{
-                        console.log('url为空，没有版权哟！！')
+                        alert('url为空，没有版权哟！！')
                     }
                 })
             },
@@ -137,11 +141,18 @@
                     return res.data.data[0]
                  })
             }
+        },
+        computed:{
+            tip_show(){
+                return this.tipshow
+            },
+            tipMessage(){
+                return this.tip_message
+            }
         }
     }
 </script>
 
 <style scoped>
-    /*@import "assets/css/main.css";*/
     @import url("../assets/css/main.css");
 </style>

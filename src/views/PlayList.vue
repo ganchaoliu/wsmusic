@@ -8,7 +8,7 @@
         </ul>
         <ul class="listbd" v-if="$store.state.playlist.length!==0"
             v-for="(song,index) in $store.state.playlist"
-            :class="{list2:index%2===0}">
+            :class="{list2:index%2===0,'pla_hl':iscurrentsong===index}">
             <!--                <li><router-link :to="{path:'/play',query:{id:song.id,name:song.name}}">{{song.name}}</router-link></li>-->
             <li><a href="#" @click="play(index)">{{song.name}}</a></li>
             <!--                <li><a href="#">{{song.artists[0].name}}</a></li>-->
@@ -55,6 +55,15 @@
                         this.tip_show=false
                     },1000)
                 }
+            }
+        },
+        computed:{
+            iscurrentsong(){
+                let currentSong = this.$store.state.currentsong
+                let currentIndex = this.$store.state.playlist.indexOf(currentSong)
+                console.log(currentIndex)                  
+                return currentIndex
+                 
             }
         }
     }
