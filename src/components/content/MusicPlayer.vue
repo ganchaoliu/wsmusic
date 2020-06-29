@@ -7,7 +7,7 @@
                 <a href="#" class="nex" @click="playloop(1)"></a>
             </div>
             <div class="music_head">
-                <img src="http://p2.music.126.net/DK1_4sP_339o5rowMdPXdw==/109951164071024476.jpg?param=34y34">
+                <img :src="album_pic">
                 <a href="/song?id=1363948882" hidefocus="true" class="mask"></a>
             </div>
 
@@ -48,7 +48,9 @@
 </template>
 
 <script>
+import { log } from 'util'
     const PlayList = ()=>import('./PlayList')
+    import {request} from '../../network/request'
 
     // 将整数转换成 时：分：秒的格式
     function realFormatSecond(second) {
@@ -87,7 +89,8 @@
                 vol_show:false,
                 position:'',
                 tip_show:false,
-                tip_message:''
+                tip_message:'',
+                album_pic:''
             }
         },
         methods:{
@@ -165,9 +168,12 @@
                 this.play()
             },
             onPlay () {
+                console.log('播放中')
                 this.audio.playing = true
                 this.$store.commit('updatePlayStatus',true)
                 this.$refs.audio.volume = this.$store.state.volume/100
+                // console.log('专辑id'+this.$store.state.currentsong.album.id)
+                this.getAlbumDetail(this.$store.state.currentsong.album.id)
             },
             // 当音频暂停
             onPause () {
@@ -213,6 +219,17 @@
                 this.$router.push({
                     path:'playlist'
                 })
+            },
+            getAlbumDetail(id){
+                request({
+                    url:"/api/album",
+                    params:{
+                        id:id
+                    }
+                }).then((res)=>{
+                    console.log(res.data.album.picUrl)
+                    this.album_pic = res.data.album.picUrl
+                })
             }
 
         },
@@ -240,6 +257,9 @@
             },
             song_url(){
                 return 'https://music.163.com/song/media/outer/url?id='+this.$store.state.currentsong.id+'.mp3'
+            },
+            album_pic(){
+                return this.album_pic
             }
         },
         watch:{

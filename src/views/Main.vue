@@ -23,11 +23,11 @@
                 v-for="(song,index) in $store.state.songlist"
                 :class="{list2:index%2==0}">
 <!--                <li><router-link :to="{path:'/play',query:{id:song.id,name:song.name}}">{{song.name}}</router-link></li>-->
-                <li @click="playsong(song.id,song.name)"><a href="#">{{song.name}}</a></li>
+                <li><a @click="playsong(song.id,song.name,song.album)">{{song.name}}</a></li>
                 <li><a href="#">{{song.artists[0].name}}</a></li>
                 <li><a href="#">{{song.album.name}}</a></li>
                 <li>
-                    <button @click="addtoplaylist(song.id,song.name)">添加到播放列表</button>
+                    <button @click="addtoplaylist(song.id,song.name,song.album)">添加到播放列表</button>
                 </li>
                 <br />
             </ul>
@@ -40,6 +40,7 @@
 
 <script>
     import {request} from "../network/request"
+import { log } from 'util'
     export default {
         name: "Main",
         date(){
@@ -51,7 +52,8 @@
             }
         },
         methods:{
-            playsong(id, name){
+            playsong(id, name, album){
+                console.log('播放')
                 request({
                     url:"/api/song/url",
                     params:{
@@ -64,6 +66,7 @@
                         song.id = id
                         song.name = name
                         song.song = res.data.data[0];
+                        song.album = album
                         this.$store.state.currentsong=song;
                         let checkresult =  this.$store.state.playlist.some(item=>{
                             if(item.id==id){
@@ -74,6 +77,7 @@
                             this.tip_message='已在播放列表中'
                         }else{
                             this.$store.state.playlist.push(song)
+                            console.log('播放'+song)
                         }
                     }else{
                         alert('url为空无法播放')
@@ -95,7 +99,7 @@
             * 1.判断在播放列表中是否存在
             *
             * */
-            addtoplaylist(id,name){
+            addtoplaylist(id,name,album){
                 request({
                     url:"/api/song/url",
                     params:{
@@ -105,11 +109,13 @@
                     const song = {
                         id:'',
                         name:'',
-                        song:{}
+                        song:{},
+                        album:{}
                     }
                     song.id = id
                     song.name = name
                     song.song = res.data.data[0]
+                    song.album = album
                     if(song.song.url!=null) {
                         let checkresult =  this.$store.state.playlist.some(item=>{
                             if(item.id==id){
@@ -120,7 +126,7 @@
                             alert('已在播放列表中')
                         }else{
                             this.$store.state.playlist.push(song)
-                            console.log('添加'+id)
+                            console.log('添加'+song)
                         }
                     }else{
                         alert('url为空，没有版权哟！！')

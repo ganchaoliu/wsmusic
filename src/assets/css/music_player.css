@@ -72,13 +72,18 @@
     overflow: hidden;
 }
 
+.music_head img{
+    height: 40px;
+    width:40px;
+}
+
 .play{
     height: 100%;
     width: 600px;
 }
 
 .play .m_words{
-    height: 13px;
+    height: 15px;
     font-size: 13px;
     padding-top: 5px;
 }
