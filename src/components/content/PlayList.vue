@@ -13,7 +13,7 @@
                     v-for="(song,index) in $store.state.playlist"
                     :class="{list2:index%2==0}">
                     <!--                <li><router-link :to="{path:'/play',query:{id:song.id,name:song.name}}">{{song.name}}</router-link></li>-->
-                    <li><a href="#" @click="play(index)">{{song.name}}</a></li>
+                    <li><a @click="play(index)">{{song.name}}</a></li>
                     <!--                <li><a href="#">{{song.artists[0].name}}</a></li>-->
                     <!--                <li><a href="#">{{song.album.name}}</a></li>-->
                     <!--                <li>-->

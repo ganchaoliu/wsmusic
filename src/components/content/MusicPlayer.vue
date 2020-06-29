@@ -179,7 +179,7 @@ import { log } from 'util'
             },
             onLoadedmetadata(res) {
                 this.audio.maxTime = parseInt(res.target.duration)
-                this.getLyric(this.$store.state.currentsong.album.id)
+                this.getLyric(this.$store.state.currentsong.id)
                 this.getAlbumDetail(this.$store.state.currentsong.album.id)
             },
             // 当timeupdate事件大概每秒一次，用来更新音频流的当前播放时间
@@ -239,7 +239,8 @@ import { log } from 'util'
                         id:id
                     }
                 }).then((res)=>{
-                    console.log(res)
+                    console.log(res.data.lrc.lyric)
+                    this.lyric = res.data.lrc.lyric
                 })
             }
 
