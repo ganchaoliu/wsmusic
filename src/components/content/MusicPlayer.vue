@@ -2,9 +2,9 @@
     <div class="music_main">
         <div class="music_player">
             <div class="btns">
-                <a href="#" class="pre" @click="playloop(-1)"></a>
-                <a href="#" :class="{'pause':audio.playing,'pla':!audio.playing}" @click="playorpause"></a>
-                <a href="#" class="nex" @click="playloop(1)"></a>
+                <a class="pre" @click="playloop(-1)"></a>
+                <a :class="{'pause':audio.playing,'pla':!audio.playing}" @click="playorpause"></a>
+                <a class="nex" @click="playloop(1)"></a>
             </div>
             <div class="music_head">
                 <img :src="album_pic">
@@ -13,7 +13,7 @@
 
             <div class="play">
                 <div class="m_words">
-                    <a href="#">{{$store.state.currentsong.name}}</a>
+                    <a href="#" v-text="displaySongMessage"></a>
                 </div>
                 <div class="m_progress">
                     <el-slider v-model="sliderTime" :format-tooltip="formatProcessToolTip" @change="changeCurrentTime" column="progress" class="progress" ></el-slider>
@@ -27,9 +27,9 @@
                 <div class="v_slider" v-show="vol_show">
                     <el-slider v-model="$store.state.volume" @change="changeVolume" :format-tooltip="formatVolumeToolTip" vertical class="volume"></el-slider>
                 </div>
-                <a href="#" class="icon_vol" @click="change_vol_show"></a>
-                <a href="#" @click="change_loop" :class="icon_loop"></a>
-                <a href="#" class="icon_playlist" @click="playlist">{{$store.state.playlist.length}}</a>
+                <a class="icon_vol" @click="change_vol_show"></a>
+                <a @click="change_loop" :class="icon_loop"></a>
+                <a class="icon_playlist" @click="playlist">{{$store.state.playlist.length}}</a>
                 <transition name="fade">
                     <span class="tip" v-show="tip_show">{{tip_message}}</span>
                 </transition>
@@ -90,7 +90,7 @@ import { log } from 'util'
                 position:'',
                 tip_show:false,
                 tip_message:'',
-                album_pic:''
+                album_pic:'',
             }
         },
         methods:{
@@ -168,12 +168,9 @@ import { log } from 'util'
                 this.play()
             },
             onPlay () {
-                console.log('播放中')
                 this.audio.playing = true
                 this.$store.commit('updatePlayStatus',true)
                 this.$refs.audio.volume = this.$store.state.volume/100
-                // console.log('专辑id'+this.$store.state.currentsong.album.id)
-                this.getAlbumDetail(this.$store.state.currentsong.album.id)
             },
             // 当音频暂停
             onPause () {
@@ -182,6 +179,8 @@ import { log } from 'util'
             },
             onLoadedmetadata(res) {
                 this.audio.maxTime = parseInt(res.target.duration)
+                this.getLyric(this.$store.state.currentsong.album.id)
+                this.getAlbumDetail(this.$store.state.currentsong.album.id)
             },
             // 当timeupdate事件大概每秒一次，用来更新音频流的当前播放时间
             onTimeupdate(res) {
@@ -220,6 +219,7 @@ import { log } from 'util'
                     path:'playlist'
                 })
             },
+            //获取专辑封面
             getAlbumDetail(id){
                 request({
                     url:"/api/album",
@@ -227,8 +227,19 @@ import { log } from 'util'
                         id:id
                     }
                 }).then((res)=>{
-                    console.log(res.data.album.picUrl)
                     this.album_pic = res.data.album.picUrl
+                })
+            },
+            //获取歌词信息
+            getLyric(id){
+                console.log('获取歌词信息')
+                request({
+                    url:"/api/lyric",
+                    params:{
+                        id:id
+                    }
+                }).then((res)=>{
+                    console.log(res)
                 })
             }
 
@@ -258,8 +269,14 @@ import { log } from 'util'
             song_url(){
                 return 'https://music.163.com/song/media/outer/url?id='+this.$store.state.currentsong.id+'.mp3'
             },
-            album_pic(){
-                return this.album_pic
+            displaySongMessage(){
+                console.log(this.$store.state.currentsong)
+                if(this.$store.state.currentsong.artist!=''){
+                    return this.$store.state.currentsong.name+'--'+ this.$store.state.currentsong.artist
+                }else{
+                    return this.$store.state.currentsong.name
+                }
+                
             }
         },
         watch:{

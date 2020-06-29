@@ -95,7 +95,7 @@ export default {
         url: "/api/search",
         params: {
           keywords: this.searchvalue,
-          limit: 50
+          limit: 20
         }
       }).then(async res => {
         //重新封装歌曲列表，将后续有可能用到的数据都在这里全部获取到

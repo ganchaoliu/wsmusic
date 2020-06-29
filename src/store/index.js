@@ -16,7 +16,8 @@ const store = new Vuex.Store({
                 url:''
             },
             playing:false,
-            album:{}
+            album:{},
+            artist:''
         },
         loginStatus:false,
         userData:{}

@@ -56,5 +56,17 @@ ul li{
 }
 
 
+.main_page{
+    margin-top: 20px;
+    text-align: center;
+}
+.main_page a{
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
 
 

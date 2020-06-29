@@ -16,6 +16,10 @@
     position: relative;
 }
 
+.btns a{
+    cursor: pointer;
+}
+
 .btns .pla,.pause{
     display: inline-block;
     width: 36px;
@@ -175,6 +179,10 @@
 
 .music_ctrl .icon_loop:hover{
     background-position: -33px -344px;
+}
+
+.music_ctrl a{
+    cursor: pointer;
 }
 
 .v_slider{
