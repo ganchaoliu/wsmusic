@@ -44,10 +44,10 @@
           >{{song.name}}</a>
         </li>
         <li>
-          <a href="#">{{song.artists[0].name}}</a>
+          <a href="#" @click="searchWithAlbum(song.artists[0].name)">{{song.artists[0].name}}</a>
         </li>
         <li>
-          <a href="#">{{song.album.name}}</a>
+          <a href="#" @click="searchWithAlbum(song.album.name)">{{song.album.name}}</a>
         </li>
         <li>
           <button @click="addtoplaylist(song.id,song.name,song.album,song.artists[0].name)">添加到播放列表</button>
@@ -57,7 +57,7 @@
       <transition name="fade">
         <span class="tip" v-show="tip_show">{{tipMessage}}</span>
       </transition>
-      <div class="main_page">
+      <div class="main_page" v-if="$store.state.songlist.length===20">
         <a @click="pre_page">上一页</a>
         <a @click="nex_page">下一页</a>
       </div>
@@ -209,6 +209,32 @@ export default {
           keywords: this.$route.query.keywords,
           limit: 20,
           offset: page
+        }
+      });
+    },
+    searchWithAlbum(album){
+      console.log("搜索专辑");
+      request({
+        url: "/api/search",
+        params: {
+          keywords: album,
+          limit: 20,
+        }
+      }).then(async res => {
+        //重新封装歌曲列表，将后续有可能用到的数据都在这里全部获取到
+        let songs = res.data.result.songs;
+        console.log(songs);
+        let ids = new Array();
+        for (let i = 0; i < songs.length; i++) {
+          ids.push(songs[i].id);
+        }
+        this.$store.commit("updateSongList", res.data.result.songs);
+      });
+      this.$router.push({
+        path: "/search",
+        query: {
+          keywords: album,
+          limit: 20,
         }
       });
     }
