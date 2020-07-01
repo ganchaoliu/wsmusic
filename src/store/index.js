@@ -20,7 +20,8 @@ const store = new Vuex.Store({
             artist:''
         },
         loginStatus:false,
-        userData:{}
+        userData:{},        
+        music_player:{}
     },
     mutations:{
         updateCurrentSong(state,song){
@@ -39,6 +40,10 @@ const store = new Vuex.Store({
         login(state,payload){
             state.userData = payload
             state.loginStatus = true
+        },
+        registerMusicPlayer(state,payload){
+            console.log(payload)
+            state.music_player = payload
         }
     }
 })

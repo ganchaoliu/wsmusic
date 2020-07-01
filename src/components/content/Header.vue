@@ -26,7 +26,7 @@
       </ul>
     </div>
 
-    <div class="search">
+    <div class="main_search">
       <input
         class="search_input"
         type="text"
@@ -69,6 +69,7 @@
       </div>
     </el-dialog>
   </div>
+  
 </template>
 
 <script >
@@ -118,9 +119,10 @@ export default {
       console.log("登陆");
       request({
         url: "/api/login/cellphone",
+        method: 'post', 
         params: {
-          phone: this.form.phone,
-          password: this.form.password
+          phone: encodeURIComponent(this.form.phone),
+          password: encodeURIComponent(this.form.password)
         }
       })
         .then(async res => {
@@ -193,7 +195,7 @@ ul li a:hover {
   margin-top: 20px;
 }
 
-.search {
+.main_search {
   width: 220px;
   height: 38px;
   margin-top: 26px;
@@ -201,7 +203,7 @@ ul li a:hover {
   border: 1px solid #9a9a9a;
   position: relative;
 }
-.search input {
+.main_search input {
   border: 0px;
   outline: white;
   font-size: 14px;

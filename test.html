@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>www.jb51.net JS获取括号内容</title>
+</head>
+<body>
+<script type="text/javascript">
+var str="123{xxxx}456[我的]789123[你的]456(1389090)789";
+var regex1 = /\((.+?)\)/g; // () 小括号
+var regex2 = /\[(.+?)\]/g; // [] 中括号
+var regex3 = /\{(.+?)\}/g; // {} 花括号，大括号
+// 输出是一个数组
+console.log(str.match(regex1)); 
+console.log(str.match(regex2));
+console.log(str.match(regex3));
+
+var patt1=/\[(.+?)\]/g;
+let str1 = new String("[00:00.000] 作曲 : 子健");
+let newstr = str1.match(patt1).join();
+document.write(newstr);
+let a = newstr.substr(1, newstr.length-2);
+document.write(a);
+
+Number.prototype.toPercent = function(){
+return (Math.round(this)).toFixed(2) + '%';
+}
+var A=35, B=25;
+ alert([A.toPercent(), B.toPercent()].join('\n'));
+
+</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
   <div id="app" class="app">
     <Header></Header>
     <router-view ></router-view>
-<!--    <audio-play></audio-play>-->
+   <!-- <audio-play></audio-play> -->
     <music-player class="music_player"></music-player>
   </div>
 </template>
@@ -10,7 +10,7 @@
 <script>
   import Header from "./components/content/Header";
   import MusicPlayer from "./components/content/MusicPlayer";
-  import AudioPlay from "./views/AudioPlay";
+  // import AudioPlay from "./views/AudioPlay";
 export default {
   name: 'App',
   components: {

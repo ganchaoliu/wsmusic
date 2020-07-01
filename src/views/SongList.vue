@@ -16,8 +16,29 @@
 </template>
 
 <script>
+    import {request} from '../network/request'
     export default {
-        name: "SongList"
+        name: "SongList",
+        data(){
+            return{
+                res:{}
+            }
+        },
+        mounted() {
+            console.log('SongList挂载时执行')
+            if(this.$store.state.loginStatus){
+                let userId = this.$store.state.userData.account.id
+                console.log(userId)
+                 request({
+                    url:"/api/top/playlist?limit=10&order=new",
+                    }).then((res)=>{
+                    console.log(res)
+                })
+            }else{
+                alert('请先登陆')
+            }
+            
+        }
     }
 </script>
 

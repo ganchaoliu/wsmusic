@@ -23,4 +23,6 @@
 
 .listbd a{
     cursor: pointer;
+    padding-right: 20px;
+    color: black;
 }

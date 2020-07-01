@@ -1,28 +1,6 @@
 <template>
   <div class="main">
-    <div class="nav">
-      <ul>
-        <li>
-          <a href="#">单曲</a>
-        </li>
-        <li>
-          <a href="#">专辑</a>
-        </li>
-        <li>
-          <a href="#">MV</a>
-        </li>
-        <li>
-          <a href="/songlist">歌单</a>
-        </li>
-        <li>
-          <a href="#">用户</a>
-        </li>
-        <li>
-          <a href="#">歌词</a>
-        </li>
-      </ul>
-      <div class="clear-fix"></div>
-    </div>
+    <navigate-bar></navigate-bar>
     <div class="musiclist w">
       <ul class="listhd">
         <li>歌曲</li>
@@ -68,6 +46,8 @@
 <script>
 import { request } from "../network/request";
 import { log } from "util";
+import NavigateBar from "../components/content/NavigateBar.vue"
+
 export default {
   name: "Main",
   data() {
@@ -257,10 +237,13 @@ export default {
               this.currentPage = 1   //当重新搜索页面时且是通过Header搜索时初始化页码
           }
       }
-  }
+  },
+  components: {
+    NavigateBar,
+  },
 };
 </script>
 
 <style scoped>
-@import url("../assets/css/main.css");
+  @import url("../assets/css/main.css");
 </style>

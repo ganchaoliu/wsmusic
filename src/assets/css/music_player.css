@@ -92,6 +92,11 @@
     padding-top: 5px;
 }
 
+.play .m_words span{
+    margin-left: 10px;
+    color: white;
+}
+
 .play .m_words a{
     color: white;
 }
