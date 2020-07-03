@@ -1,0 +1,65 @@
+.artist_main{
+    width: 980px;
+    margin: 0 auto;
+}
+
+.artist_left{
+    width: 709px;
+    padding: 47px 30px 40px 39px;
+    border-left: 1px solid #ccc;
+    float: left;
+}
+
+.artist_left .artist_ltop{
+    width: 640px;
+    height: 333px;
+}
+
+.ar_title{
+    height: 33px;
+}
+
+.artist_ltop .ar_title h2,h3{
+    display: inline-block;
+}
+.artist_ltop .ar_title h2{
+    font-size: 24px;
+    font-weight: normal;
+    color: #333;
+}
+
+.artist_ltop .ar_title h3{
+    font-size: 14px;
+    font-weight: normal;
+    color: #333;
+    padding-left: 10px;
+}
+
+.btn_fav{
+    display: block;
+    position: absolute;
+    bottom: 18px;
+    right: 20px;
+    width: 76px;
+    height: 32px;
+}
+
+.artist_tab{
+    width: 640px;
+    height: 39px;
+    display: block;
+}
+
+.artist_nav li{
+    display: inline-block;
+}
+
+.artist_right{
+    width: 270px;
+    padding: 47px 30px 40px 39px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    background-color: gold;
+    float: right;
+}
+

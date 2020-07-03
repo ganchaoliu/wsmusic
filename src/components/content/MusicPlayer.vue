@@ -11,14 +11,19 @@
         <a class="nex" @click="playloop(1)" title="下一曲"></a>
       </div>
       <div class="music_head">
-        <img :src="album_pic" />
+        <el-image
+                style="width: 100px; height: 100px"
+                :src="album_pic"
+                :preview-src-list="album_pic_list">
+        </el-image>
+<!--        <img :src="album_pic" />-->
         <a href="/song?id=1363948882" hidefocus="true" class="mask"></a>
       </div>
 
       <div class="play">
         <div class="m_words">
           <a href="#" v-text="displaySongMessage"></a>
-          <span class="lyric_text">{{currentLyricLine}}</span>
+          <span class="lyric_text" v-text="currentLyricLine"></span>
         </div>
         <div class="m_progress">
           <el-slider
@@ -36,7 +41,7 @@
         </div>
       </div>
       <div class="music_ctrl">
-        <div class="v_slider" v-show="vol_show">
+        <div class="v_slider" v-show="vol_show" :tabindex="0" @blur="v_bar_blur">
           <el-slider
             v-model="$store.state.volume"
             @change="changeVolume"
@@ -116,7 +121,8 @@ export default {
       position: "",
       tip_show: false,
       tip_message: "",
-      album_pic: ""
+      album_pic: "",
+      album_pic_list:[]
     };
   },
   methods: {
@@ -197,9 +203,7 @@ export default {
       //如果是单曲循环则将当前歌曲重新播放一遍
       //随机播放
       this.playloop();
-      this.lyric={}
-      this.currentLyricLine=''
-      this.lyricTime=[]
+      this.resetLyric();
     },
     playrandom() {
       let playlist = this.$store.state.playlist;
@@ -219,6 +223,7 @@ export default {
       this.$store.commit("updatePlayStatus", false);
     },
     onLoadedmetadata(res) {
+      this.resetLyric();
       this.audio.maxTime = parseInt(res.target.duration);
       this.getLyric(this.$store.state.currentsong.id);
       this.getAlbumDetail(this.$store.state.currentsong.album.id);
@@ -228,19 +233,25 @@ export default {
       this.audio.currentTime = res.target.currentTime;
       // console.log(this.audio.currentTime)
       this.sliderTime = (this.audio.currentTime / this.audio.maxTime) * 100;
-
-      let currentTime = this.audio.currentTime;
-      let currentLine = 0;
-      let len = 0;
-      for (let j = currentLine, len = this.lyricTime.length; j < len; j++) {
-        if (
-          currentTime < this.lyricTime[j + 1] &&
-          currentTime > this.lyricTime[j]
-        ) {
-          currentLine = j;
-          this.currentLyricLine = this.lyric[this.lyricTime[j]];
+      this.showLyric(this.audio.currentTime);
+    },
+    showLyric(currentTime) {
+      let array = Object.keys(this.lyric);
+      if (array.length != 0) {
+        let currentLine = 0;
+        for (let j = currentLine, len = this.lyricTime.length; j < len; j++) {
+          if (
+            currentTime < this.lyricTime[j + 1] &&
+            currentTime > this.lyricTime[j]
+          ) {
+            currentLine = j;
+            this.currentLyricLine = this.lyric[this.lyricTime[j]];
+          }
         }
       }
+      // else{
+      //     this.currentLyricLine='暂时没有歌词'
+      // }
     },
     // 进度条格式化toolTip
     formatProcessToolTip(index = 0) {
@@ -259,9 +270,15 @@ export default {
       this.$store.commit("updateVolume", pos);
       this.$refs.audio.volume = this.$store.state.volume / 100;
     },
-    change_vol_show() {
+    change_vol_show() {        
       this.vol_show ? (this.vol_show = false) : (this.vol_show = true);
+      this.$refs.volume.focus()
     },
+    v_bar_blur(){
+        console.log('失去焦点')
+        this.vol_show=false
+    },
+
     change_loop() {
       if (this.loop < loopM.random) {
         this.loop++;
@@ -283,17 +300,21 @@ export default {
         }
       }).then(res => {
         this.album_pic = res.data.album.picUrl;
+        this.album_pic_list.push(res.data.album.picUrl)
       });
     },
     //获取歌词信息
     getLyric(id) {
       console.log("获取歌词信息");
+      this.currentLyricLine='歌词加载中...'
       request({
         url: "/api/lyric",
         params: {
           id: id
         }
       }).then(res => {
+        console.log(res)
+        this.currentLyricLine='歌词加载成功'
         let lyric = res.data.lrc.lyric.split("\n");
         let timeArray = res.data.lrc.lyric.match(/\[(.+?)\]/g);
         let lyricValue = new Array(); //歌词数组
@@ -302,31 +323,37 @@ export default {
           let pos = lyric[i].indexOf("]");
           lyricValue.push(lyric[i].substring(pos + 1));
         }
-
         //将时间转化为秒的格式
         let netTA = timeArray.map((value, index) => {
           let strArray = value
-            .substring(1, value.indexOf("]"))
-            .split(":")
-            .map((value, index) => {
+            .substring(1, value.indexOf("]"))  //选出内容
+            .split(":")  //按：分割字符串
+            .map((value, index) => {   //将数值转化为秒
               if (index % 2 == 0) {
                 return parseFloat(value) * 60;
               }
               return parseFloat(value);
             })
-            .reduce((total, item) => {
+            .reduce((total, item) => {  //数组求和
               return total + item;
             });
           return strArray;
         });
         this.lyricTime = netTA;
         let obj = {};
-
         for (let i = 0; i < netTA.length; i++) {
           obj[netTA[i]] = lyricValue[i];
         }
         this.lyric = obj;
+      }).catch(err=>{
+          console.log(err)
+        this.currentLyricLine = '暂时没有歌词哟'
       });
+    },
+    resetLyric() {
+      this.lyricTime = [];
+      this.lyric = {};
+      this.currentLyricLine = "";
     }
   },
   filters: {

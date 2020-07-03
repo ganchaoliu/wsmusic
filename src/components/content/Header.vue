@@ -11,7 +11,7 @@
           <a href="#">音乐馆</a>
         </li>
         <li>
-          <a href="#">我的音乐</a>
+          <a href="javascript:;" @click="gotopage('/mysonglist')">我的音乐</a>
         </li>
         <li>
           <a href="#">客户端</a>
@@ -74,7 +74,6 @@
 
 <script >
 import { request } from "../../network/request";
-import { log } from "util";
 export default {
   name: "Header",
   data() {
@@ -130,8 +129,8 @@ export default {
           console.log(res);
           if (res.data.code === 200) {
             this.$store.commit("login", res.data);
-            alert("登陆成功");
             this.dialogFormVisible = false;
+            alert("登陆成功");
           } else {
             alert(res.data.message);
           }
@@ -139,6 +138,9 @@ export default {
         .catch(err => {
           console.log("请求失败");
         });
+    },
+    gotopage(page){
+      this.$router.push(page)
     }
   }
 };

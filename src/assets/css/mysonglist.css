@@ -1,0 +1,58 @@
+.songlist_main{
+    width: 1200px;
+    margin: 20px auto 0;
+    background-color: pink;
+}
+
+.songlist_left{
+    float: left;
+    padding-top:40px;
+    padding-right:20px;
+    width: 240px;
+    height: 600px;
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+}
+
+.songlist_right{
+    float: left;
+    width: 960px;
+    height: 600px;
+}
+.csl_show .li{
+    margin-top: 10px;
+}
+
+.csl_show ul{
+    margin-top: 20px;
+}
+
+.left_img{
+    float: left;
+}
+.left_img img{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.slmain{
+    padding: 10px;
+}
+
+.clear-fix::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.slmain h2{
+    text-indent: 18px;
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+p{
+    font-size: 14px;
+}

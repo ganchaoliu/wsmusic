@@ -31,6 +31,10 @@ ul li{
     text-overflow: ellipsis;
 }
 
+.listbd a{
+    cursor: pointer;
+}
+
 .list2{
     background-color: rgba(0,0,0,0.02);
 }

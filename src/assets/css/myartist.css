@@ -1,0 +1,60 @@
+.ma_title{
+    width: 100%;
+    height: 42px;
+    border-bottom: 2px solid #c20c0c;
+}
+
+.ma_main{
+    padding: 10px;
+}
+
+.ma_main h2{
+    color: #333;
+    font-size: 24px;
+    font-weight: normal;
+}
+.ma_body{
+    overflow: auto;
+}
+.ma_body ul li{
+    height: 100px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    vertical-align: top;
+}
+
+.ma_body .cvr{
+    width: 80px;
+    height: 80px;
+    float: left;
+    overflow: hidden;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.singerimg{
+    width: 80px;
+    height: 80px;
+}
+
+.ma_body .detail{
+    display: inline-block;
+    border: 1px solid #fff;
+    width: 600px;
+    height: 80px;
+    margin-left: 10px;
+}
+
+.ma_body .detail h3{
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 18px;
+    color: #666;
+}
+
+.ma_body .detail span{
+    padding: 10px;
+    font-size: 14px;
+    color: #666;
+}
+

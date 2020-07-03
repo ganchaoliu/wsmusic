@@ -16,16 +16,14 @@
       >
         <!--                <li><router-link :to="{path:'/play',query:{id:song.id,name:song.name}}">{{song.name}}</router-link></li>-->
         <li>
-          <a
-            href="#"
-            @click="playsong(song.id,song.name,song.album,song.artists[0].name)"
+          <a  @click="playsong(song.id,song.name,song.album,song.artists[0].name)"
           >{{song.name}}</a>
         </li>
         <li>
-          <a href="#" @click="searchWithAlbum(song.artists[0].name)">{{song.artists[0].name}}</a>
+          <a  @click="searchWithAlbum(song.artists[0].name)">{{song.artists[0].name}}</a>
         </li>
         <li>
-          <a href="#" @click="searchWithAlbum(song.album.name)">{{song.album.name}}</a>
+          <a  @click="searchWithAlbum(song.album.name)">{{song.album.name}}</a>
         </li>
         <li>
           <button @click="addtoplaylist(song.id,song.name,song.album,song.artists[0].name)">添加到播放列表</button>
@@ -157,7 +155,7 @@ export default {
     pre_page() {
         if(this.currentPage>1){
             this.currentPage--
-            this.searchMusic(this.currentPage-1)
+            this.searchMusic(this.currentPage)
         }
     },
     nex_page() {
@@ -171,7 +169,7 @@ export default {
         params: {
           keywords: this.$route.query.keywords,
           limit: 20,
-          offset: page
+          offset: (page-1)*20
         }
       }).then(async res => {
         //重新封装歌曲列表，将后续有可能用到的数据都在这里全部获取到
@@ -188,7 +186,7 @@ export default {
         query: {
           keywords: this.$route.query.keywords,
           limit: 20,
-          offset: page
+          offset: (page-1)*20
         }
       });
     },

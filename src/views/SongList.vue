@@ -11,6 +11,14 @@
                 <div class="orderby">热门</div>
                 <div class="clear-fix"></div>
             </div>
+            <div class="mysonglist">
+                <ul >
+                    <li v-for="(item,index) in mySongList.playlist" :key="index">
+                        <img :src="item.coverImgUrl" v-if="item.creator.userId==$store.state.userData.account.id" alt="">
+                    </li>
+
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -21,7 +29,7 @@
         name: "SongList",
         data(){
             return{
-                res:{}
+                mySongList:{}
             }
         },
         mounted() {
@@ -30,8 +38,12 @@
                 let userId = this.$store.state.userData.account.id
                 console.log(userId)
                  request({
-                    url:"/api/top/playlist?limit=10&order=new",
+                    url:"/api/user/playlist",
+                    params:{
+                        uid:userId
+                    }
                     }).then((res)=>{
+                        this.mySongList = res.data
                     console.log(res)
                 })
             }else{

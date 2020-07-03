@@ -9,6 +9,10 @@ const MusicPlayer=()=>import('../views/MusicPlayer')
 const PlayList=()=>import('../views/PlayList')
 const SongList=()=>import('../views/SongList')
 const Login = () => import('../views/Login')
+const MySongList = () => import('../views/MySongList')
+const MyArtist = ()=>import('../views/MyArtist')
+const MyMV = ()=>import('../views/MyMV')
+const Artist = ()=>import('../views/Artist')
 
 const routes= [
   {
@@ -44,7 +48,25 @@ const routes= [
     path: '/login',
     name: 'login',
     component: Login
-  }
+  },
+  {
+    path: '/mysonglist',
+    name: 'mysonglist',
+    component: MySongList,
+    children:[{
+      path: '/myartist',
+      component: MyArtist,
+    },
+      {
+        path: '/mymv',
+        component: MyMV,
+      }],
+  },
+  {
+    path: '/artists',
+    name: 'artists',
+    component: Artist
+  },
 ]
 
 const router= new Router({
