@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="ma_bg">
         <div class="ma_main">
             <div class="ma_title">
                 <h2>我的歌手（{{$parent.collectArtist.length}}）</h2>

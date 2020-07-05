@@ -3,27 +3,26 @@
     height: 42px;
     border-bottom: 2px solid #c20c0c;
 }
-
 .ma_main{
-    padding: 10px;
+    padding: 10px 40px;
 }
 
-.ma_main h2{
+.ma_main .ma_title h2{
     color: #333;
     font-size: 24px;
     font-weight: normal;
 }
-.ma_body{
-    overflow: auto;
+.ma_main .ma_body{
+    padding: 10px;
 }
-.ma_body ul li{
+.ma_main .ma_body ul li{
     height: 100px;
     padding: 10px 0;
     border-bottom: 1px solid #ccc;
     vertical-align: top;
 }
 
-.ma_body .cvr{
+.ma_main .ma_body .cvr{
     width: 80px;
     height: 80px;
     float: left;

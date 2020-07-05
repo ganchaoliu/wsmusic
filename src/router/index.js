@@ -13,6 +13,7 @@ const MySongList = () => import('../views/MySongList')
 const MyArtist = ()=>import('../views/MyArtist')
 const MyMV = ()=>import('../views/MyMV')
 const Artist = ()=>import('../views/Artist')
+const MV = ()=>import('../views/MV')
 
 const routes= [
   {
@@ -40,11 +41,6 @@ const routes= [
     component: PlayList
   },
   {
-    path: '/songlist',
-    name: 'songlist',
-    component: SongList
-  },
-  {
     path: '/login',
     name: 'login',
     component: Login
@@ -52,15 +48,28 @@ const routes= [
   {
     path: '/mysonglist',
     name: 'mysonglist',
+    redirect: '/mysonglist/songlist',
     component: MySongList,
     children:[{
-      path: '/myartist',
+      path: 'myartist',
+      name: 'myartist',
       component: MyArtist,
     },
-      {
-        path: '/mymv',
-        component: MyMV,
-      }],
+    {
+      path: 'mymv',
+      name: 'mymv',
+      component: MyMV,
+    },
+    {
+      path: 'songlist',
+      name: 'songlist',
+      component: SongList
+    },],
+  },
+  {
+    path: '/mv',
+    name: 'mv',
+    component: MV,
   },
   {
     path: '/artists',

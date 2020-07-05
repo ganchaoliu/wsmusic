@@ -1,30 +1,47 @@
 <template>
-    <div class="bgw">
-        <div class="songlist">
-            <div class="head">
-                <h3>
-                    <span>全部</span>
-                    <a href="#">
-                        <i>选择分类</i>
-                    </a>
-                </h3>
-                <div class="orderby">热门</div>
-                <div class="clear-fix"></div>
-            </div>
-            <div class="mysonglist">
-                <ul >
-                    <li v-for="(item,index) in mySongList.playlist" :key="index">
-                        <img :src="item.coverImgUrl" v-if="item.creator.userId==$store.state.userData.account.id" alt="">
-                    </li>
+    <div class="sub_songlist_bg">
+        <div class="sub_songlist_main">
+            <div class="sl_head">
+                <div class="sub_sl_img">
+                    <img src="" alt="">
+                </div>
+                <div class="sub_sl_detail">
+                    <h2>我喜欢的音乐</h2>
+                    <div class="owner">
+                        <img src="" alt="">
+                        <a href=""><span>wscooll</span></a>
+                        <span>2015-11-22创建</span>
+                    </div>
+                    <div class="btns">
+                        <button>播放</button>
+                        <button>收藏</button>
+                        <button>分享</button>
+                        <button>下载</button>
+                        <button>评论</button>
+                    </div>
 
-                </ul>
+                </div>
             </div>
+            <div class="sub_sl_main">
+                <div class="sub_head">
+
+                </div>
+                <div class="sub_sl_bd">
+                    <ul>
+                        <li></li>
+                        <li>歌曲标题</li>
+                        <li>时长</li>
+                        <li>歌手</li>
+                        <li>专辑</li>
+                    </ul>
+                </div>
+            </div>
+           <h2>歌曲列表</h2>
         </div>
     </div>
 </template>
 
 <script>
-    import {request} from '../network/request'
     export default {
         name: "SongList",
         data(){
@@ -32,51 +49,9 @@
                 mySongList:{}
             }
         },
-        mounted() {
-            console.log('SongList挂载时执行')
-            if(this.$store.state.loginStatus){
-                let userId = this.$store.state.userData.account.id
-                console.log(userId)
-                 request({
-                    url:"/api/user/playlist",
-                    params:{
-                        uid:userId
-                    }
-                    }).then((res)=>{
-                        this.mySongList = res.data
-                    console.log(res)
-                })
-            }else{
-                alert('请先登陆')
-            }
-            
-        }
     }
 </script>
 
 <style scoped>
-    .bgw{
-    width: 980px;
-    height: 500px;
-    margin: 20px auto 0;
-    background-color: pink;
-}
-
-.songlist{
-    padding: 40px;
-}
-
-.head{
-    height: 42px;
-    border-bottom: 2px solid green;
-    background-color: yellow;
-}
-
-h3{
-    float: left;
-}
-
-.orderby{
-    float: right;
-}
+    @import "../assets/css/songlist.css";
 </style>

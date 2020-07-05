@@ -6,7 +6,7 @@
 
 .songlist_left{
     float: left;
-    padding-top:40px;
+    padding-top:10px;
     padding-right:20px;
     width: 240px;
     height: 600px;
@@ -18,26 +18,51 @@
     float: left;
     width: 960px;
     height: 600px;
-}
-.csl_show .li{
-    margin-top: 10px;
+    border-right: 1px solid #eee;
 }
 
-.csl_show ul{
-    margin-top: 20px;
+.mycreate_sl ul li:hover{
+    background-color: #eee;
+    cursor: pointer;
 }
 
-.left_img{
-    float: left;
+.mycollect_sl ul li:hover{
+    background-color: #eee;
+    cursor: pointer;
 }
+
+.mycreate_sl ul li{
+    padding:7px 0px 6px 20px;
+    height: 54px;
+    width: 238px;
+}
+
+.mycollect_sl ul li{
+    padding:7px 0px 6px 20px;
+    height: 54px;
+    width: 238px;
+}
+
+ul{
+    list-style: none;
+}
+
+.left_img,.left_detail{
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.left_detail{
+    width: 150px;
+    padding-left: 10px;
+}
+
 .left_img img{
     width: 40px;
     height: 40px;
     border-radius: 5px;
-}
-
-.slmain{
-    padding: 10px;
 }
 
 .clear-fix::after{
@@ -47,12 +72,22 @@
 }
 
 .slmain h2{
-    text-indent: 18px;
-    font-size: 18px;
-    color: #000;
-    margin-bottom: 10px;
+    height: 38px;
+    width: 238px;
+    padding: 0px 5px 2px 20px;
+    font-size: 16px;
+    font-family: "Microsoft YaHei UI";
+    color: #000 !important;
+    line-height: 38px;
+}
+
+.slmain h2:hover{
+    background-color: #eee;
+    cursor: pointer;
 }
 
 p{
-    font-size: 14px;
+    font-size: 12px;
+    font-family: "Microsoft YaHei UI";
+    margin-bottom: 15px;
 }

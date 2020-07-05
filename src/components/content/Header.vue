@@ -11,7 +11,7 @@
           <a href="#">音乐馆</a>
         </li>
         <li>
-          <a href="javascript:;" @click="gotopage('/mysonglist')">我的音乐</a>
+          <a href="javascript:;" @click="gotopage('mysonglist')">我的音乐</a>
         </li>
         <li>
           <a href="#">客户端</a>

@@ -1,0 +1,90 @@
+.ma_title{
+    width: 100%;
+    height: 42px;
+    border-bottom: 2px solid #c20c0c;
+}
+
+.mymv_body{
+    padding: 10px 40px;
+}
+
+.mymv_body h2{
+    color: #333;
+    font-size: 24px;
+    font-weight: normal;
+}
+.mymv_body{
+    overflow: auto;
+    width:939px;
+}
+
+.mymv_body ul li{
+    width: 200px;
+    display: inline-block;
+    height: 180px;
+    padding: 10px 0;
+    vertical-align: top;
+    margin-right: 14px;
+    margin-bottom: 10px;
+}
+.mymv_body ul li a{
+    display: inline-block;
+    width: 155px;
+    height: 16px;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.mymv_body ul li i{
+    display: inline-block;
+    width: 26px;
+    height: 16px;
+    background: url("../img/icon2.png") no-repeat -270px -480px;
+    margin: 5px 5px 0px 0px;
+}
+
+.mymv_body ul li:last-child{
+    margin-right: 0px;
+}
+
+.mymv_body ul li:hover{
+    cursor: pointer;
+}
+
+
+.sub_left_img img{
+    width: 200px;
+    height: 115px;
+}
+
+.sub_left_img{
+    position: relative;
+}
+
+.sub_left_img span{
+    display: inline-block;
+    position: absolute;
+}
+
+.sub_left_img .dura{
+    height: 12px;
+    left: 7px;
+    bottom: 7px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.sub_left_img .pt{
+    height: 20px;
+    right: 7px;
+    top: 7px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.sub_left_detail p{
+    padding: 0;
+    margin: 5px 0px 0px;
+}

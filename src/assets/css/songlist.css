@@ -1,24 +1,10 @@
-.bgw{
-    width: 980px;
-    height: 500px;
-    margin: 20px auto 0;
-    background-color: pink;
+.sub_songlist_main{
+
 }
 
-.songlist{
+.sl_head{
+    width: 960px;
+    height: 280px;
     padding: 40px;
-}
-
-.head{
-    height: 42px;
-    border-bottom: 2px solid green;
-    background-color: yellow;
-}
-
-h3{
-    float: left;
-}
-
-.orderby{
-    float: right;
+    background-color: pink;
 }

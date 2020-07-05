@@ -3,30 +3,34 @@
         <div class="songlist_main">
             <div class="songlist_left">
                 <div class="slmain clear-fix">
-                    <h2><router-link to="myartist">我的歌手({{collectArtist.length}})</router-link></h2>
-                    <h2><router-link to="mymv">我的视频({{collectMV.length}})</router-link></h2>
+                    <router-link :to="{name:'myartist'}" tag="h2">我的歌手({{collectArtist.length}})</router-link>
+                    <router-link :to="{name:'mymv'}" tag="h2">我的视频({{collectMV.length}})</router-link>
                     <div class="mycreate_sl clear-fix">
                         <h2 @click="showMycreateList"><span><i></i>创建的歌单({{myCreate_Songlist.length}})</span></h2>
                         <ul v-show="csl_show">
-                            <li v-for="(item,index) in myCreate_Songlist" class="list_item clear-fix">
+                            <router-link v-for="(item,index) in myCreate_Songlist" :to="{name:'songlist',query:{index:index,type:'create'}}" tag="li" class="list_item clear-fix">
                                 <div class="left_img">
                                     <img :src="item.coverImgUrl" alt="">
                                 </div>
-                                <p>{{item.name}}</p>
-                                <p>{{item.trackCount}}</p>
-                            </li>
+                                <div class="left_detail">
+                                    <p>{{item.name}}</p>
+                                    <p>{{item.trackCount}}首</p>
+                                </div>
+                            </router-link>
                         </ul>
                     </div>
                     <div class="mycollect_sl">
                         <h2 @click="showMycollectList">收藏的歌单({{myCollect_Songlist.length}})</h2>
                         <ul v-show="cll_show">
-                            <li v-for="(item,index) in myCollect_Songlist" class="clear-fix">
+                            <router-link  v-for="(item,index) in myCollect_Songlist"  :to="{name:'songlist',query:{index:index,type:'collect'}}" tag="li" class="clear-fix">
                                 <div class="left_img">
                                     <img :src="item.coverImgUrl" alt="">
                                 </div>
-                                <p>{{item.name}}</p>
-                                <p>{{item.trackCount}}</p>
-                            </li>
+                                <div class="left_detail">
+                                    <p>{{item.name}}</p>
+                                    <p>{{item.trackCount}}首</p>
+                                </div>
+                            </router-link>
                         </ul>
                     </div>
                 </div>
