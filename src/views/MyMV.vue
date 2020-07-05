@@ -8,20 +8,24 @@
                 <ul>
                     <li v-for="mv in collectMV" class="left">
                         <div class="sub_left_img">
-                            <img :src="getImg(mv.coverUrl)" alt="">
+                            <img :src="getImg(mv.coverUrl)" alt="" >
                             <span class="dura">{{mv.durationms/1000 |formatSecond}}</span>
                             <span class="pt">点击量：{{mv.playTime |formatPlayTime}}</span>
                         </div>
-                        <div class="sub_left_detail">
+                        <div class="sub_left_detail" v-if="mv.type==0">
 <!--                            <p><a href="">{{mv.title}}</a></p>-->
-                            <p><i v-if="mv.type==0"></i><router-link :to="{name:'mv',query:{id:mv.vid}}" tag="a" :title="mv.title">{{mv.title}}</router-link></p>
-                            <p> <span v-if="mv.type!=0">by</span> <a href="">{{mv.creator[0].userName}}</a></p>
+                            <p><i v-if=""></i><router-link :to="{name:'mv',query:{id:mv.vid}}" tag="a" :title="mv.title">{{mv.title}}</router-link></p>
+                            <p><a href="">{{mv.creator[0].userName}}</a></p>
+                        </div>
+                        <div class="sub_left_detail" v-else>
+                            <!--                            <p><a href="">{{mv.title}}</a></p>-->
+                            <p><router-link :to="{name:'video',query:{id:mv.vid}}" tag="a" :title="mv.title">{{mv.title}}</router-link></p>
+                            <p> <span>by</span> <a href="">{{mv.creator[0].userName}}</a></p>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
-        {{collectMV}}
     </div>
 </template>
 
@@ -49,6 +53,9 @@
 
     export default {
         name: "MyArtist",
+        meta:{
+            keepAlive:true   // 需要缓存的页面
+        },
         data(){
             return{
                 collectMV:this.$parent.collectMV
@@ -57,13 +64,20 @@
         methods:{
           getImg(url){
               return url+'?param=200y115'
+          },
+          init(){
+
+          },
+          play_mv(vid){
+            console.log(vid)
+            this.$router.push({name:'mv',query:{id:vid}})
           }
         },
         computed:{
 
         },
         mounted() {
-
+            console.log(this.$parent)
         },
         filters: {
             formatSecond(second = 0) {

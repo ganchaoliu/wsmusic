@@ -51,8 +51,8 @@
             return{
                 myCreate_Songlist:[],
                 myCollect_Songlist:[],
-                csl_show:false,
-                cll_show:false,
+                csl_show:true,
+                cll_show:true,
                 initData:{},
                 collectArtist:[],
                 collectMV:[]
@@ -100,9 +100,12 @@
                     })
                     console.log(res)
                 })
+            },
+            init(){
+
             }
         },
-        mounted() {
+        beforeMount() {
             console.log('SongList挂载时执行')
             if(this.$store.state.loginStatus){
                 let userId = this.$store.state.userData.account.id
@@ -113,7 +116,8 @@
                 alert('请先登陆')
                 this.$router.push('/login')
             }
-
+        },
+        watch:{
         }
     }
 </script>
