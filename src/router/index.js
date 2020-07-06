@@ -14,6 +14,7 @@ const MyArtist = ()=>import('../views/MyArtist')
 const MyMV = ()=>import('../views/MyMV')
 const Artist = ()=>import('../views/Artist')
 const MV = ()=>import('../views/MV')
+const Video = ()=>import('../views/Video')
 
 const routes= [
   {
@@ -50,6 +51,9 @@ const routes= [
     name: 'mysonglist',
     redirect: '/mysonglist/songlist',
     component: MySongList,
+    meta:{
+      keepAlive:true
+    },
     children:[{
       path: 'myartist',
       name: 'myartist',
@@ -59,6 +63,9 @@ const routes= [
       path: 'mymv',
       name: 'mymv',
       component: MyMV,
+      meta:{
+        keepAlive:true
+      }
     },
     {
       path: 'songlist',
@@ -70,6 +77,11 @@ const routes= [
     path: '/mv',
     name: 'mv',
     component: MV,
+  },
+  {
+    path: '/video',
+    name: 'video',
+    component: Video,
   },
   {
     path: '/artists',

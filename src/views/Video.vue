@@ -3,14 +3,14 @@
         <div class="mv_main">
             <div class="mv_left">
                 <div class="mv_ltop">
-                    <div class="mv_title" v-if="mv_detail.data.name">
-                        <h2 :title="mv_detail.data.name"><i></i>{{mv_detail.data.name}}</h2>
+                    <div class="mv_title" v-if="mv_detail.data.title">
+                        <h2 :title="mv_detail.data.title"><i></i>{{mv_detail.data.creator.nickname}}</h2>
                     </div>
                     <span>{{mv_detail.data.artistName}}</span>
                     <div class="mv_player"><video :src="mv_url" controls autoplay ></video></div>
                 </div>
                 <div class="mv_btns">
-                    <a href="">赞({{likedCount}})</a><a href="">收藏({{mv_detail.data.subCount}})</a><a href="">转发({{mv_detail.data.shareCount}})</a>
+                    <a href="">赞({{mv_detail.data.praisedCount}})</a><a href="">收藏({{mv_detail.data.subscribeCount}})</a><a href="">转发({{mv_detail.data.shareCount}})</a>
                 </div>
             </div>
             <div class="mv_right">
@@ -19,8 +19,8 @@
                 </h3>
                 <div class="mv_desc">
                     <p>发布时间：{{mv_detail.data.publishTime}}</p>
-                    <p>播放次数：{{mv_detail.data.playCount | formatPlayTime}}</p>
-                    <p>{{mv_detail.data.desc}}</p>
+                    <p>播放次数：{{mv_detail.data.playTime | formatPlayTime}}</p>
+                    <p>{{mv_detail.data.description}}</p>
                 </div>
                 <h3>
                     <span>相关推荐</span>
@@ -28,12 +28,12 @@
                 <ul class="mv_tuijian" v-if="mvs">
                     <li v-for="(mv,index) in mvs">
                         <div class="mv_cover">
-                            <img :src="mv.cover" alt="">
+                            <img :src="mv.coverUrl" alt="">
                         </div>
                         <div class="mv_content">
-                            <p><router-link :to="{name:'mv',query:{id:mv.id}}">{{mv.name}}</router-link></p>
-                            <p>{{mv.duration | formatSecond}}</p>
-                            <p>{{mv.artistName}}</p>
+                            <p><router-link :to="{name:'video',query:{id:mv.vid}}">{{mv.title}}</router-link></p>
+                            <p>{{mv.durationms | formatSecond}}</p>
+                            <p>{{mv.creator[0].userName}}</p>
                         </div>
                         <div class="clear-fix"></div>
                     </li>
@@ -79,20 +79,20 @@
         methods:{
             init(){
                 request({
-                    url:"/api/mv/url",
+                    url:"/api/video/url",
                     params:{
                         id:this.$route.query.id
                     }
                 }).then((res)=>{
                     console.log("mv链接")
                     console.log(res)
-                    this.mv_url = res.data.data.url
+                    this.mv_url = res.data.urls[0].url
 
                 })
                 request({
-                    url:"/api/mv/detail",
+                    url:"/api/video/detail",
                     params:{
-                        mvid:this.$route.query.id
+                        id:this.$route.query.id
                     }
                 }).then((res)=>{
                     console.log("mv详情")
@@ -100,25 +100,25 @@
                     this.mv_detail = res.data
                 })
                 request({
-                    url:"/api/simi/mv",
+                    url:"/api/related/allvideo",
                     params:{
-                        mvid:this.$route.query.id
+                        id:this.$route.query.id
                     }
                 }).then((res)=>{
                     console.log("推荐MV")
                     console.log(res)
-                    this.mvs = res.data.mvs
+                    this.mvs = res.data.data
                 })
-                request({
-                    url:"/api/mv/detail/info",
-                    params:{
-                        mvid:this.$route.query.id
-                    }
-                }).then((res)=>{
-                    console.log("赞MV")
-                    console.log(res)
-                    this.likedCount = res.data.likedCount
-                })
+                // request({
+                //     url:"/api/mv/detail/info",
+                //     params:{
+                //         mvid:this.$route.query.id
+                //     }
+                // }).then((res)=>{
+                //     console.log("赞MV")
+                //     console.log(res)
+                //     this.likedCount = res.data.likedCount
+                // })
             },
         },
         created() {

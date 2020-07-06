@@ -1,12 +1,235 @@
 .main{
-    margin:20px auto 60px;
-    width:1200px
+    margin-bottom: 40px;
 }
 
-.w{
-    width: 1200px;
-    margin:0 auto;
+.search_body{    
+    margin: 0 auto 0;
+    width: 980px;    
+    padding:40px;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
 }
+
+.search_body .search_input{  
+    width: 420px;  
+    height: 40px;
+    margin: 0 240px;
+    background: url('../img/sprite.png' ) no-repeat ;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.search_body .search_input a{    
+    float:right;
+    width: 50px;
+    height: 40px;
+    vertical-align: bottom;    
+}
+
+.search_body .search_input a:hover{
+    background: url('../img/sprite.png' ) no-repeat ;
+    background-position: -430px 0;
+    text-decoration: none;
+}
+
+
+
+.search_body .search_input input{
+    float: left;
+    height: 17px;
+    width: 320px;
+    border: none;
+    margin: 12px 0 0 20px;
+    outline: none;
+}
+
+
+
+.search_con{
+    width: 900px;
+}
+
+.search_con .note{
+    width: 900px;
+    height: 16px;
+    font-size: 12px;
+    margin: 28px 0px 17px;
+    color: #999;
+}
+
+.search_body .search_tab{
+    width: 100%;
+    height: 39px; 
+}
+
+.search_body .search_tab ul li{
+    float: left;
+    width: 112px;
+    height: 39px;
+    text-align: center;
+    line-height: 37px;
+    border-top: 2px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color: rgba(0, 0, 0, 0.025);
+}
+
+.search_body .search_tab ul li a{
+    display: inline-block;
+    width: 112px;
+    height: 39px;
+    font-size: 14px;
+    color: #333;
+}
+
+.search_body .search_tab ul li:first-child{
+    border-left: 1px solid #ccc;
+}
+
+.search_body .search_tab ul li:last-child{
+    border-right: 1px solid #ccc;
+}
+
+.search_body .search_tab ul li:hover{
+    border-top: 2px solid #31c27c;
+    cursor: pointer;
+}
+
+.search_body .search_tab .tab_selected{
+    border-top: 2px solid #31c27c;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 0px;
+}
+
+.musiclist{
+    width: 900px;
+}
+
+.slbg{
+    background-color: #f7f7f7;
+}
+
+.song_item{
+    width: 900px;
+    height: 43px;
+    padding: 10px 10px 8px 18px;
+    font-size: 12px;
+}
+
+.song_item:hover{
+    background-color: #ebe9e9;
+}
+
+.song_item .td .play_btn{
+    width: 17px;
+    height: 17px;
+    background: url('../img/table.png') no-repeat 0 -103px;
+    margin-right: 15px;    
+}
+
+.showOptBtns{
+    visibility: visible;
+}
+
+.hideOptBtns{
+    visibility: hidden;
+}
+
+.opt_btns{
+    width: 96px;
+    height: 16px;     
+    vertical-align: middle;
+}
+
+.song_item .td .play_btn:hover{
+    cursor: pointer;
+    background-position: 0 -128px;
+}
+
+.opt_btns .icn-add,.icn-fav,.icn-share,.icn-download{
+    background: url('../img/icon.png');
+}
+
+.opt_btns .icn-add{
+    display:inline-block;   
+    width: 13px;
+    height: 13px;
+    background-position: 0 -700px;
+    margin: -5px 8px 3px 0px;
+}
+
+.opt_btns .icn-fav{
+    display:inline-block;    
+    vertical-align: middle;
+    width: 18px;
+    height: 16px;    
+    background: url('../img/table.png') no-repeat 0 -174px;
+    margin: -11px 6px 0px 0px;
+}
+
+.opt_btns .icn-share{
+    display:inline-block;    
+    vertical-align: middle;
+    width: 18px;
+    height: 16px;
+    background: url('../img/table.png') no-repeat 0 -195px;
+    margin: -8px 6px 3px 0px;
+}
+
+.opt_btns .icn-download{
+    display:inline-block;
+    vertical-align: middle;
+    width: 18px;
+    height: 16px;
+    background: url('../img/table.png') no-repeat -81px -174px;
+    margin: -8px 7px 3px 0px;
+}
+
+
+
+
+.song_item .sn{
+    width: 370px;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.song_item .btns{
+    width: 96px;
+    height: 16px;
+}
+
+.song_item .at{
+    width: 15%;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.song_item .al{
+    width: 18%;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+/* 歌曲列表开始 */
+.musiclist .song_item .td{
+    line-height: 23px;
+    float: left;
+}
+
 
 ul li{
     list-style: none;
@@ -23,7 +246,7 @@ ul li{
 
 .listhd li,.listbd li{
     display: inline-block;
-    width: 300px;
+    width: 220px;
     height: 30px;
     line-height: 30px;
     overflow: hidden;

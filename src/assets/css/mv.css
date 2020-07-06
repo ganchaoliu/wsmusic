@@ -1,8 +1,9 @@
 .mv_main{
     width: 980px;
-    height: 500px;
+    height: 100%;
     margin: 0px auto;
     border-left: 1px solid #ccc;
+    overflow: hidden;
 }
 
 .mv_main .mv_left{
@@ -27,8 +28,15 @@
     margin: 7px 5px 0px 0px;
 }
 
-.mv_title{
+.mv_title{    
     vertical-align: bottom;
+}
+
+.mv_title h2{
+    width: 660px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 
 .mv_ltop span{
@@ -44,6 +52,8 @@
 .mv_main .mv_left video{
     margin-top: 5px;
     width: 640px;
+    height: 360px;
+    background-color: black;
 }
 
 .mv_left .mv_btns{
@@ -87,9 +97,9 @@
 .mv_right .mv_content p{
     width: 95px;
     height: 20px;
-    padding: 0;
     margin: 0px;
     margin-left: 5px;
+    padding-bottom: 20px;
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;

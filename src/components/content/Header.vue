@@ -32,7 +32,7 @@
         type="text"
         aria-label="请输入搜索内容"
         placeholder="搜索音乐、MV、歌单、用户"
-        @keyup.enter="searchMusic"
+        @keyup.enter="searchMusic(1)"
         v-model="searchvalue"
       />
       <button class="search_button" @click="searchMusic">
@@ -40,14 +40,12 @@
       </button>
     </div>
 
-    <div class="user_header" @click="dialogFormVisible = true" v-if="$store.state.loginStatus" >
+    <div class="user_header" @click="dialogFormVisible = true" v-if="$store.state.loginStatus">
       <img :src="$store.state.userData.profile.avatarUrl" alt />
     </div>
-    <div class="user_header" @click="dialogFormVisible = true" v-else >
-      <img src="../../assets/img/g.jpg" alt  />
+    <div class="user_header" @click="dialogFormVisible = true" v-else>
+      <img src="../../assets/img/g.jpg" alt />
     </div>
-
-
 
     <div class="button">
       <a class="greenbutton">开通绿钻豪华版</a>
@@ -69,7 +67,6 @@
       </div>
     </el-dialog>
   </div>
-  
 </template>
 
 <script >
@@ -89,36 +86,27 @@ export default {
     };
   },
   methods: {
-    searchMusic() {
-      console.log("搜索歌曲");
-      request({
-        url: "/api/search",
-        params: {
-          keywords: this.searchvalue,
-          limit: 20
-        }
-      }).then(async res => {
-        //重新封装歌曲列表，将后续有可能用到的数据都在这里全部获取到
-        let songs = res.data.result.songs;
-        console.log(songs);
-        let ids = new Array();
-        for (let i = 0; i < songs.length; i++) {
-          ids.push(songs[i].id);
-        }
-        this.$store.commit("updateSongList", res.data.result.songs);
-      });
-      this.$router.push({
-        path: "/search",
-        query: {
-          keywords: this.searchvalue
-        }
-      });
+    searchMusic(type = 1) {
+      if (this.searchvalue != "") {
+        console.log("搜索歌曲");
+        this.$store.commit("updateSearchValue", this.searchvalue);
+        this.$store
+          .dispatch("search", { 'keyword': this.searchvalue, 'type': type, 'offset':0 })
+          .then(res => {
+            this.$router.push({
+              path: "/search",
+              query: {
+                keywords: this.searchvalue
+              }
+            });
+          });
+      }
     },
     login() {
       console.log("登陆");
       request({
         url: "/api/login/cellphone",
-        method: 'post', 
+        method: "post",
         params: {
           phone: encodeURIComponent(this.form.phone),
           password: encodeURIComponent(this.form.password)
@@ -139,8 +127,8 @@ export default {
           console.log("请求失败");
         });
     },
-    gotopage(page){
-      this.$router.push(page)
+    gotopage(page) {
+      this.$router.push(page);
     }
   }
 };

@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="songlist_right">
-                <router-view></router-view>
+                <router-view ></router-view>
             </div>
         </div>
     </div>
