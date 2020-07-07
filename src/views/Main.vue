@@ -77,6 +77,14 @@ export default {
       if (keyword != "") {
         this.type = type;
         this.$store.dispatch("search", { 'keyword': keyword, 'type': type }).then(res=>{
+          
+          let findKey = (value, compare = (a, b) => a === b) =>{
+            return Object.keys(TYPE).find(k => compare(TYPE[k], value))
+          }
+
+          let str = findKey(type)
+          // console.log(str)
+          
           this.$router.push({
             path: "/search",
             query: {

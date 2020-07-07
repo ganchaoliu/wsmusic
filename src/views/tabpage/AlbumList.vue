@@ -2,8 +2,9 @@
   <div class="album_list">
     <ul>
       <li class="ablum_item" v-for="(album,index) in albums" :key="index">
-        <div class="album_cvr">
+        <div class="album_cvr" @mouseover="showPlayBtn(index)" @mouseout="hidePlayBtn">
           <img :src="getPicUrl(album.picUrl)" alt />
+          <a href="" v-show="playBtnIndex===index"></a>
         </div>
         <p :title="album.name">{{album.name}}</p>
         <p :title="getCreatorName(album.artists)">{{getCreatorName(album.artists)}}</p>
@@ -30,7 +31,8 @@ import { TYPE } from "../../utils/common";
 export default {
   data() {
     return {
-      currentPage: 1
+      currentPage: 1,
+      playBtnIndex:-1
     };
   },
   methods: {
@@ -62,7 +64,14 @@ export default {
             }
           });
         });
-    }},
+    },
+    showPlayBtn(index){
+        this.playBtnIndex=index
+    },
+    hidePlayBtn(){
+        this.playBtnIndex = -1
+    }
+    },
 
   computed: {
       ...mapState("albumlist", ["albums", "albumCount"]),

@@ -39,7 +39,7 @@
             </div>
             <div class="mv_content">
               <p>
-                <router-link :to="{name:'video',query:{id:mv.vid}}">{{mv.title}}</router-link>
+                <router-link :to="{name:'video',query:{id:mv.vid}}" :title="mv.title">{{mv.title}}</router-link>
               </p>
               <p>{{mv.durationms | formatSecond}}</p>
               <p>{{mv.creator[0].userName}}</p>
