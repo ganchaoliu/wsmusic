@@ -164,7 +164,7 @@ export default {
           this.$router.push({
             path: "/search",
             query: {
-              keywords: keyword,
+              keywords: this.$store.state.searchvalue,
               limit: 20,
               offset: offset
             }

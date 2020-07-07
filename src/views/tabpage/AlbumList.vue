@@ -1,15 +1,86 @@
 <template>
-    <div>
-        <h2>专辑页面</h2>
-    </div>
+  <div class="album_list">
+    <ul>
+      <li class="ablum_item" v-for="(album,index) in albums" :key="index">
+        <div class="album_cvr">
+          <img :src="getPicUrl(album.picUrl)" alt />
+        </div>
+        <p :title="album.name">{{album.name}}</p>
+        <p :title="getCreatorName(album.artists)">{{getCreatorName(album.artists)}}</p>
+      </li>
+      <div class="clear-fix"></div>
+    </ul>
+    <el-pagination
+        class="main_page"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[5, 10, 20, 40]"
+        :page-size="$store.state.pageLimit"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="albumCount"
+      ></el-pagination>
+  </div>
 </template>
 
 <script>
-    export default {
-        
+import { mapState, mapGetters } from "vuex";
+import { TYPE } from "../../utils/common";
+
+export default {
+  data() {
+    return {
+      currentPage: 1
+    };
+  },
+  methods: {
+
+    handleSizeChange(size) {
+      this.$store.commit("updatePageLimit", size);
+      this.$store.dispatch("search", {
+        keyword: this.$store.state.searchvalue,
+        type: TYPE.album,
+        offset: 0
+      });
+    },
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
+      let offset = (this.currentPage - 1) * this.$store.state.pageLimit;
+      this.$store
+        .dispatch("search", {
+          keyword: this.$store.state.searchvalue,
+          type: TYPE.album,
+          offset: offset
+        })
+        .then(res => {
+          this.$router.push({
+            path: "/search",
+            query: {
+              keywords: keyword,
+              limit: 20,
+              offset: offset
+            }
+          });
+        });
+    }},
+
+  computed: {
+      ...mapState("albumlist", ["albums", "albumCount"]),
+      getPicUrl() {
+        return url => {
+          return url + "?param=180y180"
+        }
+      },
+      getCreatorName() {
+        return creator => {
+          return creator.map((item, index) => item.name).join("/")
+        }
+      }
     }
+  
+};
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+@import url("../../assets/css/tabpage/albumlist.css");
 </style>

@@ -26,7 +26,7 @@
                     <span>相关推荐</span>
                 </h3>
                 <ul class="mv_tuijian" v-if="mvs">
-                    <li v-for="(mv,index) in mvs">
+                    <li v-for="(mv,index) in mvs" :key="index">
                         <div class="mv_cover">
                             <img :src="mv.cover" alt="">
                         </div>

@@ -35,7 +35,7 @@
         @keyup.enter="searchMusic(1)"
         v-model="searchvalue"
       />
-      <button class="search_button" @click="searchMusic">
+      <button class="search_button" @click="searchMusic(1)">
         <i class="button_img"></i>
       </button>
     </div>
@@ -86,9 +86,9 @@ export default {
     };
   },
   methods: {
-    searchMusic(type = 1) {
+    searchMusic(type) {
       if (this.searchvalue != "") {
-        console.log("搜索歌曲");
+        console.log("搜索歌曲"+type);
         this.$store.commit("updateSearchValue", this.searchvalue);
         this.$store
           .dispatch("search", { 'keyword': this.searchvalue, 'type': type, 'offset':0 })
@@ -135,7 +135,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("//unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css");
+/* @import url("//unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css"); */
 .header_m {
   max-width: 1200px;
   height: 90px;

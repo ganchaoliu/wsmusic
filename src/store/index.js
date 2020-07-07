@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import { request } from '../network/request'
 import artistlist from './artistlist/index'
 import videolist from './videolist/index'
+import albumlist from './albumlist/index'
 import {TYPE} from '../utils/common'
 
 Vue.use(Vuex)
@@ -64,13 +65,14 @@ const store = new Vuex.Store({
     },
     actions: {
         search(state, payload) {
+            console.log(payload.type)
             return new Promise((resolve, reject) => {
                 request({
                     url: "/api/search",
                     params: {
                         keywords: payload.keyword,
                         limit: this.state.pageLimit,
-                        type: parseInt(payload.type),
+                        type: payload.type,
                         offset: payload.offset
                     }
                 }).then(res => {
@@ -83,7 +85,8 @@ const store = new Vuex.Store({
                             state.commit('artistlist/updateArtists', { 'artists': res.data.result.artists, 'artistCount': res.data.result.artistCount });
                             break;
                         case TYPE.album:
-                            console.log('专辑处理');
+                            console.log(res);
+                            state.commit('albumlist/updateAlbums', { 'albums': res.data.result.albums, 'albumCount': res.data.result.albumCount });
                             break;
                         case TYPE.video:
                             console.log(res);
@@ -115,7 +118,8 @@ const store = new Vuex.Store({
     },
     modules: {
         artistlist,
-        videolist
+        videolist,
+        albumlist
     }
 })
 

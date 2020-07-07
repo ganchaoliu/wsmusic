@@ -1,0 +1,46 @@
+.album_list{
+    margin-top: 20px;
+}
+
+.album_list ul .ablum_item{
+    display: inline-block;
+    width: 153px;
+    height: 178px; 
+    overflow: hidden;    
+    margin-right: 33px;
+}
+
+.album_list ul .ablum_item:nth-child(5n+0){   
+    margin-right: 0px;
+}
+
+.album_cvr{
+    width: 153px;
+    height: 130px;
+    background: url('../../img/coverall.png') no-repeat 0px -845px;
+}
+
+.album_cvr img{
+    height: 130px;
+    width: 130px;
+}
+
+.ablum_item p{
+    font-size: 14px;
+    margin: 5px 0px 0px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+/* 分页 */
+.main_page{
+    margin-top: 20px;
+    text-align: center;
+}
+.main_page a{
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}

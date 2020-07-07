@@ -12,7 +12,7 @@
           <span v-if="type==1"><em >{{$store.state.songCount}} </em>首单曲</span>
           <span v-if="type==100"><em >{{$store.state.artistlist.artistCount}}</em>个歌手</span>
           <span v-if="type==1014"><em >{{$store.state.videolist.videoCount}}</em>个视频</span>
-
+          <span v-if="type==10"><em >{{$store.state.albumlist.albumCount}}</em>个专辑</span>
         </div>
         <div class="search_tab">
           <ul>
