@@ -156,7 +156,7 @@ export default {
       let offset = (this.currentPage - 1) * this.$store.state.pageLimit;
       this.$store
         .dispatch("search", {
-          keyword: this.$route.query.keywords,
+          keyword: this.$store.state.searchvalue,
           type: 1,
           offset: offset
         })
@@ -164,7 +164,7 @@ export default {
           this.$router.push({
             path: "/search",
             query: {
-              keywords: this.$route.query.keywords,
+              keywords: keyword,
               limit: 20,
               offset: offset
             }
@@ -201,5 +201,5 @@ export default {
 </script>
 
 <style scoped>
-@import url('../assets/css/musiclist.css');
+@import url('../assets/css/tabpage/musiclist.css');
 </style>

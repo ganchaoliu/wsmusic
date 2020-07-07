@@ -3,13 +3,16 @@
     <!-- <navigate-bar></navigate-bar> -->
     <div class="search_body">
       <div class="search_input">
-        <input type="text" v-model="searchValue" @keyup.enter="search(1,searchValue)" />
+        <input type="text" v-model="searchValue" @keyup.enter="search(type)" />
         <a href></a>
       </div>
       <div class="search_con">
         <div class="note">
           搜索“{{$store.state.searchvalue}}”，找到
-          <em>{{$store.state.songCount}}</em> 首单曲
+          <span v-if="type==1"><em >{{$store.state.songCount}} </em>首单曲</span>
+          <span v-if="type==100"><em >{{$store.state.artistlist.artistCount}}</em>个歌手</span>
+          <span v-if="type==1014"><em >{{$store.state.videolist.videoCount}}</em>个视频</span>
+
         </div>
         <div class="search_tab">
           <ul>
@@ -40,8 +43,10 @@
           </ul>
         </div>
         
-        <music-list v-show="type===1" ></music-list>
-        <artist-list v-show="type===100"></artist-list>
+        <music-list v-show="type===TYPE.song" ></music-list>
+        <artist-list v-show="type===TYPE.artist"></artist-list>
+        <album-list v-show="type===TYPE.album"></album-list>
+        <video-list v-show="type===TYPE.video"></video-list>
       </div>
     </div>
   </div>
@@ -51,79 +56,37 @@
 
 import { log } from "util";
 import NavigateBar from "../components/content/NavigateBar.vue";
+import {TYPE} from "../utils/common"
 const  ArtistList = ()=>import ("./ArtistList")
 const  MusicList = ()=>import ("./MusicList")
+const  AlbumList = ()=>import ("./tabpage/AlbumList")
+const  VideoList = ()=>import ("./tabpage/VideoList")
 
 
 export default {
   name: "Main",
   data() {
     return {
-      type:1
+      type:TYPE.song,
+      TYPE:TYPE
     };
   },
   methods: {
-    
-    // getSongDetail: async function() {
-    //   request({
-    //     url: "/api/song/url",
-    //     params: {
-    //       id: id
-    //     }
-    //   }).then(res => {
-    //     console.log("获取歌曲详情" + res);
-    //   });
-    // },    
-    // updatesonglist() {
-    //   console.log("歌曲列表变更了");
-    // },
-    // getSongUrl: async function(id) {
-    //   await request({
-    //     url: "/api/song/url",
-    //     params: {
-    //       id: id
-    //     }
-    //   }).then(res => {
-    //     console.log("获取url");
-    //     return res.data.data[0];
-    //   });
-    // },
     search(type) {
       let keyword = this.$store.state.searchvalue;
       if (keyword != "") {
         this.type = type;
-        this.$store.dispatch("search", { 'keyword': keyword, 'type': type });
+        this.$store.dispatch("search", { 'keyword': keyword, 'type': type }).then(res=>{
+          this.$router.push({
+            path: "/search",
+            query: {
+              keywords: keyword,
+              type:type,
+            }
+            })
+        });
       }
     },
-    // searchWithAlbum(album) {
-    //   console.log("搜索专辑");
-    //   request({
-    //     url: "/api/search",
-    //     params: {
-    //       keywords: album,
-    //       limit: 20
-    //     }
-    //   }).then(async res => {
-    //     //重新封装歌曲列表，将后续有可能用到的数据都在这里全部获取到
-    //     let songs = res.data.result.songs;
-    //     console.log(songs);
-    //     let ids = new Array();
-    //     for (let i = 0; i < songs.length; i++) {
-    //       ids.push(songs[i].id);
-    //     }
-    //     this.$store.commit("updateSongList", res.data.result.songs);
-    //   });
-    //   this.$router.push({
-    //     path: "/search",
-    //     query: {
-    //       keywords: album,
-    //       limit: 20
-    //     }
-    //   });
-    // },
-    
-    
-    
   },
   computed: {
     tip_show() {
@@ -155,7 +118,9 @@ export default {
   components: {
     NavigateBar,
     ArtistList,
-    MusicList
+    MusicList,
+    AlbumList,
+    VideoList
   },
   
 };

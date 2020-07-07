@@ -1,6 +1,6 @@
 <template>
   <div class="header_m">
-    <div class="logo_image">
+    <div class="header_logo_image">
       <a href>
         <img class="logo_image_item" src="../../assets/img/logo.png" alt />
       </a>
@@ -47,7 +47,7 @@
       <img src="../../assets/img/g.jpg" alt />
     </div>
 
-    <div class="button">
+    <div class="header_button">
       <a class="greenbutton">开通绿钻豪华版</a>
       <a class="openpaybag">开通付费包</a>
     </div>
@@ -149,17 +149,17 @@ export default {
   float: left;
 }
 
-ul {
+.nav ul {
   list-style: none;
   padding: 0;
   margin: 0 0 0 35px;
   display: inline-block;
 }
-ul li {
+.nav ul li {
   float: left;
 }
 
-ul li a {
+.nav ul li a {
   color: #000;
   font-size: 18px;
   padding: 15px;
@@ -168,12 +168,12 @@ ul li a {
   line-height: 50px;
 }
 
-ul li a:hover {
+.nav ul li a:hover {
   background-color: #31c27c;
   color: white;
 }
 
-.logo_image {
+.header_logo_image {
   margin: 0;
   padding: 0;
   width: 170px;
@@ -183,6 +183,8 @@ ul li a:hover {
 
 .logo_image_item {
   margin-top: 20px;
+  width: 170px;
+  height: 46px;
 }
 
 .main_search {

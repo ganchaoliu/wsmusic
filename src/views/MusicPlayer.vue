@@ -124,7 +124,6 @@
                     id:this.$store.state.currentsong.id
                 }
             }).then((res)=>{
-                console.log(res);
                 this.lyric = res.data.lrc.lyric.replace(/(\r\n)|(\n)/g,'<br/><br/>')
             })
         }

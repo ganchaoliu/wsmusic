@@ -1,0 +1,62 @@
+.videolist{
+    width: 900px;
+    margin-top: 20px;
+}
+
+.videocover,.videoimg{
+    width: 159px;
+    height: 90px;
+    position: relative;
+}
+
+.videolist .videoitem{
+    width: 159px;
+    height: 177px;
+    display: inline-block;
+    margin-right: 21px;
+    vertical-align: text-bottom;
+}
+
+.videoitem h4 .mvicon{
+    display: inline-block;
+    width: 26px;
+    height: 16px;
+    background: url('../../img/icon2.png') no-repeat -270px -480px;
+}
+
+.videolist .videoitem .videotitle{
+    margin-top: 7px;
+    font-size: 14px;
+    vertical-align: middle;    
+    font-weight: normal;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.videocreator{
+    font-size: 14px;
+    vertical-align: middle;    
+    font-weight: normal;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.videopt,.vidodura{
+    font-size: 12px;
+    position: absolute;
+    color: white;
+}
+
+.videopt{
+    right: 5px;
+    top:5px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.vidodura{
+    bottom: 5px;
+    left: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+}

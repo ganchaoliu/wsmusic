@@ -86,7 +86,7 @@
     margin-bottom: 20px;
 }
 
-.mv_right .mv_cover,img{
+.mv_right .mv_cover img{
     width: 96px;
     height: 54px;
 }
@@ -107,4 +107,13 @@
 
 .mv_tuijian li{
     margin-bottom: 10px;
+}
+
+.mv_desc p{
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.mv_tuijian p{
+    font-size: 12px;
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <Header></Header>
-    <router-view ></router-view>
+    <router-view></router-view>
    <!-- <audio-play></audio-play> -->
     <music-player class="music_player" v-show="$route.name!='mv' && $route.name!='video'&&$route.name!='mymv'"></music-player>
   </div>

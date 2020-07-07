@@ -1,0 +1,23 @@
+.artist_main{
+    margin-top: 20px;
+    width: 900px;
+}
+
+.artist_main .artist_item{
+    float: left;
+    width: 130px;
+    height: 184px;
+    margin-right: 30px;
+}
+
+.artist_main .artist_item .artist_cover img{
+    width: 130px;
+    height: 130px;
+}
+
+.artist_main .artist_item p{
+    margin-top: 8px;
+    font-size: 12px;
+    color: #0c73c2;
+}
+

@@ -18,14 +18,15 @@
 }
 
 .musiclist .song_item:hover{
-    background-color: #ebe9e9;
+    background-color: #eeeeee;
+    border: 1px solid #ddd;
 }
 
 .musiclist .song_item .td .play_btn{
     margin-top: 2px;
     width: 17px;
     height: 17px;
-    background: url('../img/table.png') no-repeat 0 -103px;
+    background: url('../../img/table.png') no-repeat 0 -103px;
     margin-right: 8px;    
 }
 
@@ -49,7 +50,7 @@
 }
 
 .song_item .opt_btns .icn-add,.icn-fav,.icn-share,.icn-download{
-    background: url('../img/icon.png');
+    background: url('../../img/icon.png');
 }
 
 .song_item .opt_btns .icn-add{
@@ -65,7 +66,7 @@
     vertical-align: middle;
     width: 18px;
     height: 16px;    
-    background: url('../img/table.png') no-repeat 0 -174px;
+    background: url('../../img/table.png') no-repeat 0 -174px;
     margin: -11px 6px 0px 0px;
 }
 
@@ -74,7 +75,7 @@
     vertical-align: middle;
     width: 18px;
     height: 16px;
-    background: url('../img/table.png') no-repeat 0 -195px;
+    background: url('../../img/table.png') no-repeat 0 -195px;
     margin: -8px 6px 3px 0px;
 }
 
@@ -83,7 +84,7 @@
     vertical-align: middle;
     width: 18px;
     height: 16px;
-    background: url('../img/table.png') no-repeat -81px -174px;
+    background: url('../../img/table.png') no-repeat -81px -174px;
     margin: -8px 7px 3px 0px;
 }
 
@@ -103,7 +104,7 @@
     display:inline-block;
     width: 23px;
     height: 17px;
-    background: url('../img/table.png') no-repeat 0 -151px;
+    background: url('../../img/table.png') no-repeat 0 -151px;
 }
 
 .song_item .dura{
