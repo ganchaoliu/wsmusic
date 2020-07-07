@@ -31,7 +31,7 @@
                             <img :src="mv.cover" alt="">
                         </div>
                         <div class="mv_content">
-                            <p><router-link :to="{name:'mv',query:{id:mv.id}}">{{mv.name}}</router-link></p>
+                            <p><router-link :to="{name:'mv',query:{id:mv.id}}" :title="mv.name">{{mv.name}}</router-link></p>
                             <p>{{mv.duration | formatSecond}}</p>
                             <p>{{mv.artistName}}</p>
                         </div>

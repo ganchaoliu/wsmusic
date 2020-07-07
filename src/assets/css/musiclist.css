@@ -1,0 +1,195 @@
+/* musiclist start */
+
+.musiclist{
+    width: 900px;    
+    margin-top: 25px;
+    position: relative;
+}
+
+.musiclist .slbg{
+    background-color: #f7f7f7;
+}
+
+.musiclist .song_item{
+    width: 900px;
+    height: 43px;
+    padding: 10px 10px 8px 18px;
+    font-size: 12px;
+}
+
+.musiclist .song_item:hover{
+    background-color: #ebe9e9;
+}
+
+.musiclist .song_item .td .play_btn{
+    margin-top: 2px;
+    width: 17px;
+    height: 17px;
+    background: url('../img/table.png') no-repeat 0 -103px;
+    margin-right: 8px;    
+}
+
+.musiclist .song_item .showOptBtns{
+    visibility: visible;
+}
+
+.musiclist .song_item .hideOptBtns{
+    visibility: hidden;
+}
+
+.song_item .song_item .opt_btns{
+    width: 96px;
+    height: 16px;     
+    vertical-align: middle;
+}
+
+.song_item .td .play_btn:hover{
+    cursor: pointer;
+    background-position: 0 -128px;
+}
+
+.song_item .opt_btns .icn-add,.icn-fav,.icn-share,.icn-download{
+    background: url('../img/icon.png');
+}
+
+.song_item .opt_btns .icn-add{
+    display:inline-block;   
+    width: 13px;
+    height: 13px;
+    background-position: 0 -700px;
+    margin: -5px 8px 3px 0px;
+}
+
+.song_item .opt_btns .icn-fav{
+    display:inline-block;    
+    vertical-align: middle;
+    width: 18px;
+    height: 16px;    
+    background: url('../img/table.png') no-repeat 0 -174px;
+    margin: -11px 6px 0px 0px;
+}
+
+.song_item .opt_btns .icn-share{
+    display:inline-block;    
+    vertical-align: middle;
+    width: 18px;
+    height: 16px;
+    background: url('../img/table.png') no-repeat 0 -195px;
+    margin: -8px 6px 3px 0px;
+}
+
+.song_item .opt_btns .icn-download{
+    display:inline-block;
+    vertical-align: middle;
+    width: 18px;
+    height: 16px;
+    background: url('../img/table.png') no-repeat -81px -174px;
+    margin: -8px 7px 3px 0px;
+}
+
+.song_item .sn{
+    width: 370px;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.song_item .sn .song_mv{
+    vertical-align: middle;
+    margin-left: 3px;
+    display:inline-block;
+    width: 23px;
+    height: 17px;
+    background: url('../img/table.png') no-repeat 0 -151px;
+}
+
+.song_item .dura{
+    line-height: 23px;
+}
+
+.song_item .btns{
+    width: 96px;
+    height: 16px;
+}
+
+.song_item .at{
+    width: 15%;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+/* 分页 */
+.main_page{
+    margin-top: 20px;
+    text-align: center;
+}
+.main_page a{
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.song_item .al{
+    width: 18%;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+/* 歌曲列表开始 */
+.musiclist .song_item .td{
+    float: left;
+}
+
+
+ul li{
+    list-style: none;
+}
+
+.main ul li:first-child a{
+    color:#31c27c;
+}
+
+.listhd li,.listbd li{
+    display: inline-block;
+    width: 220px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-space: none;
+    text-overflow: ellipsis;
+}
+
+.listbd a{
+    cursor: pointer;
+}
+
+.list2{
+    background-color: rgba(0,0,0,0.02);
+}
+
+.musiclist .tip{
+    position: absolute;
+    z-index: 1000;
+    top: 30px;
+    left: 500px;
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: rgba(0,0,0,.8);
+    font-size: 25px;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+/* musiclist结束 */
