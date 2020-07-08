@@ -1,5 +1,6 @@
 <template>
   <div class="musiclist">
+    <div class="content" v-if="!loading">
     <div
       class="song_item"
       @mouseover="addActive(index)"
@@ -7,6 +8,7 @@
       v-for="(song,index) in songlist"
       :key="index"
       :class="index%2===0?'':'slbg'"
+      
     >
       <div class="td">
         <div class="play_btn" @click="playsong(song.id,song.name,song.album,song.artists[0].name)"></div>
@@ -47,6 +49,10 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="$store.state.songCount"
     ></el-pagination>
+    </div>
+    <div class="loading" v-else>
+      <span>数据加载中。。。</span>
+    </div>
   </div>
 </template>
 
@@ -58,7 +64,8 @@ export default {
     return {
       opt_btns_show: false,
       currentPage: 1,
-      type:1
+      type:1,
+      loading:false
     };
   },
   methods: {

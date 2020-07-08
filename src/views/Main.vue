@@ -56,7 +56,8 @@
         <album-list v-show="type===TYPE.album"></album-list>
         <video-list v-show="type===TYPE.video"></video-list>-->
 
-        <div :is="zujian" keep-alive></div>
+        <div :is="zujian" keep-alive v-if='!loading'></div>
+        <div v-else>数据加载中</div>
       </div>
     </div>
   </div>
@@ -77,7 +78,8 @@ export default {
     return {
       type: TYPE.Music,
       TYPE: TYPE,
-      zujian: "MusicList"
+      zujian: "MusicList",
+      loading:false
     };
   },
   methods: {
@@ -86,6 +88,7 @@ export default {
       let keyword = this.$store.state.searchvalue;
       if (keyword != "") {
         this.type = type;
+        this.loading=true;
         this.$store
           .dispatch("search", { keyword: keyword, type: type })
           .then(res => {
@@ -96,7 +99,7 @@ export default {
             let str = findKey(type);
             this.zujian = str + "List";
             sessionStorage.setItem("searchtab", this.zujian);
-
+            this.loading=false;
             this.$router.push({
               path: "/search",
               query: {

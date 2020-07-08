@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="app">
-    <Header></Header>
+    <!-- <Header></Header> -->
+    <net-ease-header></net-ease-header>
     <router-view ></router-view>
    <!-- <audio-play></audio-play> -->
     <music-player class="music_player" v-show="$route.name!='mv' && $route.name!='video'&&$route.name!='mymv'"></music-player>
@@ -9,6 +10,7 @@
 
 <script>
   import Header from "./components/content/Header";
+  import NetEaseHeader from "./components/content/NetEaseHeader";
   import MusicPlayer from "./components/content/MusicPlayer";
   // import AudioPlay from "./views/AudioPlay";
 export default {
@@ -16,6 +18,7 @@ export default {
   components: {
     Header,
     MusicPlayer,
+    NetEaseHeader
     // AudioPlay
   },
   created () {

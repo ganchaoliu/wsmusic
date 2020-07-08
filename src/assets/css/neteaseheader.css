@@ -1,28 +1,172 @@
-.topbar{
+.neh_bg{
     width: 100%;
-    height: 105px;
-    background-color: gray;
-}
-
-.topheader{
-    width: 100%;
-    height: 70px;
     background-color: #242424;
 }
 
-.m-top{
-    width: 980px;
+.neheader{
+    width: 1100px;
     height: 70px;
-    margin: 0px auto 0;
+    margin: 0 auto;
 }
 
-.logo{
+/*#############################*/
+
+.neheader .nelogo{
     float: left;
+    margin: 0px;
     width: 176px;
     height: 69px;
     background: url('../../assets/img/topbar.png') no-repeat 0px 0px;
+    padding-right: 20px;
 }
 
-a{
-    text-decoration: none;
+.neheader .nelogo a{
+    display: inline-block;
+    width: 176px;
+    height: 69px;
+}
+
+
+/*#############################*/
+.neheader .ne_nav{
+    list-style: none;
+    float: left;
+    height: 70px;    
+}
+
+.neheader .ne_nav li{
+    float: left;    
+    color: #ccc;
+    position: relative;
+}
+
+.neheader .ne_nav li .cor{
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 64px;
+    width: 12px;
+    height: 7px;
+    margin-left: -6px;
+    overflow: hidden;
+    background: url('../../assets/img/topbar.png') no-repeat -226px 0;
+}
+
+.ne_nav li a{
+    display: inline-block;
+    padding:0 19px;
+    height: 70px;
+    line-height: 70px;    
+    font-size: 14px;
+}
+
+.ne_nav li a:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.ne_nav li .select{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+/*#############################*/
+
+.neheader .creater_center{ 
+    float:right;   
+    height: 32px;
+    width: 90px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 12px;
+    line-height: 32px;
+    padding-left: 16px;
+    margin: 19px 0px 0px 12px;
+}
+
+
+/* ##################### */
+.ne_head{
+    float: right;
+    height: 45px;
+    margin: 19px 0px 0px 20px;
+    padding-right: 20px;
+}
+
+.ne_head .head_img{
+    float: left;
+    width: 30px;
+    height: 30px;    
+    background-color: yellowgreen;
+    position: relative;
+}
+
+.ne_head .head_img img{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+}
+
+.ne_head a{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 30px;
+    margin-left: 8px;
+    height: 30px;
+}
+
+.ne_head .head_img i{
+    display: inline-block;
+    height: 17px;
+    padding: 0px 5px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #c20c0c;
+    border: 1px solid #000;
+    border-radius: 17px;
+    line-height: 17px;
+    font-style: normal;
+    position: absolute;
+    right: -20px;
+    top: -7px;
+}
+
+.neheader  .neh_search{
+    float: right;
+    margin-top: 19px;
+    width: 158px;
+    height: 32px;
+    border: 1px solid #242424;
+    border-radius: 32px;
+    background-color: #fff;
+}
+
+.neheader .neh_search span{ 
+    display: inline-block;
+    width: 158px;
+    height: 32px;   
+    background: url('../../assets/img/topbar.png') no-repeat 0px -99px;
+    position: relative;
+    font-size: 12px;
+    
+}
+
+.neheader .neh_search span input{
+    position: absolute;
+    border: 0;
+    outline: 0;
+    width: 72%;
+    top: 8px;
+    left: 30px;
+    line-height: 16px;
+}
+
+.subnav_line{
+    width: 100%;
+    height: 5px;
+    background-color: #c20c0c;
 }
