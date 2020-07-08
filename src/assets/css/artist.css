@@ -1,11 +1,13 @@
 .artist_main1{
     width: 980px;
+    height: 100%;
     margin: 0 auto;
+    border-right: 1px solid #ccc;
 }
 
 .artist_left{
     width: 709px;
-    padding: 47px 30px 40px 39px;
+    padding: 20px 30px 40px 39px;
     border-left: 1px solid #ccc;
     float: left;
 }
@@ -72,15 +74,6 @@
 
 .artist_nav li{
     display: inline-block;
-}
-
-.artist_right{
-    width: 270px;
-    padding: 47px 30px 40px 39px;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    background-color: gold;
-    float: right;
 }
 
 
@@ -198,3 +191,29 @@
     background: url('../../assets/img/button2.png') no-repeat 0 -977px; 
 }
 
+/* 右边开始 */
+
+.artist_right{
+    width: 270px;
+    height: 100%;
+    padding: 20px 40px 40px 28px;    
+    float: right;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.artist_right .simi_artists{
+    margin-top: 20px;
+    margin-left: -25px;
+}
+
+.artist_right .simi_artists .simi_artist_item{
+    float: left;
+    width: 75px;
+    height: 92px;
+    font-size: 12px;
+    padding-left: 25px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}

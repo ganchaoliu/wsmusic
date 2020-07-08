@@ -4,8 +4,8 @@
       <li class="videoitem" v-for="(video,index) in videos" :key="index">
         <div class="videocover">
           <img :src="getPicUrl(video.coverUrl)" alt class="videoimg" />
-          <p class="videopt">{{video.playTime|formatPlayTime}}</p>
-          <p class="vidodura">{{video.durationms|formatSecond}}</p>
+          <span class="videopt">{{video.playTime|formatPlayTime}}</span>
+          <span class="vidodura">{{video.durationms|formatSecond}}</span>
         </div>
         <h4 class="videotitle" :title="video.title" v-if="video.type==0">
           <i class="mvicon" ></i>

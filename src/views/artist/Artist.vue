@@ -43,7 +43,19 @@
         </div>
       </div>
       <div class="artist_right">
-        <h2>test</h2>
+        <h3>
+          <span>相似歌手</span>
+        </h3>
+        <ul class="simi_artists">
+          <li v-for="(item,index) in simiArtist" :key="index" class="simi_artist_item">
+            <router-link tag="a" :to="{name:'artist',query:{id:item.id}}">
+              <img :src="getSimiArtistCvr(item.picUrl)" alt />
+            </router-link>
+            <router-link tag="a" :to="{name:'artist',query:{id:item.id}}" :title="item.name">
+              <p>{{item.name}}</p>
+            </router-link>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -51,23 +63,27 @@
 
 <script>
 import { request } from "../../network/request";
-const HotSongList = ()=>import ('../artist/HotSongList')
+const HotSongList = () => import("../artist/HotSongList");
 
 export default {
   name: "Artist",
   data() {
     return {
       artist: {
-          name:'',
-          alias:[],
-          followed:false
+        name: "",
+        alias: [],
+        followed: false
       },
       hotSongs: [],
-      zujian:"HotSongList"
+      zujian: "HotSongList",
+      simiArtist: []
     };
   },
   methods: {
-    init() {},
+    init() {
+      this.getSimiArtist();
+      this.getArtist();
+    },
     follow(follow) {
       request({
         url: "/api/artist/sub",
@@ -81,6 +97,31 @@ export default {
           this.artist.followed = !this.artist.followed;
         }
       });
+    },
+    getSimiArtist() {
+      request({
+        url: "/api/simi/artist",
+        params: {
+          id: this.$route.query.id
+        }
+      }).then(res => {
+        console.log(res);
+        if (res.data.code == 200) {
+          this.simiArtist = res.data.artists;
+        }
+      });
+    },
+    getArtist() {
+      request({
+        url: "/api/artists",
+        params: {
+          id: this.$route.query.id
+        }
+      }).then(res => {
+        this.artist = res.data.artist;
+        this.hotSongs = res.data.hotSongs;
+        console.log(this.hotSongs);
+      });
     }
   },
   computed: {
@@ -89,21 +130,22 @@ export default {
         return url + "?param=640y300";
       };
     },
+    getSimiArtistCvr() {
+      return url => {
+        return url + "?param=50y50";
+      };
+    }
   },
   created() {
-    request({
-      url: "/api/artists",
-      params: {
-        id: this.$route.query.id
-      }
-    }).then(res => {
-      this.artist = res.data.artist;
-      this.hotSongs = res.data.hotSongs;
-      console.log(this.hotSongs);
-    });
+    this.init();
+  },
+  watch: {
+    $route() {
+      this.init();
+    }
   },
   components: {
-      HotSongList
+    HotSongList
   }
 };
 </script>

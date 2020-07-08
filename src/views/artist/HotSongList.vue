@@ -12,7 +12,7 @@
         <div class="number">{{index+1}}</div>
       </div>
       <div class="td">
-        <div class="play_btn" @click="playsong(song.id,song.name,song.al.name,song.ar[0].name)"></div>
+        <div class="play_btn" @click="playsong(song.id,song.name,song.al,song.ar[0].name)"></div>
       </div>
       <div class="td sn">
         <router-link tag="a" to>{{song.name}}</router-link>
@@ -22,7 +22,7 @@
           <div class="opt_btns" :class="index === opt_btns_show?'showOptBtns':'hideOptBtns'">
           <a
             class="icn-add"
-            @click="addtoplaylist(song.id,song.name,song.al.name,song.ar[0].name)"
+            @click="addtoplaylist(song.id,song.name,song.al,song.ar[0].name)"
             title="添加到播放列表"
           ></a>
           <a class="icn-fav" @click="fav(song.id)" title="收藏"></a>
