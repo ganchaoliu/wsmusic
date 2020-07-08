@@ -9,10 +9,18 @@
       <div class="search_con">
         <div class="note">
           搜索“{{$store.state.searchvalue}}”，找到
-          <span v-if="type==1"><em >{{$store.state.songCount}} </em>首单曲</span>
-          <span v-if="type==100"><em >{{$store.state.artistlist.artistCount}}</em>个歌手</span>
-          <span v-if="type==1014"><em >{{$store.state.videolist.videoCount}}</em>个视频</span>
-          <span v-if="type==10"><em >{{$store.state.albumlist.albumCount}}</em>个专辑</span>
+          <span v-if="type==1">
+            <em>{{$store.state.songCount}}</em>首单曲
+          </span>
+          <span v-if="type==100">
+            <em>{{$store.state.artistlist.artistCount}}</em>个歌手
+          </span>
+          <span v-if="type==1014">
+            <em>{{$store.state.videolist.videoCount}}</em>个视频
+          </span>
+          <span v-if="type==10">
+            <em>{{$store.state.albumlist.albumCount}}</em>个专辑
+          </span>
         </div>
         <div class="search_tab">
           <ul>
@@ -42,59 +50,78 @@
             </li>
           </ul>
         </div>
-        
-        <music-list v-show="type===TYPE.song" ></music-list>
+
+        <!-- <music-list v-show="type===TYPE.song" ></music-list>
         <artist-list v-show="type===TYPE.artist"></artist-list>
         <album-list v-show="type===TYPE.album"></album-list>
-        <video-list v-show="type===TYPE.video"></video-list>
+        <video-list v-show="type===TYPE.video"></video-list>-->
+
+        <div :is="zujian" keep-alive></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 import { log } from "util";
 import NavigateBar from "../components/content/NavigateBar.vue";
-import {TYPE} from "../utils/common"
-const  ArtistList = ()=>import ("./ArtistList")
-const  MusicList = ()=>import ("./MusicList")
-const  AlbumList = ()=>import ("./tabpage/AlbumList")
-const  VideoList = ()=>import ("./tabpage/VideoList")
-
+import { TYPE } from "../utils/common";
+const ArtistList = () => import("./tabpage/ArtistList");
+const MusicList = () => import("./tabpage/MusicList");
+const AlbumList = () => import("./tabpage/AlbumList");
+const VideoList = () => import("./tabpage/VideoList");
 
 export default {
   name: "Main",
   data() {
     return {
-      type:TYPE.song,
-      TYPE:TYPE
+      type: TYPE.Music,
+      TYPE: TYPE,
+      zujian: "MusicList"
     };
   },
   methods: {
     search(type) {
+      console.log(this.$children)
       let keyword = this.$store.state.searchvalue;
       if (keyword != "") {
         this.type = type;
-        this.$store.dispatch("search", { 'keyword': keyword, 'type': type }).then(res=>{
-          
-          let findKey = (value, compare = (a, b) => a === b) =>{
-            return Object.keys(TYPE).find(k => compare(TYPE[k], value))
-          }
+        this.$store
+          .dispatch("search", { keyword: keyword, type: type })
+          .then(res => {
+            //  根据type的值获取TYPE中的key的值，并组合成组件名称保存
+            let findKey = (value, compare = (a, b) => a === b) => {
+              return Object.keys(TYPE).find(k => compare(TYPE[k], value));
+            };
+            let str = findKey(type);
+            this.zujian = str + "List";
+            sessionStorage.setItem("searchtab", this.zujian);
 
-          let str = findKey(type)
-          // console.log(str)
-          
-          this.$router.push({
-            path: "/search",
-            query: {
-              keywords: keyword,
-              type:type,
-            }
-            })
-        });
+            this.$router.push({
+              path: "/search",
+              query: {
+                keywords: keyword,
+                type: type
+              }
+            });
+          });
       }
-    },
+    }
+  },
+  created: function() {
+    if (sessionStorage.getItem("searchtab")) {
+      this.zujian = sessionStorage.getItem("searchtab");
+      let type = this.zujian.slice(0,-4)
+      this.type = TYPE[type]
+    }else{
+      console.log('localStorage没找到对应的值')
+    }
+  },
+  activated: function() {
+    console.log("activated");
+  },
+  deactivated: function() {
+    console.log("deactivated");
   },
   computed: {
     tip_show() {
@@ -129,8 +156,7 @@ export default {
     MusicList,
     AlbumList,
     VideoList
-  },
-  
+  }
 };
 </script>
 

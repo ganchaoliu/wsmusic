@@ -71,6 +71,8 @@
 
 <script >
 import { request } from "../../network/request";
+import { TYPE } from "../../utils/common";
+
 export default {
   name: "Header",
   data() {
@@ -86,12 +88,18 @@ export default {
     };
   },
   methods: {
-    searchMusic(type) {
+    searchMusic() {
       if (this.searchvalue != "") {
-        console.log("搜索歌曲"+type);
+        let searchtype = 1
+        let zujian = sessionStorage.getItem("searchtab");
+        if(zujian!=null){        
+          let type = zujian.slice(0,-4)
+          searchtype = TYPE[type]
+        }
+
         this.$store.commit("updateSearchValue", this.searchvalue);
         this.$store
-          .dispatch("search", { 'keyword': this.searchvalue, 'type': type, 'offset':0 })
+          .dispatch("search", { 'keyword': this.searchvalue, 'type': searchtype, 'offset':0 })
           .then(res => {
             this.$router.push({
               path: "/search",

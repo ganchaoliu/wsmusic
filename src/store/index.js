@@ -65,7 +65,7 @@ const store = new Vuex.Store({
     },
     actions: {
         search(state, payload) {
-            console.log(payload.type)
+            console.log('搜索类型'+payload.type)
             return new Promise((resolve, reject) => {
                 request({
                     url: "/api/search",
@@ -76,29 +76,29 @@ const store = new Vuex.Store({
                         offset: payload.offset
                     }
                 }).then(res => {
-                    console.log(TYPE.video)
+                    console.log(TYPE.Video)
                     switch (payload.type) {
-                        case TYPE.song:
+                        case TYPE.Music:
                             state.commit("updateSongList", { 'songlist': res.data.result.songs, 'songcount': res.data.result.songCount, 'hasmore': res.data.result.hasMore });
                             break;
-                        case TYPE.artist:
+                        case TYPE.Artist:
                             state.commit('artistlist/updateArtists', { 'artists': res.data.result.artists, 'artistCount': res.data.result.artistCount });
                             break;
-                        case TYPE.album:
+                        case TYPE.Album:
                             console.log(res);
                             state.commit('albumlist/updateAlbums', { 'albums': res.data.result.albums, 'albumCount': res.data.result.albumCount });
                             break;
-                        case TYPE.video:
+                        case TYPE.Video:
                             console.log(res);
                             state.commit('videolist/updateVideos', { 'videos': res.data.result.videos, 'videoCount': res.data.result.videoCount });
                             break;
-                        case TYPE.lyric:
+                        case TYPE.Lyric:
                             break;
-                        case TYPE.songlist:
+                        case TYPE.Song:
                             break;
-                        case TYPE.radio:
+                        case TYPE.Radio:
                             break;
-                        case TYPE.user:
+                        case TYPE.User:
                             break;
                     }
 

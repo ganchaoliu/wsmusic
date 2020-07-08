@@ -4,7 +4,7 @@
       class="song_item"
       @mouseover="addActive(index)"
       @mouseout="removeActive(index)"
-      v-for="(song,index) in $store.state.songlist"
+      v-for="(song,index) in songlist"
       :key="index"
       :class="index%2===0?'':'slbg'"
     >
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="td at">
-        <router-link tag="a" to :title="artist(song.artists)">{{artist(song.artists)}}</router-link>
+        <router-link tag="a" :to="{name:'artist',query:{id:song.artists[0].id}}" :title="artist(song.artists)">{{artist(song.artists)}}</router-link>
       </div>
       <div class="td al">
         <router-link tag="a" :to="{name:'mv',query:{id:song.album.id}}">《{{song.album.name}}》</router-link>
@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import { realFormatSecond } from "../utils/common";
-import { request } from "../network/request";
+import { realFormatSecond } from "../../utils/common";
+import { request } from "../../network/request";
 export default {
   data() {
     return {
@@ -63,7 +63,6 @@ export default {
   },
   methods: {
     playsong(id, name, album, artist) {
-      console.log("播放");
       request({
         url: "/api/song/url",
         params: {
@@ -71,7 +70,6 @@ export default {
         }
       }).then(res => {
         if (res.data.data[0].url != null) {
-          console.log(res);
           const song = {};
           song.id = id;
           song.name = name;
@@ -88,7 +86,6 @@ export default {
             this.tip_message = "已在播放列表中";
           } else {
             this.$store.state.playlist.push(song);
-            console.log("播放" + song);
           }
         } else {
           alert("url为空无法播放");
@@ -129,7 +126,6 @@ export default {
             alert("已在播放列表中");
           } else {
             this.$store.state.playlist.push(song);
-            console.log("添加" + song);
           }
         } else {
           alert("url为空，没有版权哟！！");
@@ -152,7 +148,6 @@ export default {
     },
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
-      console.log(this.currentPage); //点击第几页
       let offset = (this.currentPage - 1) * this.$store.state.pageLimit;
       this.$store
         .dispatch("search", {
@@ -195,11 +190,14 @@ export default {
               let newStr = artists.map((item,index)=>item.name).join('/')
               return newStr
           }
+      },
+      songlist(){
+        return this.$store.state.songlist
       }
   } 
 };
 </script>
 
-<style scoped>
-@import url('../assets/css/tabpage/musiclist.css');
+<style lang='css' scoped>
+@import url('../../assets/css/tabpage/musiclist.css');
 </style>

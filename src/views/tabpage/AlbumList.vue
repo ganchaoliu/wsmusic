@@ -41,7 +41,7 @@ export default {
       this.$store.commit("updatePageLimit", size);
       this.$store.dispatch("search", {
         keyword: this.$store.state.searchvalue,
-        type: TYPE.album,
+        type: TYPE.Album,
         offset: 0
       });
     },
@@ -51,7 +51,7 @@ export default {
       this.$store
         .dispatch("search", {
           keyword: this.$store.state.searchvalue,
-          type: TYPE.album,
+          type: TYPE.Album,
           offset: offset
         })
         .then(res => {

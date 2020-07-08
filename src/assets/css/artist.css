@@ -1,4 +1,4 @@
-.artist_main{
+.artist_main1{
     width: 980px;
     margin: 0 auto;
 }
@@ -13,6 +13,7 @@
 .artist_left .artist_ltop{
     width: 640px;
     height: 333px;
+    position: relative;
 }
 
 .ar_title{
@@ -31,17 +32,36 @@
 .artist_ltop .ar_title h3{
     font-size: 14px;
     font-weight: normal;
-    color: #333;
+    color: #999;
     padding-left: 10px;
 }
 
-.btn_fav{
+.artist_ltop .btn_fav,.btn_unfav{
     display: block;
-    position: absolute;
+    position: absolute; 
     bottom: 18px;
     right: 20px;
     width: 76px;
     height: 32px;
+    background: url('../img/iconall.png') no-repeat 0px -500px;
+}
+
+.artist_ltop .btn_fav{
+    cursor: pointer;
+    background-position: 0px -500px;
+}
+
+.artist_ltop .btn_unfav{
+    cursor: pointer;
+    background-position:  0px -735px;
+}
+
+.artist_ltop .btn_unfav:hover{
+    background-position:  0px -781px;
+}
+
+.artist_ltop .btn_fav:hover{
+    background-position: 0px -540px;
 }
 
 .artist_tab{
@@ -61,5 +81,120 @@
     border-right: 1px solid #ccc;
     background-color: gold;
     float: right;
+}
+
+
+.artist_tab{
+    width: 640px;
+    height: 39px; 
+}
+
+.artist_tab ul li{
+    display: inline-block;
+    width: 160px;
+    height: 39px;
+    text-align: center;
+    line-height: 37px;
+    border-top: 2px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color: rgba(0, 0, 0, 0.025);
+}
+
+.artist_tab ul li a{
+    display: inline-block;
+    width: 112px;
+    height: 39px;
+    font-size: 14px;
+    color: #333;
+}
+
+.artist_tab ul li:first-child{
+    border-left: 1px solid #ccc;
+}
+
+.artist_tab ul li:last-child{
+    border-right: 1px solid #ccc;
+}
+
+.artist_tab ul li:hover{
+    border-top: 2px solid #31c27c;
+    cursor: pointer;
+}
+
+.artist_tab .tab_selected{
+    border-top: 2px solid #31c27c;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 0px;
+}
+
+/* 热门50歌单开始 */
+.artist_top50{
+    width: 640px;
+    margin-bottom: 30px;
+}
+
+.artist_btns{
+    width: 640px;
+    height: 31px;
+    margin: 20px 0 10px;
+    font-size: 12px;
+}
+
+.artist_btns .artist_btn_play{
+    display: inline-block;
+    width: 66px;
+    height: 31px;
+    line-height: 31px;
+    background: url('../../assets/img/button2.png') no-repeat right -428px;
+    padding-right: 5px;
+}
+
+.artist_btns .artist_btn_play i{
+    color: #fff;
+    font-style: normal;
+    display: inline-block;
+    width: 66px;
+    height: 31px;
+    background: url('../../assets/img/button2.png') no-repeat 0 -387px;
+    padding-left: 8px;
+}
+
+.play_btn{
+    float: left;
+    width: 20px;
+    height: 18px;
+    margin: 6px 2px 2px 0;
+    background: url('../../assets/img/button2.png') no-repeat 0 -1622px;
+    overflow: hidden;
+}
+
+.artist_btns .artist_btn_add{
+    text-indent: -999px;
+    display: inline-block;
+    width: 31px;
+    line-height: 31px;
+    height: 31px;
+    margin-right: 5px;
+    background: url('../../assets/img/button2.png') no-repeat 0 -1588px;
+}
+
+.artist_btns .artist_btn_fav{
+    display: inline-block;
+    width: 95px;
+    height: 31px;  
+    line-height: 31px; 
+    background: url('../../assets/img/button2.png') no-repeat right -1020px; 
+     
+}
+
+.artist_btns .artist_btn_fav i{
+    text-indent: 27px;
+    display: inline-block;
+    width: 90px;
+    height: 31px;
+    font-style: normal;
+    background: url('../../assets/img/button2.png') no-repeat 0 -977px; 
 }
 

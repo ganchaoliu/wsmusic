@@ -5,7 +5,7 @@
                 <div class="artist_cover">
                     <img :src="getURL(artist.picUrl)" alt="">
                 </div>
-                <p><router-link tag="a" to=""><span>{{artist.name}}</span></router-link></p>
+                <p><router-link tag="a" :to="{name:'artist',query:{'id':artist.id}}"><span>{{artist.name}}</span></router-link></p>
             </li>
         </ul>
         <div class="clear-fix"></div>
@@ -31,7 +31,7 @@ import {mapState,mapGetters} from 'vuex';
             getURL(){
                 return (url)=>{
                     if(url==null){
-                      return require('../assets/img/noartistcover.jpg')
+                      return require('../../assets/img/noartistcover.jpg')
                     }else{
                         return url+'?param=130y130'
                     }
@@ -42,5 +42,5 @@ import {mapState,mapGetters} from 'vuex';
 </script>
 
 <style scoped>
-@import url("../assets/css/tabpage/artistlist.css");
+@import url("../../assets/css/tabpage/artistlist.css");
 </style>

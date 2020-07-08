@@ -47,7 +47,7 @@ export default {
       this.$store.commit("updatePageLimit",size);
       this.$store.dispatch("search", {
         keyword: this.$store.state.searchvalue,
-        type: TYPE.video,
+        type: TYPE.Video,
         offset: 0
       });
     },
@@ -57,7 +57,7 @@ export default {
       this.$store
         .dispatch("search", {
           keyword: this.$store.state.searchvalue,
-          type: TYPE.video,
+          type: TYPE.Video,
           offset: offset
         })
         .then(res => {

@@ -1,0 +1,204 @@
+/* hotsonglist start */
+
+.hotsonglist{
+    width: 640px;    
+    margin-top: 25px;
+    position: relative;
+}
+
+.hotsonglist .slbg{
+    background-color: #f7f7f7;
+}
+
+.hotsonglist .hot_song_item{
+    width: 640px;
+    height: 43px;
+    padding: 10px 10px 8px 18px;
+    font-size: 12px;
+}
+
+.hotsonglist .hot_song_item:hover{
+    background-color: #eeeeee;
+    border: 1px solid #ddd;
+}
+
+.hotsonglist .hot_song_item .td .play_btn{
+    margin-top: 2px;
+    width: 17px;
+    height: 17px;
+    background: url('../../img/table.png') no-repeat 0 -103px;
+    margin-right: 8px;    
+}
+
+.hotsonglist .hot_song_item .showOptBtns{
+    visibility: visible;
+}
+
+.hotsonglist .hot_song_item .hideOptBtns{
+    visibility: hidden;
+}
+
+.hotsonglist .hot_song_item .hot_song_item .opt_btns{
+    width: 96px;
+    height: 16px;     
+    vertical-align: middle;
+}
+
+.hotsonglist .hot_song_item .td .play_btn:hover{
+    cursor: pointer;
+    background-position: 0 -128px;
+}
+
+.hotsonglist .hot_song_item .opt_btns .icn-add,.icn-fav,.icn-share,.icn-download{
+    background: url('../../img/icon.png');
+}
+
+.hotsonglist .hot_song_item .opt_btns .icn-add{
+    display:inline-block;   
+    width: 13px;
+    height: 13px;
+    background-position: 0 -700px;
+    margin: -5px 8px 3px 0px;
+}
+
+.hotsonglist .hot_song_item .opt_btns .icn-fav{
+    display:inline-block;    
+    vertical-align: middle;
+    width: 18px;
+    height: 16px;    
+    background: url('../../img/table.png') no-repeat 0 -174px;
+    margin: -11px 6px 0px 0px;
+}
+
+.hotsonglist .hot_song_item .opt_btns .icn-share{
+    display:inline-block;    
+    vertical-align: middle;
+    width: 18px;
+    height: 16px;
+    background: url('../../img/table.png') no-repeat 0 -195px;
+    margin: -8px 6px 3px 0px;
+}
+
+.hotsonglist .hot_song_item .opt_btns .icn-download{
+    display:inline-block;
+    vertical-align: middle;
+    width: 18px;
+    height: 16px;
+    background: url('../../img/table.png') no-repeat -81px -174px;
+    margin: -8px 7px 3px 0px;
+}
+
+.hotsonglist .hot_song_item .sn{
+    width: 250px;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.hotsonglist .hot_song_item .sn .song_mv{
+    vertical-align: middle;
+    margin-left: 3px;
+    display:inline-block;
+    width: 23px;
+    height: 17px;
+    background: url('../../img/table.png') no-repeat 0 -151px;
+}
+
+.hotsonglist .hot_song_item .dura{
+    width: 80px;
+    height: 23px;
+    line-height: 23px;
+}
+
+.hotsonglist .hot_song_item .btns{
+    width: 96px;
+    height: 16px;
+}
+
+.hotsonglist .hot_song_item .at{
+    width: 15%;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+/* 分页 */
+.main_page{
+    margin-top: 20px;
+    text-align: center;
+}
+.main_page a{
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.hotsonglist .hot_song_item .number{
+    height: 23px;
+    width: 25px;
+    line-height: 23px;
+}
+
+.hotsonglist .hot_song_item .al{
+    width: 18%;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+/* 歌曲列表开始 */
+.hotsonglist .hot_song_item .td{
+    float: left;
+}
+
+
+ul li{
+    list-style: none;
+}
+
+.main ul li:first-child a{
+    color:#31c27c;
+}
+
+.listhd li,.listbd li{
+    display: inline-block;
+    width: 220px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-space: none;
+    text-overflow: ellipsis;
+}
+
+.listbd a{
+    cursor: pointer;
+}
+
+.list2{
+    background-color: rgba(0,0,0,0.02);
+}
+
+.hotsonglist .tip{
+    position: absolute;
+    z-index: 1000;
+    top: 30px;
+    left: 500px;
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: rgba(0,0,0,.8);
+    font-size: 25px;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+/* hotsonglist结束 */

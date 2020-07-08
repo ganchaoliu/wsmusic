@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <Header></Header>
-    <router-view></router-view>
+    <router-view ></router-view>
    <!-- <audio-play></audio-play> -->
     <music-player class="music_player" v-show="$route.name!='mv' && $route.name!='video'&&$route.name!='mymv'"></music-player>
   </div>
@@ -25,6 +25,11 @@ export default {
     window.addEventListener('beforeunload',()=>{
       sessionStorage.setItem('store',JSON.stringify(this.$store.state))
     })
+  },
+  computed: {
+    key(){
+      return this.$route.name !== undefined? this.$route.name + +new Date(): this.$route + +new Date()
+    }
   }
 }
 </script>

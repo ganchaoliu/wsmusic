@@ -5,14 +5,14 @@ export default {
 }
 
 export const TYPE={
-  'song':1,
-  'artist':100,
-  'album':10,
-  'video':1014,
-  'lyric':1006,
-  'songlist':1000,
-  'radio':1009,
-  'user':1002
+  'Music':1,
+  'Artist':100,
+  'Album':10,
+  'Video':1014,
+  'Lyric':1006,
+  'Song':1000,
+  'Radio':1009,
+  'User':1002
 }
 
 // 将整数转换成 时：分：秒的格式

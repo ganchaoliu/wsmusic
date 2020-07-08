@@ -6,7 +6,7 @@
             </div>
             <div class="ma_body">
                 <ul>
-                    <li v-for="mv in collectMV" class="left">
+                    <li v-for="(mv,index) in collectMV" class="left" :key="index">
                         <div class="sub_left_img">
                             <img :src="getImg(mv.coverUrl)" alt="" >
                             <span class="dura">{{mv.durationms/1000 |formatSecond}}</span>
@@ -14,7 +14,7 @@
                         </div>
                         <div class="sub_left_detail" v-if="mv.type==0">
 <!--                            <p><a href="">{{mv.title}}</a></p>-->
-                            <p><i v-if=""></i><router-link :to="{name:'mv',query:{id:mv.vid}}" tag="a" :title="mv.title">{{mv.title}}</router-link></p>
+                            <p><i></i><router-link :to="{name:'mv',query:{id:mv.vid}}" tag="a" :title="mv.title">{{mv.title}}</router-link></p>
                             <p><a href="">{{mv.creator[0].userName}}</a></p>
                         </div>
                         <div class="sub_left_detail" v-else>
@@ -58,7 +58,7 @@
         },
         data(){
             return{
-                collectMV:this.$parent.collectMV
+                // collectMV:{}
             }
         },
         methods:{
@@ -69,16 +69,20 @@
 
           },
           play_mv(vid){
-            console.log(vid)
             this.$router.push({name:'mv',query:{id:vid}})
           }
         },
         computed:{
-
+            collectMV(){
+                return this.$parent.collectMV
+            }
         },
-        mounted() {
-            console.log(this.$parent)
-        },
+        // mounted() {
+        //     // console.log(this.$parent)
+        // },
+        // created() {
+        //     this.collectMV = this.$parent.collectMV
+        // },
         filters: {
             formatSecond(second = 0) {
                 return realFormatSecond(second);

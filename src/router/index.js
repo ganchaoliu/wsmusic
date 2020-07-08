@@ -32,7 +32,7 @@ const Login = () => import('../views/Login')
 const MySongList = () => import('../views/MySongList')
 const MyArtist = ()=>import('../views/MyArtist')
 const MyMV = ()=>import('../views/MyMV')
-const Artist = ()=>import('../views/Artist')
+const Artist = ()=>import('../views/artist/Artist')
 const MV = ()=>import('../views/MV')
 const Video = ()=>import('../views/Video')
 
@@ -105,7 +105,7 @@ const routes= [
   },
   {
     path: '/artists',
-    name: 'artists',
+    name: 'artist',
     component: Artist
   },
 ]
