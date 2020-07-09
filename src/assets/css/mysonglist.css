@@ -1,7 +1,12 @@
-.songlist_main{
-    width: 1200px;
-    margin: 20px auto 0;
-    background-color: pink;
+.mysonglist_main{
+    width: 1100px;
+    margin: 0px auto; 
+    padding-top: 20px;   
+    background-color: #fff;
+    overflow: hidden;
+    
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
 }
 
 .songlist_left{
@@ -9,16 +14,14 @@
     padding-top:10px;
     padding-right:20px;
     width: 240px;
-    height: 600px;
-    border-left: 1px solid #eeeeee;
-    border-right: 1px solid #eeeeee;
+    height: 524px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .songlist_right{
     float: left;
-    width: 960px;
-    height: 600px;
-    border-right: 1px solid #eee;
+    width: 850px;
 }
 
 .mycreate_sl ul li:hover{

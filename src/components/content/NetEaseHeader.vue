@@ -16,7 +16,10 @@
           </a>
         </li>
         <li>
-          <a>朋友</a>
+          <a @click="gotopage('friend')" :class="3===selectedNav?'select':''">
+            <span>朋友</span>
+            <i class="cor" v-show="3==selectedNav"></i>
+          </a>
         </li>
         <li>
           <a>商城</a>
@@ -53,7 +56,7 @@
       </div>
     </div>
     <div class="main_subnav_line" v-show="selectedNav!==1"></div>
-    <div class="main_subnav" v-show="selectedNav===1" :class="">
+    <div class="main_subnav" v-show="selectedNav===1" >
       <div class="subnav_bd">
         <a href="#" class="subnav_item" :class="1===selectedSubNav?'subnav_selected':''" @click="subnavto(1)">推荐</a>
         <a href="#" class="subnav_item" :class="2===selectedSubNav?'subnav_selected':''" @click="subnavto(2)">排行榜</a>
@@ -159,6 +162,9 @@ export default {
       }
       if(page==='discovery'){
           this.selectedNav = 1
+      }
+      if(page==='friend'){
+          this.selectedNav = 3
       }
     },
     subnavto(index){

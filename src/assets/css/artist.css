@@ -3,6 +3,8 @@
     height: 100%;
     margin: 0 auto;
     border-right: 1px solid #ccc;
+    background-color: #fff;
+    overflow: hidden;
 }
 
 .artist_left{
@@ -138,8 +140,8 @@
 .artist_btns .artist_btn_play{
     display: inline-block;
     width: 66px;
-    height: 31px;
-    line-height: 31px;
+    height: 30px;
+    line-height: 30px;
     background: url('../../assets/img/button2.png') no-repeat right -428px;
     padding-right: 5px;
 }
@@ -176,8 +178,8 @@
 .artist_btns .artist_btn_fav{
     display: inline-block;
     width: 95px;
-    height: 31px;  
-    line-height: 31px; 
+    height: 30px;  
+    line-height: 30px; 
     background: url('../../assets/img/button2.png') no-repeat right -1020px; 
      
 }
@@ -199,7 +201,6 @@
     padding: 20px 40px 40px 28px;    
     float: right;
     border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
 }
 
 .artist_right .simi_artists{

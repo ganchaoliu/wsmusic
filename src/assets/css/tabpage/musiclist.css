@@ -18,7 +18,7 @@
 }
 
 .musiclist .song_item:hover{
-    background-color: #eeeeee;
+    background-color: #eeeeee;    
     border: 1px solid #ddd;
 }
 
@@ -151,10 +151,6 @@
 /* 歌曲列表开始 */
 .musiclist .song_item .td{
     float: left;
-}
-
-.main ul li:first-child a{
-    color:#31c27c;
 }
 
 .listhd li,.listbd li{

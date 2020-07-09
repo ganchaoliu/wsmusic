@@ -111,7 +111,7 @@ export default {
       const currentsong = this.$store.state.currentsong.song.url;
       if (currentsong == "" && this.$store.state.playlist.length > 0) {
         // this.$store.state.currentsong = this.$store.state.playlist[0]
-        this.$store.commit("updateCurrentSong", this.$store.state.playlist[0]);
+        this.$store.commit("musicplayer/updateCurrentSong", this.$store.state.playlist[0]);
       } else {
         this.audio.playing ? this.pause() : this.play();
       }
@@ -133,7 +133,7 @@ export default {
           this.$store.state.playlist[pos + 1]
         );
       } else {
-        this.$store.commit("updateCurrentSong", this.$store.state.playlist[0]);
+        this.$store.commit("musicplayer/updateCurrentSong", this.$store.state.playlist[0]);
         this.play();
       }
     },
@@ -166,13 +166,13 @@ export default {
       if (pos - 1 >= 0) {
         // this.$store.state.currentsong = this.$store.state.playlist[pos-1]
         this.$store.commit(
-          "updateCurrentSong",
+          "musicplayer/updateCurrentSong",
           this.$store.state.playlist[pos - 1]
         );
       } else {
         // this.$store.state.currentsong = this.$store.state.playlist[len-1]
         this.$store.commit(
-          "updateCurrentSong",
+          "musicplayer/updateCurrentSong",
           this.$store.state.playlist[len - 1]
         );
       }
@@ -190,18 +190,18 @@ export default {
       let playlist = this.$store.state.playlist;
       let pos = Math.floor(Math.random() * playlist.length);
       // this.$store.state.currentsong = playlist[pos]
-      this.$store.commit("updateCurrentSong", playlist[pos]);
+      this.$store.commit("musicplayer/updateCurrentSong", playlist[pos]);
       this.play();
     },
     onPlay() {
       this.audio.playing = true;
-      this.$store.commit("updatePlayStatus", true);
+      this.$store.commit("musicplayer/updatePlayStatus", true);
       this.$refs.audio.volume = this.$store.state.volume / 100;
     },
     // 当音频暂停
     onPause() {
       this.audio.playing = false;
-      this.$store.commit("updatePlayStatus", false);
+      this.$store.commit("musicplayer/updatePlayStatus", false);
     },
     onLoadedmetadata(res) {
       this.resetLyric();
@@ -248,7 +248,7 @@ export default {
     },
     //改变音量，由于进度条是1-100，音量范围是0-1所以需要进行替换
     changeVolume(pos) {
-      this.$store.commit("updateVolume", pos);
+      this.$store.commit("musicplayer/updateVolume", pos);
       this.$refs.audio.volume = this.$store.state.volume / 100;
     },
     change_vol_show() {        
@@ -417,7 +417,7 @@ export default {
     PlayList
   },
   mounted() {
-    this.$store.commit("registerMusicPlayer", this.$refs.audio);
+    this.$store.commit("musicplayer/registerMusicPlayer", this.$refs.audio);
   }
 };
 </script>

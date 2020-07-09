@@ -16,7 +16,7 @@
 <!--                                <a href=""></a>-->
                                 <router-link :to="{path:'/artists',query:{id:item.id}}">{{item.name}}</router-link>
                             </h3>
-                            <span>{{item.albumSize}}个专辑 {{item.mvSize}}个视频</span>
+                            <p><span v-show="item.albumSize>0">{{item.albumSize}}个专辑</span> <span v-if="item.mvSize>0">{{item.mvSize}}个视频</span></p>
                         </div>
                         
                         </li>

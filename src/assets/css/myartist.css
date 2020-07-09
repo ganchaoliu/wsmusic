@@ -39,21 +39,24 @@
 .ma_body .detail{
     display: inline-block;
     border: 1px solid #fff;
-    width: 600px;
+    width: 550px;
     height: 80px;
     margin-left: 10px;
 }
 
 .ma_body .detail h3{
-    margin-top: 10px;
     padding: 10px;
     font-size: 18px;
     color: #666;
 }
 
-.ma_body .detail span{
+.ma_body .detail p{
     padding: 10px;
     font-size: 14px;
     color: #666;
+}
+
+.ma_body .detail p span{
+    margin-right: 5px;
 }
 

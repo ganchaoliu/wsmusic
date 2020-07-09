@@ -7,7 +7,8 @@
     width: 980px;    
     padding:40px;
     border-left: 1px solid #eee;
-    border-right: 1px solid #eee;
+    border-right: 1px solid #eee;    
+    background-color: #fff;
 }
 
 .search_body .search_input{  
