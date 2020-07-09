@@ -2,7 +2,7 @@
   <div id="app" class="app">
     <!-- <Header></Header> -->
     <net-ease-header></net-ease-header>
-    <router-view ></router-view>
+    <router-view class="router_view"></router-view>
    <!-- <audio-play></audio-play> -->
     <music-player class="music_player" v-show="$route.name!='mv' && $route.name!='video'&&$route.name!='mymv'"></music-player>
   </div>
@@ -46,4 +46,9 @@ export default {
     bottom: 0;
     background-color: rgba(0, 0, 0, .8);
   }
+
+  /* .router_view a{
+    color: #333;
+  } */
+
 </style>

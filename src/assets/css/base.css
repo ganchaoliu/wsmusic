@@ -1,7 +1,7 @@
 @import "./normalize.css";
 
 :root{
-    --color-text:#666;
+    --color-text:#333;
     --color-high-text:#ff5777;
     --color-tint:#ff8198;  /*背景颜色*/
     --color-background:#fff;
@@ -31,7 +31,7 @@ a{
 }
 
 a:hover{
-    color: #31c27c;
+    color: #c20c0c;
 }
 
 .clear-fix::after{
@@ -53,4 +53,8 @@ a:hover{
 
 .right{
     float: right;
+}
+
+ul li{
+    list-style: none;
 }

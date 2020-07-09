@@ -6,6 +6,9 @@
         <input type="text" v-model="searchValue" @keyup.enter="search(type)" />
         <a href></a>
       </div>
+      <div class="search_history">
+        <a href="" v-for="(his,index) in searchHistory" :key="index">{{his}}</a>
+      </div>
       <div class="search_con">
         <div class="note">
           搜索“{{$store.state.searchvalue}}”，找到
@@ -67,6 +70,7 @@
 import { log } from "util";
 import NavigateBar from "../components/content/NavigateBar.vue";
 import { TYPE } from "../utils/common";
+import {mapState,mapGetters} from 'vuex';
 const ArtistList = () => import("./tabpage/ArtistList");
 const MusicList = () => import("./tabpage/MusicList");
 const AlbumList = () => import("./tabpage/AlbumList");
@@ -92,6 +96,7 @@ export default {
         this.$store
           .dispatch("search", { keyword: keyword, type: type })
           .then(res => {
+            console.log(res)
             //  根据type的值获取TYPE中的key的值，并组合成组件名称保存
             let findKey = (value, compare = (a, b) => a === b) => {
               return Object.keys(TYPE).find(k => compare(TYPE[k], value));
@@ -143,6 +148,12 @@ export default {
       set(v) {
         this.$store.commit("updateSearchValue", v);
       }
+    },
+    searchHistory(){
+      let arr,newarr = []
+      arr = this.$store.state.searchHistory.slice(0)
+      newarr = arr.reverse().slice(0,6);
+      return newarr
     }
   },
   watch: {

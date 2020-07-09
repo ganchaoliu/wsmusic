@@ -153,11 +153,6 @@
     float: left;
 }
 
-
-ul li{
-    list-style: none;
-}
-
 .main ul li:first-child a{
     color:#31c27c;
 }
@@ -168,7 +163,7 @@ ul li{
     height: 30px;
     line-height: 30px;
     overflow: hidden;
-    text-space: none;
+    white-space: none;
     text-overflow: ellipsis;
 }
 

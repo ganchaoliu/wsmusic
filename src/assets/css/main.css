@@ -85,17 +85,21 @@
     border-left: 1px solid #ccc;
 }
 
+.search_body .search_tab ul li:first-child a{
+    color: #333;
+}
+
 .search_body .search_tab ul li:last-child{
     border-right: 1px solid #ccc;
 }
 
 .search_body .search_tab ul li:hover{
-    border-top: 2px solid #31c27c;
+    border-top: 2px solid #c20c0c;
     cursor: pointer;
 }
 
 .search_body .search_tab .tab_selected{
-    border-top: 2px solid #31c27c;
+    border-top: 2px solid #c20c0c;
     background-color: #fff;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
