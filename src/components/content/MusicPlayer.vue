@@ -43,7 +43,7 @@
       <div class="music_ctrl">
         <div class="v_slider" v-show="vol_show" :tabindex="0" @blur="v_bar_blur">
           <el-slider
-            v-model="$store.state.volume"
+            v-model="$store.state.musicplayer.volume"
             @change="changeVolume"
             :format-tooltip="formatVolumeToolTip"
             vertical
@@ -52,7 +52,7 @@
         </div>
         <a class="icon_vol" @click="change_vol_show" :title="change_vol_title"></a>
         <a @click="change_loop" :class="icon_loop" :title="loopString"></a>
-        <a class="icon_playlist" @click="playlist" title="播放列表">{{$store.state.playlist.length}}</a>
+        <a class="icon_playlist" @click="gotoplaylist" title="播放列表">{{playlist.length}}</a>
         <transition name="fade">
           <span class="tip" v-show="tip_show">{{tip_message}}</span>
         </transition>
@@ -75,6 +75,7 @@
 
 <script>
 import { log } from "util";
+import { mapState, mapGetters } from "vuex";
 const PlayList = () => import("./PlayList");
 import { request } from "../../network/request";
 import loopM from "../../utils/common";
@@ -108,10 +109,10 @@ export default {
   },
   methods: {
     playorpause() {
-      const currentsong = this.$store.state.currentsong.song.url;
-      if (currentsong == "" && this.$store.state.playlist.length > 0) {
-        // this.$store.state.currentsong = this.$store.state.playlist[0]
-        this.$store.commit("musicplayer/updateCurrentSong", this.$store.state.playlist[0]);
+      const currentsong = this.currentsong.song.url;
+      if (currentsong == "" && this.playlist.length > 0) {
+        // this.currentsong = this.playlist[0]
+        this.$store.commit("musicplayer/updateCurrentSong", this.playlist[0]);
       } else {
         this.audio.playing ? this.pause() : this.play();
       }
@@ -123,17 +124,17 @@ export default {
       this.$refs.audio.pause();
     },
     play_next() {
-      let pos = this.$store.state.playlist.indexOf(
-        this.$store.state.currentsong
+      let pos = this.playlist.indexOf(
+        this.currentsong
       );
-      if (pos + 1 < this.$store.state.playlist.length) {
-        // this.$store.state.currentsong = this.$store.state.playlist[pos+1]
+      if (pos + 1 < this.playlist.length) {
+        // this.currentsong = this.playlist[pos+1]
         this.$store.commit(
           "updateCurrentSong",
-          this.$store.state.playlist[pos + 1]
+          this.playlist[pos + 1]
         );
       } else {
-        this.$store.commit("musicplayer/updateCurrentSong", this.$store.state.playlist[0]);
+        this.$store.commit("musicplayer/updateCurrentSong", this.playlist[0]);
         this.play();
       }
     },
@@ -156,24 +157,24 @@ export default {
       }
     },
     play_pre() {
-      const playlist = this.$store.state.playlist;
+      const playlist = this.playlist
       let len = playlist.length;
       //获取播放模式是2随机，0顺序，1单曲循环
       console.log("现在播放列表中有：" + playlist.length + "首歌");
-      let pos = this.$store.state.playlist.indexOf(
-        this.$store.state.currentsong
+      let pos = this.playlist.indexOf(
+        this.currentsong
       );
       if (pos - 1 >= 0) {
-        // this.$store.state.currentsong = this.$store.state.playlist[pos-1]
+        // this.currentsong = this.playlist[pos-1]
         this.$store.commit(
           "musicplayer/updateCurrentSong",
-          this.$store.state.playlist[pos - 1]
+          this.playlist[pos - 1]
         );
       } else {
-        // this.$store.state.currentsong = this.$store.state.playlist[len-1]
+        // this.currentsong = this.playlist[len-1]
         this.$store.commit(
           "musicplayer/updateCurrentSong",
-          this.$store.state.playlist[len - 1]
+          this.playlist[len - 1]
         );
       }
     },
@@ -187,16 +188,16 @@ export default {
       this.resetLyric();
     },
     playrandom() {
-      let playlist = this.$store.state.playlist;
+      let playlist = this.playlist;
       let pos = Math.floor(Math.random() * playlist.length);
-      // this.$store.state.currentsong = playlist[pos]
+      // this.currentsong = playlist[pos]
       this.$store.commit("musicplayer/updateCurrentSong", playlist[pos]);
       this.play();
     },
     onPlay() {
       this.audio.playing = true;
       this.$store.commit("musicplayer/updatePlayStatus", true);
-      this.$refs.audio.volume = this.$store.state.volume / 100;
+      this.$refs.audio.volume = this.volume / 100;
     },
     // 当音频暂停
     onPause() {
@@ -206,8 +207,8 @@ export default {
     onLoadedmetadata(res) {
       this.resetLyric();
       this.audio.maxTime = parseInt(res.target.duration);
-      this.getLyric(this.$store.state.currentsong.id);
-      this.getAlbumDetail(this.$store.state.currentsong.album.id);
+      this.getLyric(this.currentsong.id);
+      this.getAlbumDetail(this.currentsong.album.id);
     },
     // 当timeupdate事件大概每秒一次，用来更新音频流的当前播放时间
     onTimeupdate(res) {
@@ -249,11 +250,10 @@ export default {
     //改变音量，由于进度条是1-100，音量范围是0-1所以需要进行替换
     changeVolume(pos) {
       this.$store.commit("musicplayer/updateVolume", pos);
-      this.$refs.audio.volume = this.$store.state.volume / 100;
+      this.$refs.audio.volume = this.volume / 100;
     },
     change_vol_show() {        
       this.vol_show ? (this.vol_show = false) : (this.vol_show = true);
-      this.$refs.volume.focus()
     },
     v_bar_blur(){
         console.log('失去焦点')
@@ -267,7 +267,7 @@ export default {
         this.loop = loopM.Sequential;
       }
     },
-    playlist() {
+    gotoplaylist() {
       this.$router.push({
         path: "playlist"
       });
@@ -348,6 +348,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('musicplayer',['volume','playlist','currentsong']),
     icon_loop() {
       let loop = this.loop;
       if (loop == loopM.Sequential) {
@@ -357,25 +358,25 @@ export default {
     },
     isupdate() {
       //返回播放列表长度
-      return this.$store.state.playlist.length;
+      return this.playlist.length;
     },
     song_url() {
       return (
         "https://music.163.com/song/media/outer/url?id=" +
-        this.$store.state.currentsong.id +
+        this.currentsong.id +
         ".mp3"
       );
     },
     displaySongMessage() {
-      console.log(this.$store.state.currentsong);
-      if (this.$store.state.currentsong.artist != "") {
+      console.log(this.currentsong);
+      if (this.currentsong.artist != "") {
         return (
-          this.$store.state.currentsong.name +
+          this.currentsong.name +
           "--" +
-          this.$store.state.currentsong.artist
+          this.currentsong.artist
         );
       } else {
-        return this.$store.state.currentsong.name;
+        return this.currentsong.name;
       }
     },
     loopString() {
@@ -392,7 +393,7 @@ export default {
       }
     },
     change_vol_title() {
-      return "音量调节" + this.$store.state.volume + "%";
+      return "音量调节" + this.volume + "%";
     }
   },
   watch: {

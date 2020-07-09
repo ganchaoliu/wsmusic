@@ -83,8 +83,8 @@ export default {
           song.song = res.data.data[0];
           song.album = album;
           song.artist = artist;
-          this.$store.state.currentsong = song;
-          let checkresult = this.$store.state.playlist.some(item => {
+          this.$store.state.musicplayer.currentsong = song;
+          let checkresult = this.$store.state.musicplayer.playlist.some(item => {
             if (item.id == id) {
               return true;
             }
@@ -92,7 +92,7 @@ export default {
           if (checkresult) {
             this.tip_message = "已在播放列表中";
           } else {
-            this.$store.state.playlist.push(song);
+            this.$store.state.musicplayer.playlist.push(song);
           }
         } else {
           alert("url为空无法播放");
@@ -124,7 +124,7 @@ export default {
         song.album = album;
         song.artist = artist;
         if (song.song.url != null) {
-          let checkresult = this.$store.state.playlist.some(item => {
+          let checkresult = this.$store.state.musicplayer.playlist.some(item => {
             if (item.id == id) {
               return true;
             }
@@ -132,7 +132,7 @@ export default {
           if (checkresult) {
             alert("已在播放列表中");
           } else {
-            this.$store.state.playlist.push(song);
+            this.$store.state.musicplayer.playlist.push(song);
           }
         } else {
           alert("url为空，没有版权哟！！");

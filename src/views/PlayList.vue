@@ -8,8 +8,8 @@
     </ul>
     <ul
       class="listbd"
-      v-if="$store.state.playlist.length!==0"
-      v-for="(song,index) in $store.state.playlist"
+      v-if="playlist.length!==0"
+      v-for="(song,index) in playlist"
       :class="{list2:index%2===0,'pla_hl':iscurrentsong===index}"
     >
       <!--                <li><router-link :to="{path:'/play',query:{id:song.id,name:song.name}}">{{song.name}}</router-link></li>-->
@@ -34,6 +34,9 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
+
+
 export default {
   name: "playlist",
   data() {
@@ -43,26 +46,27 @@ export default {
     };
   },
   methods: {
+    ...mapMutations('musicplayer',['updateCurrentSong']),
     play(index) {
-      let status = this.$store.state.currentsong.playing
-      this.$store.state.currentsong = this.$store.state.playlist[index];
+      let status = this.currentsong.playing
+      this.updateCurrentSong(this.playlist[index]);
       if(!status){
-        this.$store.state.music_player.play()
+        this.music_player.play()
       }
       
     },
     deletefromplaylist(index) {
       //判断是否是当前播放的歌曲
-      let currentSong = this.$store.state.currentsong;
-      let currentIndex = this.$store.state.playlist.indexOf(currentSong);
-      if (currentIndex === index && this.$store.state.currentsong.playing) {
+      let currentSong = this.currentsong;
+      let currentIndex = this.playlist.indexOf(currentSong);
+      if (currentIndex === index && this.currentsong.playing) {
         this.tip_message = "正在播放中";
         this.tip_show = true;
         setTimeout(() => {
           this.tip_show = false;
         }, 1000);
       } else {
-        this.$store.state.playlist.splice(index, 1);
+        this.playlist.splice(index, 1);
         this.tip_message = "删除成功";
         this.tip_show = true;
         setTimeout(() => {
@@ -72,9 +76,10 @@ export default {
     }
   },
   computed: {
+    ...mapState('musicplayer',['playlist','currentsong','music_player']),
     iscurrentsong() {
-      let currentSong = this.$store.state.currentsong;
-      let currentIndex = this.$store.state.playlist.indexOf(currentSong);
+      let currentSong = this.currentsong;
+      let currentIndex = this.playlist.indexOf(currentSong);
       console.log(currentIndex);
       return currentIndex;
     }
