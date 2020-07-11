@@ -1,3 +1,5 @@
+import {History} from '../utils/common'
+
 export default{
         
         updatePageLimit(state, pageSize) {
@@ -16,6 +18,17 @@ export default{
             state.searchvalue = payload
         },
         updateSearchHistory(state,payload){
-            state.searchHistory = [...state.searchHistory,payload]
-        }
+            console.log('增加元素')
+            let array = state.searchHistory
+            let i=0
+            while(i<array.length){
+                if(array[i]==payload){
+                    console.log('重复啦'+i)
+                    array.splice(i,1)
+                    break
+                }
+                i++
+            }
+            state.searchHistory.splice(0,0,payload)
+        },
 }

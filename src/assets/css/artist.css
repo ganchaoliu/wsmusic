@@ -5,6 +5,7 @@
     border-right: 1px solid #ccc;
     background-color: #fff;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .artist_left{
@@ -206,6 +207,7 @@
 .artist_right .simi_artists{
     margin-top: 20px;
     margin-left: -25px;
+    height: 100%;
 }
 
 .artist_right .simi_artists .simi_artist_item{

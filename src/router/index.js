@@ -4,26 +4,6 @@ import Layout from "../views/element/Layout";
 
 Vue.use(Router)
 
-// /**
-//      * @param {to} 将要去的路由
-//      * @param {from} 出发的路由
-//      * @param {next} 执行下一步
-//      */
-//     router.beforeEach((to, from, next) => {
-//       console.log('路由守卫')
-//       console.log(to)
-//       next()
-
-//       // document.title = to.meta.title || '卖座电影';
-//       // if (to.meta.needLogin && !$store.state.isLogin) {
-//       //     next({
-//       //         path: '/login'
-//       //     })
-//       // } else {
-//       //     next()
-//       // }
-//   })
-
 const Main=()=>import('../views/Main')
 const MusicPlayer=()=>import('../views/MusicPlayer')
 const PlayList=()=>import('../views/PlayList')
@@ -35,11 +15,17 @@ const MyMV = ()=>import('../views/MyMV')
 const Artist = ()=>import('../views/artist/Artist')
 const MV = ()=>import('../views/MV')
 const Video = ()=>import('../views/Video')
+const Discover = ()=>import('../views/discover/Discover')
 
 const routes= [
   {
     path: '/',
-    redirect: '/search'
+    redirect: '/discover'
+  },
+  {
+    path: '/discover',
+    name: 'discover',
+    component: Discover
   },
   {
     path: '/search',

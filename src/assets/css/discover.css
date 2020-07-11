@@ -1,0 +1,113 @@
+.index_bg{
+    width: 100%;
+    background-color: salmon;
+}
+
+.discover_banner{
+    width: 100%;
+    height: 285px;
+}
+
+.discover_banner .dbanner_bd{
+    margin: 0 auto;
+    width:982px;
+    height: 100%;
+    background-color: sandybrown;
+}
+
+.dbanner_bd .dbanner_left{
+    float: left;
+    width: 730px;
+    height: 100%;
+    background-color: springgreen;
+    position: relative;
+}
+
+.dbanner_left .banner_image{
+    display: block;
+    width: 730px;
+    height: 285px;
+}
+
+.dbanner_left .dot_nav{
+    text-align: center;
+    width: 730px;
+    height: 20px;
+    position: absolute;
+    bottom: 5px;
+}
+
+.dbanner_left .dot_nav a{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    margin-right: 10px;
+    background: url('../img/banner.png') no-repeat 3px -343px;
+}
+
+.dbanner_left .dot_nav a:hover{
+    background-position: -16px -343px;
+}
+
+.dbanner_left .pre,.next{
+    position: absolute;
+    display: inline-block;
+    width: 37px;
+    height: 63px;
+    text-indent: 9999px;
+    overflow: hidden;
+}
+
+.dbanner_left .pre{ 
+    top: 40%;
+    left: -80px;   
+    background: url('../img/banner.png') no-repeat 0px -360px;
+}
+
+.dbanner_left .pre:hover{ 
+    background-position:  0px -430px;
+}
+
+.dbanner_left .next{ 
+    top: 40%;
+    right: -330px;  
+    background: url('../img/banner.png') no-repeat 0px -508px;
+}
+
+.dbanner_left .next:hover{ 
+    
+    background: url('../img/banner.png') no-repeat 0px -578px;
+}
+
+.dbanner_left .dot_nav .ban_selected{
+    background: url('../img/banner.png');
+    background-position: -16px -343px;
+}
+
+.dbanner_bd .dbanner_right{
+    position: relative;
+    float: left;
+    width: 252px;
+    height: 100%;
+    background-color: slategray;
+    background: url('../img/download.png');
+}
+
+.dbanner_right a{
+    display: block;
+    margin: 186px 0 0 19px;
+    width: 215px;
+    height: 56px;
+}
+
+.dbanner_right p{
+    font-size: 12px;
+    margin: 10PX AUTO;
+    text-align: center;
+    color: #8D8D8D;
+}
+
+
+
+

@@ -47,6 +47,10 @@ export default {
     background-color: rgba(0, 0, 0, .8);
   }
 
+  .app, body{
+    overflow: hidden;
+  }
+
   /* .router_view a{
     color: #333;
   } */

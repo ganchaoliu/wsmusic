@@ -130,7 +130,7 @@ export default {
       if (pos + 1 < this.playlist.length) {
         // this.currentsong = this.playlist[pos+1]
         this.$store.commit(
-          "updateCurrentSong",
+          "musicplayer/updateCurrentSong",
           this.playlist[pos + 1]
         );
       } else {

@@ -4,7 +4,8 @@
 
 .search_body{    
     margin: 0 auto 0;
-    width: 980px;    
+    width: 980px; 
+    min-height: 700px;   
     padding:40px;
     border-left: 1px solid #eee;
     border-right: 1px solid #eee;    

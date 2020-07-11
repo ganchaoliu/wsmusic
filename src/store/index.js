@@ -8,12 +8,15 @@ import musicplayer from './musicplayer/index'
 import mutations from './mutations'
 import actions from './actions'
 
+import {History} from '../utils/common'
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
         searchvalue: '',
-        searchHistory:[],
+        searchHistory: [],
+        searchHistoryLinkList: new History(),
         songlist: [],
         songCount: 0,
         hasMore: false,

@@ -7,7 +7,7 @@
         <a href></a>
       </div>
       <div class="search_history">
-        <a href="" v-for="(his,index) in searchHistory" :key="index">{{his}}</a>
+        <a href="#" v-for="(his,index) in searchHistory" :key="index" @click="history(his)">{{his}}</a>
       </div>
       <div class="search_con">
         <div class="note">
@@ -70,7 +70,7 @@
 import { log } from "util";
 import NavigateBar from "../components/content/NavigateBar.vue";
 import { TYPE } from "../utils/common";
-import {mapState,mapGetters} from 'vuex';
+import {mapState,mapGetters, mapMutations} from 'vuex';
 const ArtistList = () => import("./tabpage/ArtistList");
 const MusicList = () => import("./tabpage/MusicList");
 const AlbumList = () => import("./tabpage/AlbumList");
@@ -87,6 +87,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations({'updateSearchValue':'updateSearchValue'}),
     search(type) {
       console.log(this.$children)
       let keyword = this.$store.state.searchvalue;
@@ -114,6 +115,10 @@ export default {
             });
           });
       }
+    },
+    history(keyword){
+      this.updateSearchValue(keyword)
+      this.search(this.type)
     }
   },
   created: function() {
@@ -149,12 +154,25 @@ export default {
         this.$store.commit("updateSearchValue", v);
       }
     },
-    searchHistory(){
-      let arr,newarr = []
-      arr = this.$store.state.searchHistory.slice(0)
-      newarr = arr.reverse().slice(0,6);
-      return newarr
-    }
+    // getHistory(){
+
+    //   return (index)=>{
+    //     let history = this.searchHistoryLinkList
+    //     let length = this.searchHistoryLinkList.length
+    //     console.log(length)
+    //     let i=0
+    //     if(index<length){
+    //       console.log('获取历史元素'+index)
+    //       while(i-->0){
+    //         history = history.next
+    //       }
+    //       return history.element
+    //     }else{
+    //       return ""
+    //     }
+    //   }
+    // },
+    ...mapState(['searchHistory','searchHistoryLinkList','keywordvalue','searchvalue'])
   },
   watch: {
     songList: function() {

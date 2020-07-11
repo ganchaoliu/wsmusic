@@ -59,6 +59,7 @@
 <script>
 import { realFormatSecond } from "../../utils/common";
 import { request } from "../../network/request";
+import { mapMutations, mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -69,6 +70,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations({'updateCurrentSong':'musicplayer/updateCurrentSong'}),
     playsong(id, name, album, artist) {
       request({
         url: "/api/song/url",
@@ -83,8 +85,8 @@ export default {
           song.song = res.data.data[0];
           song.album = album;
           song.artist = artist;
-          this.$store.state.musicplayer.currentsong = song;
-          let checkresult = this.$store.state.musicplayer.playlist.some(item => {
+          this.updateCurrentSong(song)
+          let checkresult = this.playlist.some(item => {
             if (item.id == id) {
               return true;
             }
@@ -92,7 +94,7 @@ export default {
           if (checkresult) {
             this.tip_message = "已在播放列表中";
           } else {
-            this.$store.state.musicplayer.playlist.push(song);
+            this.playlist.push(song);
           }
         } else {
           alert("url为空无法播放");
@@ -124,7 +126,7 @@ export default {
         song.album = album;
         song.artist = artist;
         if (song.song.url != null) {
-          let checkresult = this.$store.state.musicplayer.playlist.some(item => {
+          let checkresult = this.playlist.some(item => {
             if (item.id == id) {
               return true;
             }
@@ -132,7 +134,7 @@ export default {
           if (checkresult) {
             alert("已在播放列表中");
           } else {
-            this.$store.state.musicplayer.playlist.push(song);
+            this.playlist.push(song);
           }
         } else {
           alert("url为空，没有版权哟！！");
@@ -148,17 +150,17 @@ export default {
     handleSizeChange(size) {
       this.$store.commit("updatePageLimit", size);
       this.$store.dispatch("search", {
-        keyword: this.$store.state.searchvalue,
+        keyword: this.searchvalue,
         type: this.type,
         offset: 0
       });
     },
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
-      let offset = (this.currentPage - 1) * this.$store.state.pageLimit;
+      let offset = (this.currentPage - 1) * this.pageLimit;
       this.$store
         .dispatch("search", {
-          keyword: this.$store.state.searchvalue,
+          keyword: this.searchvalue,
           type: 1,
           offset: offset
         })
@@ -166,7 +168,7 @@ export default {
           this.$router.push({
             path: "/search",
             query: {
-              keywords: this.$store.state.searchvalue,
+              keywords: this.searchvalue,
               limit: 20,
               offset: offset
             }
@@ -192,6 +194,8 @@ export default {
     }
   },
   computed: {
+    ...mapState('musicplayer',['currentsong','playlist']),
+    ...mapState(['searchvalue','pageLimit']),
       artist(){
           return function(artists){
               let newStr = artists.map((item,index)=>item.name).join('/')

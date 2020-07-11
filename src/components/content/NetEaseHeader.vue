@@ -6,7 +6,7 @@
       </h1>
       <ul class="ne_nav">
         <li>
-          <a @click="gotopage('discovery')" :class="1===selectedNav?'select':''">发现音乐</a>
+          <a @click="gotopage('discover')" :class="1===selectedNav?'select':''">发现音乐</a>
           <i v-show="1==selectedNav" class="cor"></i>
         </li>
         <li>
@@ -91,7 +91,7 @@ export default {
   name: "NetEaseHeader",
   data() {
     return {
-      selectedNav:-1,
+      selectedNav:1,
       selectedSubNav:1,
       dialogFormVisible: false,
       dialogTableVisible: false,
@@ -159,9 +159,11 @@ export default {
       this.$router.push(page);
       if(page==='mysonglist'){
           this.selectedNav = 2
+          this.$router.push('/mysonglist')
       }
-      if(page==='discovery'){
+      if(page==='discover'){
           this.selectedNav = 1
+          this.$router.push('/discover')
       }
       if(page==='friend'){
           this.selectedNav = 3

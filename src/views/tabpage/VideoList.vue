@@ -1,5 +1,5 @@
 <template>
-  <div class="videolist">
+  <div class="videolist" v-if="videos.length>0">
     <ul v-if="videos.length>0">
       <li class="videoitem" v-for="(video,index) in videos" :key="index">
         <div class="videocover">
@@ -29,6 +29,7 @@
     ></el-pagination>
     </ul>
   </div>
+  <div v-else class="n_video"><div class="n_video_content"><i class="n_video_icon"></i> 很抱歉，未能找到相关搜索结果！</div></div>
 </template>
 
 <script>

@@ -15,8 +15,9 @@ export default {
                         offset: payload.offset
                     }
                 }).then(res => {
-                    console.log(TYPE.Video)
+                    console.log('搜索类型：'+TYPE.Video)
                     state.commit("updateSearchHistory", payload.keyword)
+                    // state.commit("updateSearchHistoryLinkList", payload.keyword)
                     switch (payload.type) {
                         case TYPE.Music:
                             state.commit("updateSongList", { 'songlist': res.data.result.songs, 'songcount': res.data.result.songCount, 'hasmore': res.data.result.hasMore });
@@ -30,7 +31,12 @@ export default {
                             break;
                         case TYPE.Video:
                             console.log(res);
-                            state.commit('videolist/updateVideos', { 'videos': res.data.result.videos, 'videoCount': res.data.result.videoCount });
+                            if(res.data.msg){
+                                console.log('很抱歉没有搜索到视频')
+                                state.commit('videolist/updateVideos', { 'videos': [], 'videoCount': 0 });
+                            }else{
+                                state.commit('videolist/updateVideos', { 'videos': res.data.result.videos, 'videoCount': res.data.result.videoCount });
+                            }
                             break;
                         case TYPE.Lyric:
                             break;

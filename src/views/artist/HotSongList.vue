@@ -44,6 +44,7 @@
 <script>
 import { realFormatSecond } from "../../utils/common";
 import { request } from "../../network/request";
+import { mapState,mapMutations } from 'vuex';
 
 export default {
   name: "HotSongList",
@@ -55,6 +56,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations({'updateCurrentSong':'musicplayer/updateCurrentSong'}),
     playsong(id, name, album, artist) {
       request({
         url: "/api/song/url",
@@ -69,8 +71,8 @@ export default {
           song.song = res.data.data[0];
           song.album = album;
           song.artist = artist;
-          this.$store.state.currentsong = song;
-          let checkresult = this.$store.state.playlist.some(item => {
+          this.updateCurrentSong(song)
+          let checkresult = this.playlist.some(item => {
             if (item.id == id) {
               return true;
             }
@@ -78,14 +80,14 @@ export default {
           if (checkresult) {
             this.tip_message = "已在播放列表中";
           } else {
-            this.$store.state.playlist.push(song);
+            this.playlist.push(song);
           }
         } else {
           alert("url为空无法播放");
         }
       });
     },
-    /*
+     /*
      * 添加歌曲到播放列表
      * 1.判断在播放列表中是否存在
      *
@@ -110,7 +112,7 @@ export default {
         song.album = album;
         song.artist = artist;
         if (song.song.url != null) {
-          let checkresult = this.$store.state.playlist.some(item => {
+          let checkresult = this.playlist.some(item => {
             if (item.id == id) {
               return true;
             }
@@ -118,7 +120,7 @@ export default {
           if (checkresult) {
             alert("已在播放列表中");
           } else {
-            this.$store.state.playlist.push(song);
+            this.push(song);
           }
         } else {
           alert("url为空，没有版权哟！！");
@@ -149,7 +151,8 @@ export default {
     },
     hotSongs() {
       return this.$parent.hotSongs;
-    }
+    },
+    ...mapState('musicplayer',['playlist','currentsong'])
   }
 };
 </script>

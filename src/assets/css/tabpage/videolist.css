@@ -69,3 +69,30 @@
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+
+.n_video{
+    width: 900px;
+    height: 400px;
+    padding-top: 100px;
+}
+
+.n_video_content{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 900px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.n_video_content .n_video_icon{
+    display: inline-block;
+    width: 64px;
+    height: 50px;
+    background: url('../../img/icon.png') no-repeat 0 -347px;
+    margin-right: 10px;
+}
+
+.n_video_content span{
+    height: 50px;
+}
