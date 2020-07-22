@@ -1,6 +1,8 @@
 .artist_main{
     margin-top: 20px;
     width: 900px;
+    height: inherit;
+    background-color: #fff;
 }
 
 .artist_main .artist_item{

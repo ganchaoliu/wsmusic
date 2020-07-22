@@ -1,6 +1,5 @@
 .index_bg{
     width: 100%;
-    background-color: salmon;
 }
 
 .discover_banner{
@@ -12,14 +11,12 @@
     margin: 0 auto;
     width:982px;
     height: 100%;
-    background-color: sandybrown;
 }
 
 .dbanner_bd .dbanner_left{
     float: left;
     width: 730px;
     height: 100%;
-    background-color: springgreen;
     position: relative;
 }
 
@@ -27,6 +24,7 @@
     display: block;
     width: 730px;
     height: 285px;
+    cursor: pointer;
 }
 
 .dbanner_left .dot_nav{

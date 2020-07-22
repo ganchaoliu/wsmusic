@@ -28,6 +28,9 @@ export default{
         updatePlayStatus(state, status) {
             state.currentsong.playing = status
         },
+        updatePlaylist(state,payload){
+            state.playlist.push(payload)
+        }
     },
     getters: {
         getUrl: state => {

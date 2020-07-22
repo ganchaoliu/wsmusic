@@ -1,58 +1,87 @@
 <template>
   <div id="app" class="app">
     <!-- <Header></Header> -->
-    <net-ease-header></net-ease-header>
+    <net-ease-header class="header"></net-ease-header>
+    <div class="clear-fix"></div>
     <router-view class="router_view"></router-view>
-   <!-- <audio-play></audio-play> -->
-    <music-player class="music_player" v-show="$route.name!='mv' && $route.name!='video'&&$route.name!='mymv'"></music-player>
+    <!-- <audio-play></audio-play> -->
+    <music-player
+      class="music_player"
+      v-show="$route.name!='mv' && $route.name!='video'&&$route.name!='mymv'"
+    ></music-player>
   </div>
 </template>
 
 <script>
-  import Header from "./components/content/Header";
-  import NetEaseHeader from "./components/content/NetEaseHeader";
-  import MusicPlayer from "./components/content/MusicPlayer";
-  // import AudioPlay from "./views/AudioPlay";
+import Header from "./components/content/Header";
+import NetEaseHeader from "./components/content/NetEaseHeader";
+import MusicPlayer from "./components/content/MusicPlayer";
+// import AudioPlay from "./views/AudioPlay";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Header,
     MusicPlayer,
     NetEaseHeader
     // AudioPlay
   },
-  created () {
-    if(sessionStorage.getItem('store')){
-      this.$store.replaceState(Object.assign({},this.$store.state,JSON.parse(sessionStorage.getItem('store'))))
+  // 将store状态保存到localStorage中
+  created() {
+    if (localStorage.getItem("store")) {
+      this.$store.replaceState(
+        Object.assign(
+          {},
+          this.$store.state,
+          JSON.parse(localStorage.getItem("store"))
+        )
+      );
     }
-    window.addEventListener('beforeunload',()=>{
-      sessionStorage.setItem('store',JSON.stringify(this.$store.state))
-    })
-  },
-  computed: {
-    key(){
-      return this.$route.name !== undefined? this.$route.name + +new Date(): this.$route + +new Date()
-    }
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("store", JSON.stringify(this.$store.state));
+    });
   }
-}
+};
 </script>
 
 <style scoped>
-  @import "assets/css/base.css";
-  .music_player {
-    width: 100%;
-    height: 53px;
-    position: fixed;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, .8);
-  }
+@import "assets/css/base.css";
 
-  .app, body{
-    overflow: hidden;
-  }
+html,
+/* body {
+  width: 100%;
+  height: 100%;
+} */
 
-  /* .router_view a{
+.app {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.header{
+  width:100%;
+  height: auto;
+}
+
+.router_view {
+  width: 100%;
+  background-color:#f5f5f5;
+  padding-bottom: 40px;
+}
+
+
+
+
+.music_player {
+  width: 100%;
+  height: 53px;
+  position: fixed;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* .router_view a{
     color: #333;
   } */
-
 </style>

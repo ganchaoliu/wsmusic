@@ -1,15 +1,21 @@
+.argist_bg{
+    width: 100%; 
+    height: auto;   
+    background-color: #fff;
+    overflow: hidden;
+}
+
 .artist_main1{
     width: 980px;
-    height: 100%;
     margin: 0 auto;
     border-right: 1px solid #ccc;
     background-color: #fff;
-    overflow: hidden;
     box-sizing: border-box;
 }
 
 .artist_left{
     width: 709px;
+    height: inherit;
     padding: 20px 30px 40px 39px;
     border-left: 1px solid #ccc;
     float: left;
@@ -128,6 +134,7 @@
 /* 热门50歌单开始 */
 .artist_top50{
     width: 640px;
+    height: auto;
     margin-bottom: 30px;
 }
 

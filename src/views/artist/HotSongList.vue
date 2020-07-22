@@ -15,7 +15,7 @@
         <div class="play_btn" @click="playsong(song.id,song.name,song.al,song.ar[0].name)"></div>
       </div>
       <div class="td sn">
-        <router-link tag="a" to>{{song.name}}</router-link>
+        <router-link tag="a" :to="{name:'song',query:{ids:song.id}}">{{song.name}}</router-link>
         <router-link tag="a" v-if="song.mv!=0" :to="{name:'mv',query:{id:song.mv}}" class="song_mv"></router-link>
       </div>
       <div class="td btns">
@@ -56,7 +56,10 @@ export default {
     };
   },
   methods: {
-    ...mapMutations({'updateCurrentSong':'musicplayer/updateCurrentSong'}),
+    ...mapMutations({
+      'updateCurrentSong':'musicplayer/updateCurrentSong',
+      'updatePlaylist':'musicplayer/updatePlaylist'
+      }),
     playsong(id, name, album, artist) {
       request({
         url: "/api/song/url",
@@ -80,7 +83,7 @@ export default {
           if (checkresult) {
             this.tip_message = "已在播放列表中";
           } else {
-            this.playlist.push(song);
+            this.updatePlaylist(song);
           }
         } else {
           alert("url为空无法播放");
@@ -120,7 +123,7 @@ export default {
           if (checkresult) {
             alert("已在播放列表中");
           } else {
-            this.push(song);
+            this.updatePlaylist(song);
           }
         } else {
           alert("url为空，没有版权哟！！");

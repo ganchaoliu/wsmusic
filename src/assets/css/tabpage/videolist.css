@@ -73,7 +73,8 @@
 .n_video{
     width: 900px;
     height: 400px;
-    padding-top: 100px;
+    padding-top: 80px;
+    padding-left: 250px;
 }
 
 .n_video_content{

@@ -224,7 +224,7 @@
     text-align: center;
     color: #fff;
     line-height: 37px;
-    text-space: none;
+    white-space: none;
     text-overflow: ellipsis;
 }
 

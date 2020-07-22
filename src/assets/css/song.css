@@ -1,0 +1,225 @@
+.song_main{
+    margin: 0 auto;
+    width: 980px;
+    height: 100%;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.song_main .song_left{
+    height: 100%;
+}
+
+.song_main .song_right{
+    float: right;
+    width: 269px;
+    height: 100%;
+    /* background-color: rgb(102, 187, 102); */
+}
+
+.song_main .song_top{
+    width: 709px;
+    padding: 47px 30px 40px 39px;
+    height: auto;
+}
+
+
+/* ###########封面模块开始################# */
+.song_main .song_top .covermodel{
+    float: left;
+}
+
+.song_main .song_top .song_cover{
+    padding-top: 38px;
+    padding-left: 38px;
+    width: 206px;
+    height: 206px;
+    position: relative;
+}
+
+.song_main .song_top .song_cover image{
+    display: inline-block;
+    width: 130px;
+    height: 130px;
+}
+
+.song_main .song_top .song_cover i{
+    position: absolute;
+    display: inline-block;
+    width: 206px;
+    height: 206px;
+    background: url('../img/coverall.png') no-repeat -140px -580px;;
+    left: 0px;
+    top: 0px;
+}
+
+.song_main .song_top .covermodel .out_link{
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+    color: #0c73c2;
+}   
+        
+.song_main .song_top .covermodel .out_link i{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('../img/icon.png') no-repeat -34px -863px;
+    vertical-align: middle;
+}
+
+.song_main .song_top .user_operation{
+    margin-top: 20px;
+    text-align: right;
+    font-size: 14px;
+}
+
+.song_main .song_top .user_operation a{
+    margin-right: 10px;
+}
+
+
+
+/* ###########封面模块结束################# */
+
+
+/* ###############歌词模块开始################ */
+
+.song_main .song_top .song_desc{
+    float: right;
+    width: 404px;
+    /* background-color: rgb(198, 100, 237); */
+}
+
+.song_desc .song_title i{
+    display: inline-block;
+    width: 54px;
+    height: 24px;
+    background: url('../img/icon.png') no-repeat 0 -463px;
+    vertical-align: bottom;
+    margin-right: 10px;
+}
+
+.song_desc .song_title{
+    font-size: 24px;
+    color: #333;
+    height: 24px;
+    line-height: 24px;
+    margin-bottom: 5px;
+}
+
+.song_artist a{
+    margin-right: 5px;
+}
+
+.song_desc p{
+    margin: 10px 0px;
+    font-size: 12px;
+    color: #999;
+}
+
+.song_operation{
+    width: 640px;
+    height: 31px;
+    margin: 10px 0 10px;
+    font-size: 12px;
+}
+
+.song_operation .song_btn_play{
+    display: inline-block;
+    width: 66px;
+    height: 30px;
+    line-height: 30px;
+    background: url('../../assets/img/button2.png') no-repeat right -428px;
+    padding-right: 5px;
+}
+
+.song_operation .song_btn_play i{
+    color: #fff;
+    font-style: normal;
+    display: inline-block;
+    width: 66px;
+    height: 31px;
+    background: url('../../assets/img/button2.png') no-repeat 0 -387px;
+    padding-left: 8px;
+}
+
+.play_btn{
+    float: left;
+    width: 20px;
+    height: 18px;
+    margin: 6px 2px 2px 0;
+    background: url('../../assets/img/button2.png') no-repeat 0 -1622px;
+    overflow: hidden;
+}
+
+.song_operation .song_btn_add{
+    text-indent: -999px;
+    display: inline-block;
+    width: 31px;
+    line-height: 31px;
+    height: 31px;
+    margin-right: 5px;
+    background: url('../../assets/img/button2.png') no-repeat 0 -1588px;
+}
+
+.song_operation .song_btn_fav{
+    display: inline-block;
+    width: 59px;
+    height: 30px;  
+    line-height: 30px; 
+    background: url('../../assets/img/button2.png') no-repeat right -1020px; 
+     
+}
+
+.song_operation .song_btn_fav i{
+    text-indent: 27px;
+    display: inline-block;
+    width: 59px;
+    height: 31px;
+    font-style: normal;
+    background: url('../../assets/img/button2.png') no-repeat 0 -977px; 
+}
+
+.song_operation .btn{
+    display: inline-block;
+    height: 31px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0px 10px;
+    line-height: 31px;
+    margin-left: 10px;
+    box-shadow: 0px 1px 3px  #ccc;
+}
+
+.song_operation .btn:hover{
+    background-color: #eee;
+    color: #333;
+}
+
+
+.song_lyric_content {
+    margin-top: 20px;
+    font-size:12px ;
+    line-height: 23px;
+}
+
+.hideOperation{
+    cursor: pointer;
+}
+
+
+
+/* ################右边开始############### */
+.song_right{
+    border-left: 1px solid #ccc;
+    height: 100%;
+    padding: 20px 40px 40px 30px;
+}
+
+.right_con h3{
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0px;
+    font-size: 12px;
+    font-weight: bold;
+}

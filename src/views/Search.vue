@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main">  
     <!-- <navigate-bar></navigate-bar> -->
     <div class="search_body">
       <div class="search_input">
@@ -60,6 +60,7 @@
         <video-list v-show="type===TYPE.video"></video-list>-->
 
         <div :is="zujian" keep-alive v-if='!loading'></div>
+        
         <div v-else>数据加载中</div>
       </div>
     </div>
@@ -187,11 +188,11 @@ export default {
     ArtistList,
     MusicList,
     AlbumList,
-    VideoList
+    VideoList,
   }
 };
 </script>
 
 <style scoped>
-@import url("../assets/css/main.css");
+@import url("../assets/css/search.css");
 </style>

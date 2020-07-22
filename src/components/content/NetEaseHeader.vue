@@ -107,7 +107,7 @@ export default {
         this.selectedNav=-1
       if (this.searchValue != "") {
         let searchtype = 1;
-        let zujian = sessionStorage.getItem("searchtab");
+        let zujian = localStorage.getItem("searchtab");
         if (zujian != null) {
           let type = zujian.slice(0, -4);
           searchtype = TYPE[type];
@@ -167,6 +167,7 @@ export default {
       }
       if(page==='friend'){
           this.selectedNav = 3
+          this.$router.push('/friend')
       }
     },
     subnavto(index){

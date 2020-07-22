@@ -1,10 +1,9 @@
 .mysonglist_main{
+    height: inherit;
     width: 1100px;
     margin: 0px auto; 
     padding-top: 20px;   
-    background-color: #fff;
-    overflow: hidden;
-    
+    background-color: #fff;    
     border-left: 1px solid #eeeeee;
     border-right: 1px solid #eeeeee;
 }
@@ -14,14 +13,17 @@
     padding-top:10px;
     padding-right:20px;
     width: 240px;
-    height: 524px;
+    height: inherit;
     overflow-x: hidden;
     overflow-y: auto;
+    border-right: 1px solid #eee;
 }
 
 .songlist_right{
     float: left;
+    height: inherit;
     width: 850px;
+    overflow: auto;
 }
 
 .mycreate_sl ul li:hover{

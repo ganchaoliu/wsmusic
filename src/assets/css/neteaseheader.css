@@ -11,6 +11,7 @@
     width: 1100px;
     height: 70px;
     margin: 0 auto;
+    border-bottom: 1px solid black;
 }
 
 /*#############################*/
@@ -182,7 +183,7 @@
 
 .subnav_bd{
     width: 1100px;
-    padding-left: 185px;
+    padding-left: 185px;    
     margin: 0 auto;
 }
 

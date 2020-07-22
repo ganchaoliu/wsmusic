@@ -39,12 +39,16 @@ export default {
                             }
                             break;
                         case TYPE.Lyric:
+                            console.log(res);
                             break;
                         case TYPE.Song:
+                            console.log(res);
                             break;
                         case TYPE.Radio:
+                            console.log(res);
                             break;
                         case TYPE.User:
+                            console.log(res);
                             break;
                     }
 

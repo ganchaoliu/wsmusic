@@ -5,11 +5,13 @@
     border-left: 1px solid #ccc;
     overflow: hidden;
     background-color: #fff;
+    position: relative;
 }
 
 .mv_main .mv_left{
     float: left;
     width: 709px;
+    height: 100%;
     padding: 20px 30px 40px 39px;
 }
 
@@ -75,6 +77,7 @@
     border-right: 1px solid #ccc;
     float: right;
     width: 270px;
+    height: 100%;
     padding: 20px 40px 40px 30px;
 }
 

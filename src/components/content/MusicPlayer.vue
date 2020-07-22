@@ -22,7 +22,7 @@
 
       <div class="play">
         <div class="m_words">
-          <a href="#" v-text="displaySongMessage"></a>
+          <router-link tag="a" :to='{name:"song",query:{ids:currentsong.id}}' v-text="displaySongMessage"></router-link>
           <span class="lyric_text" v-text="currentLyricLine"></span>
         </div>
         <div class="m_progress">

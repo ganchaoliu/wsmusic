@@ -4,7 +4,7 @@ import Layout from "../views/element/Layout";
 
 Vue.use(Router)
 
-const Main=()=>import('../views/Main')
+const Search=()=>import('../views/Search')
 const MusicPlayer=()=>import('../views/MusicPlayer')
 const PlayList=()=>import('../views/PlayList')
 const SongList=()=>import('../views/SongList')
@@ -16,6 +16,10 @@ const Artist = ()=>import('../views/artist/Artist')
 const MV = ()=>import('../views/MV')
 const Video = ()=>import('../views/Video')
 const Discover = ()=>import('../views/discover/Discover')
+const Friend = ()=>import('../views/friend/Friend')
+const Song = ()=>import('../views/Song')
+
+
 
 const routes= [
   {
@@ -25,12 +29,18 @@ const routes= [
   {
     path: '/discover',
     name: 'discover',
-    component: Discover
+    component: Discover,
+    meta:{
+      title:'首页'
+    }
   },
   {
     path: '/search',
-    name: 'main',
-    component: Main
+    name: 'search',
+    component: Search,
+    meta:{
+      title:'搜索音乐'
+    }
   },
   {
     path: '/play',
@@ -50,7 +60,10 @@ const routes= [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    meta:{
+      title:'登陆'
+    }
   },
   {
     path: '/mysonglist',
@@ -83,16 +96,35 @@ const routes= [
     path: '/mv',
     name: 'mv',
     component: MV,
+    meta:{
+      title:'MV'
+    }
   },
   {
     path: '/video',
     name: 'video',
     component: Video,
+    meta:{
+      title:'视频'
+    }
   },
   {
     path: '/artists',
     name: 'artist',
-    component: Artist
+    component: Artist,
+    meta:{
+      title:'歌手'
+    }
+  },
+  {
+    path: '/friend',
+    name: 'friend',
+    component: Friend
+  },
+  {
+    path: '/song',
+    name: 'song',
+    component: Song
   },
 ]
 
