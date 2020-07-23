@@ -1,0 +1,120 @@
+.sub_songlist_main{    
+    background-color: #fff;
+}
+
+.sl_head{
+    width: 744px;
+    padding: 40px;
+}
+
+.sl_head .sub_sl_cvr{
+    float: left;
+    width: 208px;
+    height: 208px;
+    border: 1px solid #ccc;
+    padding: 3px;
+}
+
+.sl_head .sub_sl_cvr img{
+    float: left;
+    width: 200px;
+    height: 200px;
+}
+
+
+.sl_head .sub_sl_detail{
+    float: left;
+    width: 430px;
+    margin-left: 25px;
+
+}
+
+
+.sl_head .sub_sl_detail .title i{
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    width: 54px;
+    height: 24px;
+    margin-right: 8px;
+    background: url('../../img/icon.png') no-repeat 0 -243px;
+}
+
+.sl_head .sub_sl_detail .title h2{
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.sl_head .sub_sl_detail .owner img{
+    width: 35px;
+    height: 35px;
+    position: relative;
+    top:13px
+}
+
+.sl_head .sub_sl_detail .owner span{
+    display: inline-block;
+    margin-left: 10px;
+    height: 35px;
+    font-size: 12px;
+    line-height: 35px;
+}
+
+.sl_head .sub_sl_detail .tags{
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.sl_head .sub_sl_detail .tags a{
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 10px;
+    background-color: rgb(219, 218, 218);
+}
+
+.sl_head .sub_sl_detail .tags a{
+    background-color: #fff;
+}
+
+.sl_head .sub_sl_detail .description{
+    margin-top: 10px;
+}
+
+.sub_sl_main{
+    width: 744px;
+}
+
+.sub_sl_main .sub_head{    
+    height: 32px;
+    padding: 0px 10px 0px 40px;
+    border-bottom: 2px solid #c20c0c ;
+}
+
+.sub_sl_main .sub_head h3{
+    float: left; 
+    font-weight: normal;   
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.sub_sl_main .sub_head .songcount{
+    float: left;
+    display: block;
+    height: 35px;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.sub_sl_main .sub_head .playcount{
+    float: right;
+    display: block;
+    height: 35px;
+    font-size: 12px;
+    line-height: 30px;
+}
+

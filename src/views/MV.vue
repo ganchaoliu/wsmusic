@@ -28,7 +28,7 @@
                 <ul class="mv_tuijian" v-if="mvs">
                     <li v-for="(mv,index) in mvs" :key="index">
                         <div class="mv_cover">
-                            <img :src="mv.cover" alt="">
+                            <img :src="getImg(mv.cover)" alt="">
                         </div>
                         <div class="mv_content">
                             <p><router-link :to="{name:'mv',query:{id:mv.id}}" :title="mv.name">{{mv.name}}</router-link></p>
@@ -101,6 +101,9 @@
                     this.likedCount = res.data.likedCount
                 })
             },
+            getImg(url){
+              return url+'?param=96y54'
+          },
         },
         created() {
             this.init()

@@ -1,10 +1,13 @@
-.playlist{
+.plmain{
     width: 1200px;
-    margin: 20px auto 65px;
+    margin: 0px auto 65px;
+    padding: 40px ;
     position: relative;
+    background-color: #fff;
+    min-height: 900px;
 }
 
-.playlist .tip{
+.plmain .tip{
     position: absolute;
     top: 30px;
     left: 500px;
@@ -17,11 +20,31 @@
     border-radius: 10px;
 }
 
-.pla_hl{
+.plmain .pla_hl{
     background-color: rgba(0,0,0,.2);
 }
 
-.listbd a{
+
+.plmain .listbd li{
+    float: left;
+    width: 220px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.plmain .listbd:hover{
+    background-color: #ccc;
+}
+
+.plmain .listhd li{
+    float: left;
+    width: 220px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+}
+
+.plmain .listbd a{
     cursor: pointer;
     padding-right: 20px;
     color: black;

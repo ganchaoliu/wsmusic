@@ -15,21 +15,25 @@
 }
 .mymv_body{
     overflow: auto;
-    width:939px;
+    width:740px;
+}
+
+.mymv_body ul{
+    margin-left: -8px;
 }
 
 .mymv_body ul li{
-    width: 200px;
+    width: 167px;
     display: inline-block;
-    height: 180px;
+    height: 162px;
     padding: 10px 0;
     vertical-align: top;
-    margin-right: 14px;
+    padding-left: 8px;
     margin-bottom: 10px;
 }
 .mymv_body ul li a{
     display: inline-block;
-    width: 155px;
+    width: 128px;
     height: 16px;
     line-height: 16px;
     overflow: hidden;
@@ -55,8 +59,8 @@
 
 
 .sub_left_img img{
-    width: 200px;
-    height: 115px;
+    width: 159px;
+    height: 90px;
 }
 
 .sub_left_img{
@@ -77,11 +81,11 @@
 }
 
 .sub_left_img .pt{
-    height: 20px;
     right: 7px;
     top: 7px;
     color: #fff;
     font-size: 12px;
+    background-color: rgba(0, 0,0, .3);
 }
 
 .sub_left_detail p{

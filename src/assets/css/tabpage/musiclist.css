@@ -1,5 +1,18 @@
 /* musiclist start */
 
+@keyframes myfirst
+{
+    from {
+        background: white;
+        border: 1px solid #fff;
+    }
+    to {
+        background: #eeeeee;
+        border: 1px solid #ddd;
+    }
+}
+
+
 .musiclist{
     width: 900px;    
     margin-top: 25px;
@@ -8,6 +21,12 @@
 
 .musiclist .slbg{
     background-color: #f7f7f7;
+    border: 1px solid #f7f7f7;
+}
+
+.musiclist .uslbg{
+    background-color: #fff;
+    border: 1px solid #fff;
 }
 
 .musiclist .song_item{
@@ -15,11 +34,11 @@
     height: 43px;
     padding: 10px 10px 8px 18px;
     font-size: 12px;
-    border: 1px solid #fff;
 }
 
 .musiclist .song_item:hover{
-    background-color: #eeeeee;    
+    animation: myfirst 500ms;
+    background: #eeeeee;
     border: 1px solid #ddd;
 }
 

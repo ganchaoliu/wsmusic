@@ -7,7 +7,7 @@
       @mouseout="removeActive(index)"
       v-for="(song,index) in songlist"
       :key="index"
-      :class="index%2===0?'':'slbg'"
+      :class="index%2===0?'uslbg':'slbg'"
       
     >
       <div class="td">
@@ -134,10 +134,10 @@ export default {
               return true;
             }
           });
-          if (checkresult) {
-            alert("已在播放列表中");
-          } else {
+          if (!checkresult) {
             this.updatePlaylist(song);
+          }else{
+            this.tip_message = "已在播放列表中";
           }
         } else {
           alert("url为空，没有版权哟！！");

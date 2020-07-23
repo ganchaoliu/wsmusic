@@ -18,12 +18,10 @@ export default{
             state.searchvalue = payload
         },
         updateSearchHistory(state,payload){
-            console.log('增加元素')
             let array = state.searchHistory
             let i=0
             while(i<array.length){
                 if(array[i]==payload){
-                    console.log('重复啦'+i)
                     array.splice(i,1)
                     break
                 }

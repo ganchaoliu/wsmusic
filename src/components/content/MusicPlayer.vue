@@ -138,9 +138,7 @@ export default {
         this.play();
       }
     },
-    //参数为播放上一曲或者播放下一曲
     playloop(int) {
-      //获取播放模式是2随机，0顺序，1单曲循环
       console.log("变更音乐");
       if (this.loop == loopM.Sequential) {
         if (int == -1) {
@@ -160,7 +158,7 @@ export default {
       const playlist = this.playlist
       let len = playlist.length;
       //获取播放模式是2随机，0顺序，1单曲循环
-      console.log("现在播放列表中有：" + playlist.length + "首歌");
+      // console.log("现在播放列表中有：" + playlist.length + "首歌");
       let pos = this.playlist.indexOf(
         this.currentsong
       );
@@ -256,7 +254,7 @@ export default {
       this.vol_show ? (this.vol_show = false) : (this.vol_show = true);
     },
     v_bar_blur(){
-        console.log('失去焦点')
+        // console.log('失去焦点')
         this.vol_show=false
     },
 
@@ -286,7 +284,7 @@ export default {
     },
     //获取歌词信息
     getLyric(id) {
-      console.log("获取歌词信息");
+      // console.log("获取歌词信息");
       this.currentLyricLine='歌词加载中...'
       request({
         url: "/api/lyric",
@@ -294,8 +292,8 @@ export default {
           id: id
         }
       }).then(res => {
-        console.log(res)
-        this.currentLyricLine='歌词加载成功'
+        // console.log(res)
+        // this.currentLyricLine='歌词加载成功'
         let lyric = res.data.lrc.lyric.split("\n");
         let timeArray = res.data.lrc.lyric.match(/\[(.+?)\]/g);
         let lyricValue = new Array(); //歌词数组
@@ -368,7 +366,7 @@ export default {
       );
     },
     displaySongMessage() {
-      console.log(this.currentsong);
+      // console.log(this.currentsong);
       if (this.currentsong.artist != "") {
         return (
           this.currentsong.name +

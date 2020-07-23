@@ -1,6 +1,6 @@
 <template>
   <div class="artist_bg">
-    <div class="artist_main1">
+    <div class="artist_main1 clear-fix">
       <div class="artist_left">
         <div class="artist_ltop">
           <div class="ar_title">
@@ -80,9 +80,9 @@ export default {
     };
   },
   methods: {
-    init() {
-      this.getSimiArtist();
-      this.getArtist();
+    async init() {
+      await this.getSimiArtist();
+      await this.getArtist();
     },
     follow(follow) {
       request({
@@ -98,7 +98,7 @@ export default {
         }
       });
     },
-    getSimiArtist() {
+     getSimiArtist() {
       request({
         url: "/api/simi/artist",
         params: {

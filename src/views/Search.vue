@@ -59,9 +59,9 @@
         <album-list v-show="type===TYPE.album"></album-list>
         <video-list v-show="type===TYPE.video"></video-list>-->
 
-        <div :is="zujian" keep-alive v-if='!loading'></div>
-        
+        <div :is="zujian" keep-alive v-if='!loading'></div>        
         <div v-else>数据加载中</div>
+        
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@ export default {
   methods: {
     ...mapMutations({'updateSearchValue':'updateSearchValue'}),
     search(type) {
-      console.log(this.$children)
+      // console.log(this.$children)
       let keyword = this.$store.state.searchvalue;
       if (keyword != "") {
         this.type = type;
@@ -98,7 +98,7 @@ export default {
         this.$store
           .dispatch("search", { keyword: keyword, type: type })
           .then(res => {
-            console.log(res)
+            // console.log(res)
             //  根据type的值获取TYPE中的key的值，并组合成组件名称保存
             let findKey = (value, compare = (a, b) => a === b) => {
               return Object.keys(TYPE).find(k => compare(TYPE[k], value));
@@ -128,7 +128,7 @@ export default {
       let type = this.zujian.slice(0,-4)
       this.type = TYPE[type]
     }else{
-      console.log('localStorage没找到对应的值')
+      // console.log('localStorage没找到对应的值')
     }
   },
   activated: function() {

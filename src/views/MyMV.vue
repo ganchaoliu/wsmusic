@@ -10,7 +10,7 @@
                         <div class="sub_left_img">
                             <img :src="getImg(mv.coverUrl)" alt="" >
                             <span class="dura">{{mv.durationms/1000 |formatSecond}}</span>
-                            <span class="pt">点击量：{{mv.playTime |formatPlayTime}}</span>
+                            <span class="pt">{{mv.playTime |formatPlayTime}}</span>
                         </div>
                         <div class="sub_left_detail" v-if="mv.type==0">
 <!--                            <p><a href="">{{mv.title}}</a></p>-->
@@ -63,7 +63,7 @@
         },
         methods:{
           getImg(url){
-              return url+'?param=200y115'
+              return url+'?param=159y90'
           },
           init(){
 

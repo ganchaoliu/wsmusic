@@ -1,19 +1,20 @@
 .song_main{
     margin: 0 auto;
     width: 980px;
-    height: 100%;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
+    background-color: #fff;
 }
 
 .song_main .song_left{
     height: 100%;
+    border-right: 1px solid #ccc;
 }
 
 .song_main .song_right{
     float: right;
-    width: 269px;
-    height: 100%;
+    width: 268px;
+    height: inherit;
     /* background-color: rgb(102, 187, 102); */
 }
 
@@ -212,7 +213,6 @@
 
 /* ################右边开始############### */
 .song_right{
-    border-left: 1px solid #ccc;
     height: 100%;
     padding: 20px 40px 40px 30px;
 }
@@ -223,3 +223,12 @@
     font-size: 12px;
     font-weight: bold;
 }
+
+.simisong .song_desc{
+    float: left;
+    width: 156px;
+    height: 25px;
+    font-size: 12px;
+    background-color: yellow;
+}
+

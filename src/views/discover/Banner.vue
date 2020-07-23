@@ -4,7 +4,15 @@
     <div class="discover_banner" :style="bannerBGImage">
       <div class="dbanner_bd">
         <div class="dbanner_left">
-          <img :src="getBannerImage" alt class="banner_image" @click="gotopage()" />
+          <img
+            v-for="(img,index) in banner_data"
+            :key="index+3"
+            v-show="index===banimg_index"
+            :src="img.imageUrl"
+            alt
+            class="banner_image"
+            @click="gotopage()"
+          />
           <div class="dot_nav">
             <a
               href="#"
@@ -34,7 +42,6 @@ export default {
       banimg_index: 0,
       banner_data: [],
       intervalId: 0,
-      bannerBGImage: {}
     };
   },
   methods: {
@@ -50,9 +57,8 @@ export default {
     },
     getBanner(type) {
       request({
-        url: "/api/banner"
-      }).then(res => {
-        console.log(res.data.banners);
+        url: "/api/banner",
+      }).then((res) => {
         this.banner_data = res.data.banners;
       });
     },
@@ -69,13 +75,12 @@ export default {
       let index = this.banimg_index;
       let type = this.banner_data[this.banimg_index].targetType;
       let url = this.banner_data[this.banimg_index].url;
-      console.log(index + ":" + type + ":" + url);
       switch (type) {
         case 3000:
           window.open(url, "_blank");
           break;
       }
-    }
+    },
   },
   created() {
     this.getBanner(0);
@@ -85,24 +90,20 @@ export default {
     clearInterval(this.intervalId);
   },
   computed: {
-    getBannerImage() {
-      if (
-        this.banner_data.length != 0 &&
-        this.banimg_index < this.banner_data.length
-      ) {
-        this.bannerBGImage = {
+    bannerBGImage() {
+      if (this.banner_data.length > 0) {
+        return {
           "background-image":
             "url(" +
             '"' +
             this.banner_data[this.banimg_index].imageUrl +
             '?imageView&blur=40x20")',
           "background-size": 6000 + "px",
-          "background-position": "center center"
+          "background-position": "center center",
         };
-        return this.banner_data[this.banimg_index].imageUrl;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

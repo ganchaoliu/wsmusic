@@ -7,7 +7,8 @@
 
 .artist_main1{
     width: 980px;
-    margin: 0 auto;
+    margin: 0 auto;    
+    border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     background-color: #fff;
     box-sizing: border-box;
@@ -17,8 +18,9 @@
     width: 709px;
     height: inherit;
     padding: 20px 30px 40px 39px;
-    border-left: 1px solid #ccc;
     float: left;
+    
+    border-right: 1px solid #ccc;
 }
 
 .artist_left .artist_ltop{
@@ -204,11 +206,9 @@
 /* 右边开始 */
 
 .artist_right{
-    width: 270px;
-    height: 100%;
+    width: 269px;
     padding: 20px 40px 40px 28px;    
     float: right;
-    border-left: 1px solid #ccc;
 }
 
 .artist_right .simi_artists{

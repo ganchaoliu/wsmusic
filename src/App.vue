@@ -57,6 +57,8 @@ html,
   width: 100vw;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .header{
@@ -67,17 +69,15 @@ html,
 .router_view {
   width: 100%;
   background-color:#f5f5f5;
-  padding-bottom: 40px;
+  overflow-y: scroll;
 }
-
-
-
 
 .music_player {
   width: 100%;
   height: 53px;
   position: fixed;
   bottom: 0;
+  margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.8);
 }
 

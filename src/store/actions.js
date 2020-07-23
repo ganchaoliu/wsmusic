@@ -3,7 +3,7 @@ import { TYPE } from '../utils/common'
 
 export default {
     search(state, payload) {
-        console.log('搜索类型' + payload.type)
+        // console.log('搜索类型' + payload.type)
         return new Promise((resolve, reject) => {
             if (payload.keyword !== state.searchvalue) {
                 request({
@@ -15,7 +15,7 @@ export default {
                         offset: payload.offset
                     }
                 }).then(res => {
-                    console.log('搜索类型：'+TYPE.Video)
+                    // console.log('搜索类型：'+TYPE.Video)
                     state.commit("updateSearchHistory", payload.keyword)
                     // state.commit("updateSearchHistoryLinkList", payload.keyword)
                     switch (payload.type) {

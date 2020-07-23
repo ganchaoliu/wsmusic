@@ -1,6 +1,6 @@
 <template>
   <div class="songlist_bg">
-    <div class="mysonglist_main">
+    <div class="mysonglist_main clear-fix">
       <div class="songlist_left">
         <div class="slmain clear-fix">
           <router-link :to="{name:'myartist'}" tag="h2">我的歌手({{collectArtist.length}})</router-link>
@@ -15,7 +15,7 @@
             <ul v-show="csl_show">
               <router-link
                 v-for="(item,index) in myCreate_Songlist"
-                :to="{name:'songlist',query:{index:index,type:'create'}}"
+                :to="{name:'songlist',query:{id:item.id}}"
                 :key="index"
                 tag="li"
                 class="list_item clear-fix"
@@ -35,7 +35,7 @@
             <ul v-show="cll_show">
               <router-link
                 v-for="(item,index) in myCollect_Songlist"
-                :to="{name:'songlist',query:{index:index,type:'collect'}}"
+                :to="{name:'songlist',query:{id:item.id}}"
                 :key="index"
                 tag="li"
                 class="clear-fix"
@@ -82,16 +82,16 @@ export default {
     showMycollectList() {
       this.cll_show = !this.cll_show;
     },
-    getCollectArtist() {
-      request({
+    async getCollectArtist() {
+      await request({
         url: "/api/artist/sublist"
       }).then(res => {
         this.collectArtist = res.data.data;
         console.log(res.data.data);
       });
     },
-    getCollectMV() {
-      request({
+    async getCollectMV() {
+      await request({
         url: "/api/mv/sublist"
       }).then(res => {
         this.collectMV = res.data.data;
@@ -132,7 +132,11 @@ export default {
       this.$router.push("/login");
     }
   },
-  watch: {}
+  watch: {
+    myCreate_Songlist(){
+      this.$router.push({name:'songlist',query:{id:this.myCreate_Songlist[0].id}})
+    }
+  }
 };
 </script>
 

@@ -27,9 +27,13 @@
 
 .videoitem h4 a{
     display: inline-block;
+    width: 159px;
     height: 16px;
     font-size: 14px;
     line-height: 16px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 
 .videolist .videoitem .videotitle{

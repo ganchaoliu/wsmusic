@@ -1,3 +1,13 @@
+
+@keyframes fadein{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
 .index_bg{
     width: 100%;
 }
@@ -22,6 +32,7 @@
 
 .dbanner_left .banner_image{
     display: block;
+    animation: fadein 1s;
     width: 730px;
     height: 285px;
     cursor: pointer;
