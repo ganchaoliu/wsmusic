@@ -15,9 +15,12 @@
           </div>
         </div>
         <div class="mv_btns">
-          <a href>赞({{mv_detail.data.praisedCount}})</a>
-          <a href>收藏({{mv_detail.data.subscribeCount}})</a>
-          <a href>转发({{mv_detail.data.shareCount}})</a>
+          <w-button v-slot:value :type='"like"'>({{mv_detail.data.praisedCount}})</w-button>
+          <w-button v-slot:value :type='"fav"'>({{mv_detail.data.subscribeCount}})</w-button>
+          <w-button v-slot:value :type='"share"'>({{mv_detail.data.shareCount}})</w-button>
+          <!-- <a href class="v_btn">赞({{mv_detail.data.praisedCount}})</a>
+          <a href class="v_btn">收藏({{mv_detail.data.subscribeCount}})</a>
+          <a href class="v_btn">转发({{mv_detail.data.shareCount}})</a> -->
         </div>
       </div>
       <div class="mv_right">
@@ -55,6 +58,7 @@
 <script>
 import { request } from "../network/request";
 import { realFormatSecond } from "../utils/common";
+import WButton from "../components/common/WButton"
 
 
 
@@ -143,6 +147,8 @@ export default {
       }
       return str;
     }
+  },components: {
+    WButton
   }
 };
 </script>

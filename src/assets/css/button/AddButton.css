@@ -1,0 +1,10 @@
+
+.btn_add{
+    text-indent: -999px;
+    display: inline-block;
+    width: 31px;
+    line-height: 31px;
+    height: 31px;
+    margin-right: 5px;
+    background: url('../../assets/img/button2.png') no-repeat 0 -1588px;
+}

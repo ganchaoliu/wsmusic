@@ -5,7 +5,6 @@ import Layout from "../views/element/Layout";
 Vue.use(Router)
 
 const Search=()=>import('../views/Search')
-const MusicPlayer=()=>import('../views/MusicPlayer')
 const PlayList=()=>import('../views/PlayList')
 const SongList=()=>import('../views/my/SongList')
 const Login = () => import('../views/Login')
@@ -41,11 +40,6 @@ const routes= [
     meta:{
       title:'搜索音乐'
     }
-  },
-  {
-    path: '/play',
-    name: 'play',
-    component: MusicPlayer
   },
   {
     path: '/layout',

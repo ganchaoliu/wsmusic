@@ -63,6 +63,10 @@
     line-height: 35px;
 }
 
+.sub_sl_detail .sl_btns{
+    margin-top: 20px;
+}
+
 .sl_head .sub_sl_detail .tags{
     margin-top: 10px;
     font-size: 12px;
@@ -84,6 +88,8 @@
 .sl_head .sub_sl_detail .description{
     margin-top: 10px;
 }
+
+/* ################歌曲列表开始#################### */
 
 .sub_sl_main{
     width: 744px;
@@ -118,3 +124,20 @@
     line-height: 30px;
 }
 
+
+.slist{
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+
+.slist th .wp{
+    height: 18px;
+    line-height: 18px;
+    padding: 8px 10px;
+    background-position: 0 -56px;
+}
+
+.slist th, .slist th .wp, .slist td, .slist .ply, .slist .mv, .slist .icn, .m-info .edit {
+    background: url('../../img/table.png') no-repeat 0 9999px;
+}

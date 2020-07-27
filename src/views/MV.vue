@@ -10,7 +10,12 @@
                     <div class="mv_player"><video :src="mv_url" controls autoplay ></video></div>
                 </div>
                 <div class="mv_btns">
-                    <a href="">赞({{likedCount}})</a><a href="">收藏({{mv_detail.data.subCount}})</a><a href="">转发({{mv_detail.data.shareCount}})</a>
+                    <w-button v-slot:value type='like'>({{likedCount}})</w-button>
+                    <w-button v-slot:value type='fav'>({{mv_detail.data.subCount}})</w-button>
+                    <w-button v-slot:value type='share'>({{mv_detail.data.shareCount}})</w-button>
+                    <!-- <a href="#" class="v_btn">赞({{likedCount}})</a>
+                    <a href="#" class="v_btn">收藏({{mv_detail.data.subCount}})</a>
+                    <a href="#" class="v_btn">转发({{mv_detail.data.shareCount}})</a> -->
                 </div>
             </div>
             <div class="mv_right">
@@ -46,6 +51,7 @@
 <script>
     import {request} from "../network/request";
     import { realFormatSecond } from "../utils/common"
+    import WButton from "../components/common/WButton"
 
     export default {
         name: "mv",
@@ -127,10 +133,12 @@
                 return str
             }
         },
-
+        components: {
+            WButton
+        }
     }
 </script>
 
-<style scoped>
+<style lang='css' scoped>
 @import "../assets/css/mv.css";
 </style>

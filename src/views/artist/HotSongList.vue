@@ -18,8 +18,14 @@
         <router-link tag="a" :to="{name:'song',query:{ids:song.id}}">{{song.name}}</router-link>
         <router-link tag="a" v-if="song.mv!=0" :to="{name:'mv',query:{id:song.mv}}" class="song_mv"></router-link>
       </div>
-      <div class="td btns">
-          <div class="opt_btns" :class="index === opt_btns_show?'showOptBtns':'hideOptBtns'">
+      <div class="td sbtns">
+        <opt-buttons 
+          :class="index === opt_btns_show?'showOptBtns':'hideOptBtns'" 
+          @add='addtoplaylist(song.id,song.name,song.al,song.ar[0].name)'
+          @fav='fav(song.id)'
+          :btns='["add","fav","share","download"]'>
+        </opt-buttons>
+          <!-- <div class="opt_btns" :class="index === opt_btns_show?'showOptBtns':'hideOptBtns'">
           <a
             class="icn-add"
             @click="addtoplaylist(song.id,song.name,song.al,song.ar[0].name)"
@@ -28,7 +34,7 @@
           <a class="icn-fav" @click="fav(song.id)" title="收藏"></a>
           <a class="icn-share" title="分享"></a>
           <a class="icn-download" title="下载"></a>
-        </div>
+        </div> -->
       </div>
       <div class="td dura">        
         <div>{{song.dt|formatSecond}}</div>
@@ -45,6 +51,7 @@
 import { realFormatSecond } from "../../utils/common";
 import { request } from "../../network/request";
 import { mapState,mapMutations } from 'vuex';
+import OptButtons from '../../components/common/OptButtons'
 
 export default {
   name: "HotSongList",
@@ -156,6 +163,9 @@ export default {
       return this.$parent.hotSongs;
     },
     ...mapState('musicplayer',['playlist','currentsong'])
+  },
+  components: {    
+  OptButtons
   }
 };
 </script>

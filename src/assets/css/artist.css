@@ -150,8 +150,8 @@
 .artist_btns .artist_btn_play{
     display: inline-block;
     width: 66px;
-    height: 30px;
-    line-height: 30px;
+    height: 31px;
+    line-height: 31px;
     background: url('../../assets/img/button2.png') no-repeat right -428px;
     padding-right: 5px;
 }

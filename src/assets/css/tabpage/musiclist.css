@@ -76,9 +76,9 @@
 .song_item .opt_btns .icn-add{
     display:inline-block;   
     width: 13px;
-    height: 13px;
+    height: 14px;
     background-position: 0 -700px;
-    margin: -5px 8px 3px 0px;
+    margin: 0px 8px 3px 0px;
 }
 
 .song_item .opt_btns .icn-fav{
@@ -131,7 +131,8 @@
     line-height: 23px;
 }
 
-.song_item .btns{
+.song_item .mbtns{
+    padding-top: 3px;
     width: 96px;
     height: 16px;
 }

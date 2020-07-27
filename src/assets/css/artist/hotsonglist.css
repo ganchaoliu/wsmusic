@@ -41,7 +41,7 @@
 }
 
 .hotsonglist .hot_song_item .hot_song_item .opt_btns{
-    width: 96px;
+    width: 120px;
     height: 16px;     
     vertical-align: middle;
 }
@@ -51,7 +51,7 @@
     background-position: 0 -128px;
 }
 
-.hotsonglist .hot_song_item .opt_btns .icn-add,.icn-fav,.icn-share,.icn-download{
+/* .hotsonglist .hot_song_item .opt_btns .icn-add{
     background: url('../../img/icon.png');
 }
 
@@ -61,34 +61,34 @@
     height: 13px;
     background-position: 0 -700px;
     margin: -5px 8px 3px 0px;
-}
+} */
 
-.hotsonglist .hot_song_item .opt_btns .icn-fav{
+/* .hotsonglist .hot_song_item .opt_btns .icn-fav{
     display:inline-block;    
     vertical-align: middle;
     width: 18px;
     height: 16px;    
     background: url('../../img/table.png') no-repeat 0 -174px;
     margin: -11px 6px 0px 0px;
-}
+} */
 
-.hotsonglist .hot_song_item .opt_btns .icn-share{
+/* .hotsonglist .hot_song_item .opt_btns .icn-share{
     display:inline-block;    
     vertical-align: middle;
     width: 18px;
     height: 16px;
     background: url('../../img/table.png') no-repeat 0 -195px;
     margin: -8px 6px 3px 0px;
-}
+} */
 
-.hotsonglist .hot_song_item .opt_btns .icn-download{
+/* .hotsonglist .hot_song_item .opt_btns .icn-download{
     display:inline-block;
     vertical-align: middle;
     width: 18px;
     height: 16px;
     background: url('../../img/table.png') no-repeat -81px -174px;
     margin: -8px 7px 3px 0px;
-}
+} */
 
 .hotsonglist .hot_song_item .sn{
     width: 250px;
@@ -115,8 +115,9 @@
     line-height: 23px;
 }
 
-.hotsonglist .hot_song_item .btns{
-    width: 96px;
+.hotsonglist .hot_song_item .sbtns{
+    padding-top: 3px;
+    width: 120px;
     height: 16px;
 }
 

@@ -1,0 +1,38 @@
+/* .playbutton,.playbutton i,.playbutton i .ply{
+    background: url('../../img/button2.png' ) no-repeat 0 -9999px;
+}
+
+.playbutton{
+    display: inline-block;
+    width: 66px;
+    height: 31px;
+    background-position: right -428px;
+}
+
+.playbutton i{
+    display: inline-block;
+    width: 61px;
+    height: 31px;
+    background-position: 0 -387px;
+    padding: 0 7px 0 8px;
+    font-size: 12px;
+    font-style: normal;
+    color: #fff;
+    vertical-align: top;
+    text-align: center;
+    cursor: pointer;
+}
+
+.playbutton i:hover{
+    background-position: 0 -469px;
+}
+
+.playbutton i .ply{
+    display: inline-block;
+    width: 20px;
+    height: 18px;
+    margin: 6px 2px 2px 0;
+    background-position: 0 -1622px;
+} */
+
+
