@@ -15,7 +15,6 @@
 
 .musiclist{
     width: 900px;    
-    margin-top: 25px;
     position: relative;
 }
 
@@ -58,18 +57,18 @@
     visibility: hidden;
 }
 
-.song_item .song_item .opt_btns{
-    width: 96px;
+/* .song_item .song_item .opt_btns{
+    width: 120px;
     height: 16px;     
     vertical-align: middle;
-}
+} */
 
 .song_item .td .play_btn:hover{
     cursor: pointer;
     background-position: 0 -128px;
 }
 
-.song_item .opt_btns .icn-add,.icn-fav,.icn-share,.icn-download{
+/* .song_item .opt_btns .icn-add,.icn-fav,.icn-share,.icn-download{
     background: url('../../img/icon.png');
 }
 
@@ -106,7 +105,7 @@
     height: 16px;
     background: url('../../img/table.png') no-repeat -81px -174px;
     margin: -8px 7px 3px 0px;
-}
+} */
 
 .song_item .sn{
     width: 370px;
@@ -133,7 +132,7 @@
 
 .song_item .mbtns{
     padding-top: 3px;
-    width: 96px;
+    width: 120px;
     height: 16px;
 }
 

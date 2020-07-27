@@ -4,7 +4,7 @@
       class="hot_song_item"
       @mouseover="addActive(index)"
       @mouseout="removeActive(index)"
-      v-for="(song,index) in hotSongs"
+      v-for="(song,index) in HSongs"
       :key="index"
       :class="index%2===0?'':'slbg'"
     >
@@ -18,7 +18,10 @@
         <router-link tag="a" :to="{name:'song',query:{ids:song.id}}">{{song.name}}</router-link>
         <router-link tag="a" v-if="song.mv!=0" :to="{name:'mv',query:{id:song.mv}}" class="song_mv"></router-link>
       </div>
-      <div class="td sbtns">
+      
+      <div class="td dura">        
+        <div v-show="index !== opt_btns_show">{{song.dt|formatSecond}}</div>
+        <div class="sbtns">
         <opt-buttons 
           :class="index === opt_btns_show?'showOptBtns':'hideOptBtns'" 
           @add='addtoplaylist(song.id,song.name,song.al,song.ar[0].name)'
@@ -36,14 +39,22 @@
           <a class="icn-download" title="下载"></a>
         </div> -->
       </div>
-      <div class="td dura">        
-        <div>{{song.dt|formatSecond}}</div>
       </div>
       <div class="td al">
         <router-link tag="a" to :title="song.al.name">《{{song.al.name}}》</router-link>
       </div>
       <div class="clear-fix"></div>
     </div>
+    <!-- <el-pagination
+      class="main_page"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[5, 10, 20, 40]"
+      :page-size="$store.state.pageLimit"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="$store.state.songCount"
+    ></el-pagination> -->
   </div>
 </template>
 
@@ -61,6 +72,11 @@ export default {
       currentPage: 1,
       type: 1
     };
+  },
+  props: {
+    HSongs:{
+      type:Array
+    }
   },
   methods: {
     ...mapMutations({
@@ -159,9 +175,9 @@ export default {
         return newStr;
       };
     },
-    hotSongs() {
-      return this.$parent.hotSongs;
-    },
+    // hotSongs() {
+    //   return this.$parent.hotSongs;
+    // },
     ...mapState('musicplayer',['playlist','currentsong'])
   },
   components: {    

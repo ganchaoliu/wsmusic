@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h2>专辑页</h2>
+    <div class="album">
+        
     </div>
 </template>
 
@@ -10,6 +10,6 @@
     }
 </script>
 
-<style scoped>
+<style lang='css' scoped>
 
 </style>

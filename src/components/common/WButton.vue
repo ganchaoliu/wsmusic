@@ -38,6 +38,10 @@ export default {
         case "like":
           return "赞";
           break;
+        case "subscribed":
+            return "订阅";
+            break
+
         
       }
     },
@@ -61,6 +65,9 @@ export default {
         case "liked":
           return "icon_liked";
           break;
+        case "subscribed":
+            return "icon_subscribed";
+            break
       }
     },
     button_style() {
@@ -87,6 +94,7 @@ export default {
 .wbutton .icon_delete,
 .wbutton .icon_like,
 .wbutton .icon_liked,
+.wbutton .icon_subscribed,
 .wbutton .button_style,
 .wbutton .btn_icon .wbutton:hover,
 .wbutton:hover .button_style {
@@ -119,6 +127,10 @@ export default {
 
 .wbutton .icon_liked {
   background-position: -30px -95px;
+}
+
+.wbutton .icon_subscribed{
+    background-position: -97px -1028px;
 }
 
 .wbutton {

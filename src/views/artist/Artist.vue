@@ -29,7 +29,10 @@
         </div>
         <div class="artist_top50">
           <div class="artist_btns">
-            <a href class="artist_btn_play">
+            <play-button></play-button>
+            <add-button style="margin-right:10px"></add-button>
+            <w-button type="fav" v-slot:value>收藏热门50</w-button>
+            <!-- <a href class="artist_btn_play">
               <i>
                 <em class="play_btn"></em>播放
               </i>
@@ -37,9 +40,9 @@
             <a href class="artist_btn_add">+</a>
             <a href class="artist_btn_fav">
               <i>收藏热门50</i>
-            </a>
+            </a> -->
           </div>
-          <div :is="zujian" keep-alive></div>
+          <component :is="zujian" keep-alive :HSongs='hotSongs'></component>
         </div>
       </div>
       <div class="artist_right">
@@ -63,6 +66,10 @@
 
 <script>
 import { request } from "../../network/request";
+import PlayButton from "../../components/common/PlayButton";
+import AddButton from "../../components/common/AddButton";
+import WButton from "../../components/common/WButton";
+
 const HotSongList = () => import("../artist/HotSongList");
 
 export default {
@@ -120,6 +127,9 @@ export default {
       }).then(res => {
         this.artist = res.data.artist;
         this.hotSongs = res.data.hotSongs;
+        console.log('歌手');
+        console.log(res);
+        console.log('热门歌曲');
         console.log(this.hotSongs);
       });
     }
@@ -145,7 +155,10 @@ export default {
     }
   },
   components: {
-    HotSongList
+    HotSongList,
+    PlayButton,
+    AddButton,
+    WButton,
   }
 };
 </script>

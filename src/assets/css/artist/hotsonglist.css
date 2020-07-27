@@ -1,7 +1,7 @@
 /* hotsonglist start */
 
 .hotsonglist{
-    width: 640px;   
+    /* width: 640px;    */
     height: inherit; 
     margin-top: 25px;
     position: relative;
@@ -12,7 +12,7 @@
 }
 
 .hotsonglist .hot_song_item{
-    width: 640px;
+    /* width: 640px; */
     height: 43px;
     padding: 10px 10px 8px 18px;
     font-size: 12px;
@@ -32,11 +32,11 @@
     margin-right: 8px;    
 }
 
-.hotsonglist .hot_song_item .showOptBtns{
+.hotsonglist .hot_song_item .dura .showOptBtns{
     visibility: visible;
 }
 
-.hotsonglist .hot_song_item .hideOptBtns{
+.hotsonglist .hot_song_item .dura .hideOptBtns{
     visibility: hidden;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .hotsonglist .hot_song_item .dura{
-    width: 80px;
+    width: 120px;
     height: 23px;
     line-height: 23px;
 }
@@ -165,7 +165,7 @@
 }
 
 
-ul li{
+/* ul li{
     list-style: none;
 }
 
@@ -179,7 +179,7 @@ ul li{
     height: 30px;
     line-height: 30px;
     overflow: hidden;
-    text-space: none;
+    white-space: none;
     text-overflow: ellipsis;
 }
 
@@ -203,5 +203,5 @@ ul li{
     color: white;
     text-align: center;
     border-radius: 10px;
-}
+} */
 /* hotsonglist结束 */

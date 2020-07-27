@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from "../views/element/Layout";
 
 Vue.use(Router)
 
@@ -40,11 +39,6 @@ const routes= [
     meta:{
       title:'搜索音乐'
     }
-  },
-  {
-    path: '/layout',
-    name: 'layout',
-    component: Layout
   },
   {
     path: '/playlist',

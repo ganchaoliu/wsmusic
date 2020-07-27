@@ -32,18 +32,13 @@
                 <a href="#">{{song.album.name}}</a>
               </p>
               <div class="song_operation">
-                <a href='#' class="song_btn_play" @click="playsong(songId, song.name, song.album, artists(song.artist))">
-                  <i>
-                    <em class="play_btn" ></em>播放
-                  </i>
-                </a>
-                <a href=# class="song_btn_add" @click="addtoplaylist(songId, song.name, song.album, artists(song.artist))">+</a>
-                <a href class="song_btn_fav">
-                  <i>收藏</i>
-                </a>
-                <a href class="btn">分享</a>
-                <a href class="btn">下载</a>
-                <a href class="btn">评论</a>
+                <play-button @click="playsong(songId, song.name, song.album.name, song.artist[0].name)"></play-button>
+                <add-button style="margin-right:10px"></add-button>
+                <w-button type="fav" ></w-button>
+                <w-button type="share" >
+                </w-button>
+                <w-button type="download" >下载</w-button>
+                <w-button type="comment" ></w-button>
               </div>
 
               <div class="song_lyric_content" >
@@ -92,10 +87,18 @@
 
 <script>
   import {request} from '../network/request';
+  import PlayButton from "../components/common/PlayButton";
+  import AddButton from "../components/common/AddButton";
+  import WButton from "../components/common/WButton";
   import { mapMutations, mapState } from 'vuex';
 
 export default {
   name:'Song',
+  components: {
+    PlayButton,
+    AddButton,
+    WButton,
+  },
   data(){
     return{
       songId:0,
@@ -216,7 +219,7 @@ export default {
           ids: id
         }
       }).then(res =>{
-        console.log(res.data.songs[0])
+        console.log(res)
         let songs = res.data.songs[0]
         this.song.coverUrl = songs.al.picUrl
         this.song.name = songs.name

@@ -8,6 +8,15 @@
     }
 }
 
+@keyframes fadeout{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
 .index_bg{
     width: 100%;
 }

@@ -141,3 +141,7 @@
 .slist th, .slist th .wp, .slist td, .slist .ply, .slist .mv, .slist .icn, .m-info .edit {
     background: url('../../img/table.png') no-repeat 0 9999px;
 }
+
+.wbutton{
+    margin-right: 10px;
+}

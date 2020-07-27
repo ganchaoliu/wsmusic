@@ -20,11 +20,11 @@
           <div class="sl_btns">
             <play-button></play-button>
             <add-button style="margin-right:10px"></add-button>
-            <w-button :type="'fav'" v-bind:disable="true"></w-button>
-            <w-button :type="'share'" v-slot:value>分享
+            <w-button :type="$store.state.userData.account.id===mySongList.creator.userId?'fav':'subscribed'" v-slot:value>{{favorsub}}</w-button>
+            <w-button type="share" v-slot:value>{{share_btn}}
             </w-button>
-            <w-button :type="'download'" v-slot:value>下载</w-button>
-            <w-button :type="'comment'" v-slot:value>评论</w-button>
+            <w-button type="download" v-slot:value>下载</w-button>
+            <w-button type="comment" v-slot:value>{{comment_btn}}</w-button>
           </div>
           <div class="clear-fix"></div>
           <div class="tags" v-show="mySongList.tags.length>0">
@@ -46,7 +46,8 @@
           <span class="playcount">播放：{{mySongList.playCount}}次</span>
         </div>
         <div class="sub_sl_bd">
-          <table class="slist">
+          <hot-song-list :HSongs='mySongList.tracks'></hot-song-list>
+          <!-- <table class="slist">
             <thead v-if="mySongList.tracks.length>0">
               <tr>
                 <th class="first">
@@ -75,7 +76,7 @@
                 <td>{{song.al.name}}</td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
           <!-- <opt-buttons></opt-buttons> -->
         </div>
       </div>
@@ -90,6 +91,7 @@ import PlayButton from "../../components/common/PlayButton";
 import AddButton from "../../components/common/AddButton";
 import WButton from "../../components/common/WButton";
 import OptButtons from "../../components/common/OptButtons";
+import HotSongList from "../../components/common/HotSongList";
 import { realFormatSecond } from "../../utils/common";
 
 export default {
@@ -99,6 +101,7 @@ export default {
     AddButton,
     WButton,
     OptButtons,
+    HotSongList
   },
   data() {
     return {
@@ -144,6 +147,61 @@ export default {
         return newStr;
       };
     },
+    comment_btn(){
+        const userId = this.$store.state.userData.account.id;
+        const id = this.mySongList.creator.userId        
+        console.log('用户id：'+userId+'\n歌单ID：'+id)
+        if(userId===id){
+            return '评论'
+        }else{
+            let commentCount = this.mySongList.commentCount
+
+            let str = "";
+            if (commentCount > 100000) {
+                str = (commentCount / 10000).toFixed(0) + "万";
+            } else {
+                str = commentCount;
+            }
+            return "("+str+")";
+            return '('+this.mySongList.commentCount+')'
+        }
+    },
+    share_btn(){
+        const userId = this.$store.state.userData.account.id;
+        const id = this.mySongList.creator.userId        
+        console.log('用户id：'+userId+'\n歌单ID：'+id)
+        if(userId===id){
+            return '分享'
+        }else{
+            let shareCount = this.mySongList.shareCount
+
+            let str = "";
+            if (shareCount > 100000) {
+                str = (shareCount / 10000).toFixed(0) + "万";
+            } else {
+                str = shareCount;
+            }
+            return "("+str+")";
+        }
+    },
+    favorsub(){
+        const userId = this.$store.state.userData.account.id;
+        const id = this.mySongList.creator.userId        
+        console.log('用户id：'+userId+'\n歌单ID：'+id)
+        if(userId===id){
+            return '收藏'
+        }else{
+            let subscribedCount = this.mySongList.subscribedCount
+
+            let str = "";
+            if (subscribedCount > 100000) {
+                str = (subscribedCount / 10000).toFixed(0) + "万";
+            } else {
+                str = subscribedCount;
+            }
+            return "("+str+")";
+        }
+    }
   },
   watch: {
     $route() {
