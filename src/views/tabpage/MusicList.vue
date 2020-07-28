@@ -11,7 +11,7 @@
       
     >
       <div class="td">
-        <div class="play_btn" @click="playsong(song.id,song.name,song.album,song.artists[0].name)"></div>
+        <div class="play_btn" @click="playsong(song.id,song.name,song.album,song.artists)"></div>
       </div>
       <div class="td sn">
         <router-link tag="a" :to="{name:'song',query:{ids:song.id}}">{{song.name}}</router-link>
@@ -20,7 +20,7 @@
       <div class="td mbtns">
         <opt-buttons 
           :class="index === opt_btns_show?'showOptBtns':'hideOptBtns'" 
-          @add='addtoplaylist(song.id,song.name,song.album,song.artists[0].name)'
+          @add='addtoplaylist(song.id,song.name,song.album,song.artists)'
           @fav='fav(song.id)'
           :btns='["add","fav","share","download"]'>
         </opt-buttons>
@@ -36,10 +36,11 @@
         </div> -->
       </div>
       <div class="td at">
-        <router-link tag="a" :to="{name:'artist',query:{id:song.artists[0].id}}" :title="artist(song.artists)">{{artist(song.artists)}}</router-link>
+        <!-- <router-link tag="a" :to="{name:'artist',query:{id:song.artists[0].id}}" :title="artist(song.artists)">{{artist(song.artists)}}</router-link> -->
+        <router-link tag="a" v-for="(item,index) in song.artists" :key='item+index' :to="{name:'artist',query:{id:item.id}}" :title="item.name">{{item.name}}</router-link>
       </div>
       <div class="td al">
-        <router-link tag="a" :to="{name:'mv',query:{id:song.album.id}}">《{{song.album.name}}》</router-link>
+        <router-link tag="a" :to="{name:'album',query:{id:song.album.id}}">《{{song.album.name}}》</router-link>
       </div>
       <div class="td dura">{{song.duration|formatSecond}}</div>
       <div class="clear-fix"></div>
@@ -128,7 +129,7 @@ export default {
           name: "",
           song: {},
           album: {},
-          artist: ""
+          artist: []
         };
         song.id = id;
         song.name = name;

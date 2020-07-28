@@ -25,14 +25,16 @@
               </div>
               <p class="song_artist">
                 歌手：
-                <router-link tag='a' v-for="(item,index) in song.artist" :to="{name:'artist',query:{id:item.id}}"  :key="index">{{item.name}}</router-link>
+                <router-link tag='a' v-for="(item) in song.artist" :to="{name:'artist',query:{id:item.id}}"  :key="item.id">{{item.name}}</router-link>
               </p>
               <p class="song_album">
                 专辑：
-                <a href="#">{{song.album.name}}</a>
+                <!-- <a href="#">{{song.album.name}}</a> -->
+                <router-link tag='a' :to="{name:'album',query:{id:song.album.id}}">{{song.album.name}}</router-link>
+                
               </p>
               <div class="song_operation">
-                <play-button @click="playsong(songId, song.name, song.album.name, song.artist[0].name)"></play-button>
+                <play-button @click="playsong(songId, song.name, song.album.name, song.artist)"></play-button>
                 <add-button style="margin-right:10px"></add-button>
                 <w-button type="fav" ></w-button>
                 <w-button type="share" >

@@ -98,7 +98,6 @@ export default {
         // 音频最大播放时长
         maxTime: 0
       },
-      loop: loopM.Sequential, //0：顺序播放 1：单曲循环 2：随机播放
       vol_show: false,
       position: "",
       tip_show: false,
@@ -260,9 +259,9 @@ export default {
 
     change_loop() {
       if (this.loop < loopM.random) {
-        this.loop++;
+        this.$store.commit("musicplayer/updateLoop", this.loop+1);
       } else {
-        this.loop = loopM.Sequential;
+        this.$store.commit("musicplayer/updateLoop", loopM.Sequential); 
       }
     },
     gotoplaylist() {
@@ -333,6 +332,10 @@ export default {
       this.lyricTime = [];
       this.lyric = {};
       this.currentLyricLine = "";
+    },
+    getArtist(artists){
+      let newStr = artists.map((item, index) => item.name).join("/");
+        return newStr;
     }
   },
   filters: {
@@ -346,7 +349,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('musicplayer',['volume','playlist','currentsong']),
+    ...mapState('musicplayer',['volume','playlist','currentsong','loop']),
     icon_loop() {
       let loop = this.loop;
       if (loop == loopM.Sequential) {
@@ -366,12 +369,13 @@ export default {
       );
     },
     displaySongMessage() {
+      console.log(this.currentsong.artist)
       // console.log(this.currentsong);
-      if (this.currentsong.artist != "") {
+      if (this.currentsong.artist.length>0) {
         return (
           this.currentsong.name +
           "--" +
-          this.currentsong.artist
+          this.getArtist(this.currentsong.artist)
         );
       } else {
         return this.currentsong.name;

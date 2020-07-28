@@ -6,7 +6,7 @@
           <img :src="getPicUrl(album.picUrl)" alt />
           <a href="" v-show="playBtnIndex===index"></a>
         </div>
-        <p :title="album.name">{{album.name}}</p>
+        <p :title="album.name"><router-link tag="a" :to='{name:"album",query:{id:album.id}}'>{{album.name}}</router-link></p>
         <p :title="getCreatorName(album.artists)">{{getCreatorName(album.artists)}}</p>
       </li>
       <div class="clear-fix"></div>

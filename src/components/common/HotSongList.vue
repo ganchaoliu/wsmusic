@@ -12,7 +12,7 @@
         <div class="number">{{index+1}}</div>
       </div>
       <div class="td">
-        <div class="play_btn" @click="playsong(song.id,song.name,song.al,song.ar[0].name)"></div>
+        <div class="play_btn" @click="playsong(song.id,song.name,song.al,song.ar)"></div>
       </div>
       <div class="td sn">
         <router-link tag="a" :to="{name:'song',query:{ids:song.id}}">{{song.name}}</router-link>
@@ -24,17 +24,18 @@
         <div class="sbtns">
         <opt-buttons 
           :class="index === opt_btns_show?'showOptBtns':'hideOptBtns'" 
-          @add='addtoplaylist(song.id,song.name,song.al,song.ar[0].name)'
+          @add='addtoplaylist(song.id,song.name,song.al,song.ar)'
           @fav='fav(song.id)'
           :btns='["add","fav","share","download"]'>
         </opt-buttons>
       </div>
       </div>
       <div class="td at">
-        <router-link tag="a" :to="{name:'artist',query:{id:song.ar[0].id}}" :title="artist(song.ar)">{{artist(song.ar)}}</router-link>
+        <!-- <router-link tag="a" :to="{name:'artist',query:{id:song.ar[0].id}}" :title="artist(song.ar)">{{artist(song.ar)}}</router-link> -->
+        <router-link tag="a" v-for="(item,index) in song.ar" :key='item+index' :to="{name:'artist',query:{id:item.id}}" :title="item.name">{{item.name}}</router-link>
       </div>
       <div class="td al">
-        <router-link tag="a" to :title="song.al.name">《{{song.al.name}}》</router-link>
+        <router-link tag="a" :to="{name:'album',query:{id:song.al.id}}" :title="song.al.name">《{{song.al.name}}》</router-link>
       </div>
       <div class="clear-fix"></div>
       
@@ -163,12 +164,6 @@ export default {
     }
   },
   computed: {
-    artist() {
-      return function(artists) {
-        let newStr = artists.map((item, index) => item.name).join("/");
-        return newStr;
-      };
-    },
     // hotSongs() {
     //   return this.$parent.hotSongs;
     // },
@@ -181,5 +176,136 @@ export default {
 </script>
 
 <style lang="css" scoped>
-@import url("../../assets/css/artist/hotsonglist.css");
+/* hotsonglist start */
+
+.hotsonglist{
+    /* width: 640px;    */
+    height: inherit; 
+    position: relative;
+}
+
+.hotsonglist .slbg{
+    background-color: #f7f7f7;
+}
+
+.hotsonglist .hot_song_item{
+    /* width: 640px; */
+    height: 43px;
+    padding: 10px 10px 8px 18px;
+    font-size: 12px;
+    border: 1px solid #fff;
+}
+
+.hotsonglist .hot_song_item:hover{
+    background-color: #eeeeee;
+    border: 1px solid #ddd;
+}
+
+.hotsonglist .hot_song_item .td .play_btn{
+    margin-top: 2px;
+    width: 17px;
+    height: 17px;
+    background: url('../../assets/img/table.png') no-repeat 0 -103px;
+    margin-right: 8px;    
+}
+
+.hotsonglist .hot_song_item .dura .showOptBtns{
+    visibility: visible;
+}
+
+.hotsonglist .hot_song_item .dura .hideOptBtns{
+    visibility: hidden;
+}
+
+.hotsonglist .hot_song_item .hot_song_item .opt_btns{
+    width: 120px;
+    height: 16px;     
+    vertical-align: middle;
+}
+
+.hotsonglist .hot_song_item .td .play_btn:hover{
+    cursor: pointer;
+    background-position: 0 -128px;
+}
+
+
+.hotsonglist .hot_song_item .sn{
+    width: 250px;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.hotsonglist .hot_song_item .sn .song_mv{
+    vertical-align: middle;
+    margin-left: 3px;
+    display:inline-block;
+    width: 23px;
+    height: 17px;
+    background: url('../../assets/img/table.png') no-repeat 0 -151px;
+}
+
+.hotsonglist .hot_song_item .dura{
+    width: 120px;
+    height: 23px;
+    line-height: 23px;
+}
+
+.hotsonglist .hot_song_item .sbtns{
+    padding-top: 3px;
+    width: 120px;
+    height: 16px;
+}
+
+.hotsonglist .hot_song_item .at{
+    width: 15%;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.hotsonglist .hot_song_item .at a{
+  margin-right: 5px;
+}
+
+/* 分页 */
+.main_page{
+    margin-top: 20px;
+    text-align: center;
+}
+.main_page a{
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.hotsonglist .hot_song_item .number{
+    height: 23px;
+    width: 25px;
+    line-height: 23px;
+}
+
+.hotsonglist .hot_song_item .al{
+    width: 18%;
+    height: 23px;
+    line-height: 23px;
+    font-size: 12px;    
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+/* 歌曲列表开始 */
+.hotsonglist .hot_song_item .td{
+    float: left;
+}
+
+
 </style>

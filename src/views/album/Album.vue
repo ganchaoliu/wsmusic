@@ -1,15 +1,149 @@
 <template>
-    <div class="album">
-        
+  <div class="main">
+    <div class="album clear-fix">
+      <div class="album_left">
+        <div class="album_h">
+          <div class="album_info">
+            <div class="album_cover">
+              <img :src="album.picUrl+'?param=177y177'" alt />
+            </div>
+            <div class="album_content">
+              <div class="a_title">
+                <em></em>
+                <h2>{{album.name}}</h2>
+              </div>
+              <p>
+                歌手：
+                <router-link
+                  :to="{name:'artist',query:{id:item.id}}"
+                  v-for="item in album.artists"
+                  :key="item.name+item.id"
+                  tag="a"
+                >{{item.name}}</router-link>
+              </p>
+              <p>发行时间：2020-06-10</p>
+              <p v-show="album.company!==''">发行公司：{{album.company}}</p>
+              <div class="album_btns">
+                <play-button></play-button>
+                <add-button style="margin-right:5px"></add-button>
+                <w-button type="fav" v-slot:value></w-button>
+                <w-button type="share" v-slot:value>({{dynamic.shareCount}})</w-button>
+                <w-button type="download" v-slot:value></w-button>
+                <w-button type="comment" v-slot:value>({{dynamic.commentCount}})</w-button>
+              </div>
+            </div>
+            <div class="clear-fix"></div>
+          </div>
+          <div class="album_desc" v-show="album.description!==null">
+            <h3>专辑介绍：</h3>
+            <p v-for="(item,index) in descArray" v-show="!(index>5&&hide)" :key="index">{{item}}</p>
+            <p
+              v-show="descArray.length>5"
+              @click="hide = !hide"
+              v-html="hide?'展开':'收起'"
+              style="text-align:right;cursor:pointer"
+            ></p>
+          </div>
+        </div>
+        <div class="album_l">
+          <div class="al_title">
+            <div class="outlink">
+              <i></i>
+              <a href>生成外链播放器</a>
+            </div>
+            <h3>包含歌曲列表</h3>
+            <span>{{songs.length}}首歌</span>
+          </div>
+          <div class="clear-fix"></div>
+          <div class="al_songlist">
+            <song-list :Songs="songs"></song-list>
+          </div>
+        </div>
+        <div class="album_c"></div>
+      </div>
+      <div class="album_right"></div>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+import PlayButton from "../../components/common/PlayButton";
+import AddButton from "../../components/common/AddButton";
+import WButton from "../../components/common/WButton";
+import SongList from "./SongList";
+import { request } from "../../network/request";
+export default {
+  data() {
+    return {
+      hide: true,
+      songs: [],
+      album: {
+        name: "",
+        picUrl: "",
+        alias: [],
+        company: "",
+        publishTime: "",
+        description: "",
+      },
+      dynamic: {
+        commentCount: 0,
+        shareCount: 0,
+        subCount: 0,
+      },
+    };
+  },
+  components: {
+    PlayButton,
+    AddButton,
+    WButton,
+    SongList,
+  },
+  methods: {
+    getAlbumDynamic(aid) {
+      request({
+        url: "/api/album/detail/dynamic",
+        params: {
+          id: aid,
+        },
+      }).then((res) => {
+        console.log(res);
+        this.dynamic = res.data;
+      });
+    },
+    getAlbum(aid) {
+      request({
+        url: "/api/album",
+        params: {
+          id: aid,
+        },
+      }).then((res) => {
+        this.album = res.data.album;
+        this.songs = res.data.songs;
+      });
+    },
+  },
+  computed: {
+    artists() {
+      return function (artists) {
+        let newStr = artists.map((item, index) => item.name).join("/");
+        return newStr;
+      };
+    },
+    descArray() {
+      if (this.album.description !== null) {
+        return this.album.description.split("\n");
+      }
+    },
+  },
+
+  created() {
+    const id = this.$route.query.id;
+    this.getAlbum(id);
+    this.getAlbumDynamic(id);
+  },
+};
 </script>
 
 <style lang='css' scoped>
-
+@import url("../../assets/css/album/album.css");
 </style>

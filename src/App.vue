@@ -27,6 +27,7 @@ export default {
   },
   // 将store状态保存到localStorage中
   created() {
+    // localStorage.clear()
     if (localStorage.getItem("store")) {
       this.$store.replaceState(
         Object.assign(

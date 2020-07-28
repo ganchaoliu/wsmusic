@@ -4,7 +4,7 @@
       class="hot_song_item"
       @mouseover="addActive(index)"
       @mouseout="removeActive(index)"
-      v-for="(song,index) in HSongs"
+      v-for="(song,index) in Songs"
       :key="index"
       :class="index%2===0?'':'slbg'"
     >
@@ -19,8 +19,8 @@
         <router-link tag="a" v-if="song.mv!=0" :to="{name:'mv',query:{id:song.mv}}" class="song_mv"></router-link>
       </div>
       
-      <div class="td dura">        
-        <div v-show="index !== opt_btns_show">{{song.dt|formatSecond}}</div>
+      <div class="td dura" >        
+        <div v-show='index !== opt_btns_show'>{{song.dt|formatSecond}}</div>
         <div class="sbtns">
         <opt-buttons 
           :class="index === opt_btns_show?'showOptBtns':'hideOptBtns'" 
@@ -30,10 +30,15 @@
         </opt-buttons>
       </div>
       </div>
-      <div class="td al">
-        <router-link tag="a" :to='{name:"album",query:{id:song.al.id}}' :title="song.al.name">《{{song.al.name}}》</router-link>
+      <div class="td at">
+        <router-link tag="a" v-for="(item) in song.ar" :key='item.id' :to="{name:'artist',query:{id:item.id}}" :title="item.name">{{item.name}}</router-link>
+
       </div>
+      <!-- <div class="td al">
+        <router-link tag="a" :to="{name:'album',query:{id:song.al.id}}" :title="song.al.name">《{{song.al.name}}》</router-link>
+      </div> -->
       <div class="clear-fix"></div>
+      
     </div>
     <!-- <el-pagination
       class="main_page"
@@ -64,7 +69,7 @@ export default {
     };
   },
   props: {
-    HSongs:{
+    Songs:{
       type:Array
     }
   },
@@ -176,6 +181,7 @@ export default {
 .hotsonglist{
     /* width: 640px;    */
     height: inherit; 
+    /* margin-top: 25px; */
     position: relative;
 }
 
@@ -225,7 +231,7 @@ export default {
 
 
 .hotsonglist .hot_song_item .sn{
-    width: 250px;
+    width: 306px;
     height: 23px;
     line-height: 23px;
     font-size: 12px;    
@@ -244,25 +250,29 @@ export default {
 }
 
 .hotsonglist .hot_song_item .dura{
-    width: 120px;
+    width: 96px;
     height: 23px;
     line-height: 23px;
 }
 
 .hotsonglist .hot_song_item .sbtns{
     padding-top: 3px;
-    width: 120px;
+    width: 96px;
     height: 16px;
 }
 
 .hotsonglist .hot_song_item .at{
-    width: 15%;
+    width: 25%;
     height: 23px;
     line-height: 23px;
     font-size: 12px;    
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
+}
+
+.hotsonglist .hot_song_item .at a{
+  margin-right: 5px;
 }
 
 /* 分页 */
@@ -283,19 +293,10 @@ export default {
     line-height: 23px;
 }
 
-.hotsonglist .hot_song_item .al{
-    width: 18%;
-    height: 23px;
-    line-height: 23px;
-    font-size: 12px;    
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
-}
-
 /* 歌曲列表开始 */
 .hotsonglist .hot_song_item .td{
     float: left;
 }
+
 
 </style>

@@ -20,9 +20,11 @@
           <div class="sl_btns">
             <play-button></play-button>
             <add-button style="margin-right:10px"></add-button>
-            <w-button :type="$store.state.userData.account.id===mySongList.creator.userId?'fav':'subscribed'" v-slot:value>{{favorsub}}</w-button>
-            <w-button type="share" v-slot:value>{{share_btn}}
-            </w-button>
+            <w-button
+              :type="$store.state.userData.account.id===mySongList.creator.userId?'fav':'subscribed'"
+              v-slot:value
+            >{{favorsub}}</w-button>
+            <w-button type="share" v-slot:value>{{share_btn}}</w-button>
             <w-button type="download" v-slot:value>下载</w-button>
             <w-button type="comment" v-slot:value>{{comment_btn}}</w-button>
           </div>
@@ -46,38 +48,7 @@
           <span class="playcount">播放：{{mySongList.playCount}}次</span>
         </div>
         <div class="sub_sl_bd">
-          <hot-song-list :HSongs='mySongList.tracks'></hot-song-list>
-          <!-- <table class="slist">
-            <thead v-if="mySongList.tracks.length>0">
-              <tr>
-                <th class="first">
-                  <div class="wp">&nbsp;</div>
-                </th>
-                <th class="title">
-                  <div class="wp">歌曲标题</div>
-                </th>
-                <th class="dt">
-                  <div class="wp">时长</div>
-                </th>
-                <th class="artist">
-                  <div class="wp">歌手</div>
-                </th>
-                <th class="album">
-                  <div class="wp">专辑</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(song,index) in mySongList.tracks" :key="song.id+index">
-                <td>{{index+1}}</td>
-                <td>{{song.name}}</td>
-                <td>{{song.dt|formatSecond}}</td>
-                <td>{{artist(song.ar)}}</td>
-                <td>{{song.al.name}}</td>
-              </tr>
-            </tbody>
-          </table> -->
-          <!-- <opt-buttons></opt-buttons> -->
+          <hot-song-list :HSongs="mySongList.tracks"></hot-song-list>
         </div>
       </div>
     </div>
@@ -101,11 +72,13 @@ export default {
     AddButton,
     WButton,
     OptButtons,
-    HotSongList
+    HotSongList,
   },
   data() {
     return {
       mySongList: {
+        tracks: [],
+        tags: [],
         creator: {
           nickname: "",
         },
@@ -123,11 +96,13 @@ export default {
         params: {
           id: id,
         },
-      }).then((res) => {
-        console.log("歌单详情");
-        console.log(res);
-        this.mySongList = res.data.playlist;
-      });
+      })
+        .then((res) => {
+          this.mySongList = res.data.playlist;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   computed: {
@@ -147,70 +122,72 @@ export default {
         return newStr;
       };
     },
-    comment_btn(){
-        const userId = this.$store.state.userData.account.id;
-        const id = this.mySongList.creator.userId        
-        console.log('用户id：'+userId+'\n歌单ID：'+id)
-        if(userId===id){
-            return '评论'
-        }else{
-            let commentCount = this.mySongList.commentCount
+    comment_btn() {
+      const userId = this.$store.state.userData.account.id;
+      const id = this.mySongList.creator.userId;
+      if (userId === id) {
+        return "评论";
+      } else {
+        let commentCount = this.mySongList.commentCount;
 
-            let str = "";
-            if (commentCount > 100000) {
-                str = (commentCount / 10000).toFixed(0) + "万";
-            } else {
-                str = commentCount;
-            }
-            return "("+str+")";
-            return '('+this.mySongList.commentCount+')'
+        let str = "";
+        if (commentCount > 100000) {
+          str = (commentCount / 10000).toFixed(0) + "万";
+        } else {
+          str = commentCount;
         }
+        return "(" + str + ")";
+        return "(" + this.mySongList.commentCount + ")";
+      }
     },
-    share_btn(){
-        const userId = this.$store.state.userData.account.id;
-        const id = this.mySongList.creator.userId        
-        console.log('用户id：'+userId+'\n歌单ID：'+id)
-        if(userId===id){
-            return '分享'
-        }else{
-            let shareCount = this.mySongList.shareCount
+    share_btn() {
+      const userId = this.$store.state.userData.account.id;
+      const id = this.mySongList.creator.userId;
+      if (userId === id) {
+        return "分享";
+      } else {
+        let shareCount = this.mySongList.shareCount;
 
-            let str = "";
-            if (shareCount > 100000) {
-                str = (shareCount / 10000).toFixed(0) + "万";
-            } else {
-                str = shareCount;
-            }
-            return "("+str+")";
+        let str = "";
+        if (shareCount > 100000) {
+          str = (shareCount / 10000).toFixed(0) + "万";
+        } else {
+          str = shareCount;
         }
+        return "(" + str + ")";
+      }
     },
-    favorsub(){
-        const userId = this.$store.state.userData.account.id;
-        const id = this.mySongList.creator.userId        
-        console.log('用户id：'+userId+'\n歌单ID：'+id)
-        if(userId===id){
-            return '收藏'
-        }else{
-            let subscribedCount = this.mySongList.subscribedCount
+    favorsub() {
+      const userId = this.$store.state.userData.account.id;
+      const id = this.mySongList.creator.userId;
+      if (userId === id) {
+        return "收藏";
+      } else {
+        let subscribedCount = this.mySongList.subscribedCount;
 
-            let str = "";
-            if (subscribedCount > 100000) {
-                str = (subscribedCount / 10000).toFixed(0) + "万";
-            } else {
-                str = subscribedCount;
-            }
-            return "("+str+")";
+        let str = "";
+        if (subscribedCount > 100000) {
+          str = (subscribedCount / 10000).toFixed(0) + "万";
+        } else {
+          str = subscribedCount;
         }
-    }
+        return "(" + str + ")";
+      }
+    },
   },
   watch: {
     $route() {
-      this.getSongList(this.$route.query.id);
+      let id = this.$route.query.id;
+      if (id !== undefined) {
+        this.getSongList(id);
+      }
     },
   },
   created() {
     let id = this.$route.query.id;
-    this.getSongList(id);
+    if (id !== undefined) {
+      this.getSongList(id);
+    }
   },
   filters: {
     formatSecond(second = 0) {

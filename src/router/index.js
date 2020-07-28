@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(Router)
 
 const Search=()=>import('../views/Search')
@@ -16,6 +21,7 @@ const Video = ()=>import('../views/Video')
 const Discover = ()=>import('../views/discover/Discover')
 const Friend = ()=>import('../views/friend/Friend')
 const Song = ()=>import('../views/Song')
+const Album = ()=>import('../views/album/Album')
 
 
 
@@ -113,6 +119,11 @@ const routes= [
     path: '/song',
     name: 'song',
     component: Song
+  },
+  {
+    path: '/album',
+    name: 'album',
+    component: Album
   },
 ]
 

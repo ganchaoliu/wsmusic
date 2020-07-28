@@ -99,7 +99,7 @@ export default {
       });
     },
     getSonglist(userId) {
-      console.log(userId);
+      console.log('用户id：'+userId);
       request({
         url: "/api/user/playlist",
         params: {
@@ -134,7 +134,7 @@ export default {
   },
   watch: {
     myCreate_Songlist(){
-      this.$router.push({name:'songlist',query:{id:this.myCreate_Songlist[0].id}})
+      this.$router.replace({name:'songlist',query:{id:this.myCreate_Songlist[0].id}})
     }
   }
 };

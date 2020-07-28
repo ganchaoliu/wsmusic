@@ -10,9 +10,10 @@ export default{
             },
             playing: false,
             album: {},
-            artist: ''
+            artist:[]
         },        
-        music_player: {}
+        music_player: {},
+        loop:0
     },
     mutations:{
         updateCurrentSong(state, song) {
@@ -30,6 +31,9 @@ export default{
         },
         updatePlaylist(state,payload){
             state.playlist.push(payload)
+        },
+        updateLoop(state,payload){
+            state.loop=payload
         }
     },
     getters: {
