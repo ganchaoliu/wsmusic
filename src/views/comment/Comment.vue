@@ -17,7 +17,7 @@
           <div class="input_btns">
             <i class="input_icon"></i>
             <i class="input_rel"></i>
-            <a href class="input_submit">评论</a>            
+            <a href class="input_submit" @click="newComment">评论</a>
             <span class="text_length">{{140-comment_text.length}}</span>
           </div>
           <em class="arr">◇</em>
@@ -26,11 +26,11 @@
       </div>
     </div>
     <div class="comments_body" v-if="data.total>0">
-      <div class="item_hot clear-fix" v-if='data.hotComments!=undefined' v-show='currentPage==1'>
+      <div class="item_hot clear-fix" v-if="data.hotComments!=undefined" v-show="currentPage==1">
         <h3 v-show="data.hotComments.length>0">精彩评论</h3>
         <ul>
           <li v-for="item in data.hotComments" :key="item.commentId" class="clear-fix">
-            <div class="comments_item">
+            <div class="comments_item" @mouseover="del_btn=item.commentId" @mouseleave="del_btn=-1">
               <div class="item_cvr">
                 <img :src="item.user.avatarUrl+'?param=50y50'" alt />
               </div>
@@ -46,37 +46,68 @@
                   />
                   :{{item.content}}
                 </div>
-                <div class="item_reply" v-if="item.beReplied.length>0">
-                  <a href>{{item.beReplied[0].user.nickname}}</a>
-                  <i></i>
-                  <img
-                    v-show="item.beReplied[0].user.vipRights!=null"
-                    src="https://p1.music.126.net/y8pM-M1mytg6B1ThedCbJA==/109951163709550847.png?param=39y12"
-                    alt
-                  />
-                  :{{item.beReplied[0].content}}
-                  <em class="arr">◆</em>
-                  <em class="arr_clear">◆</em>
+                <div v-if="item.beReplied.length>0">
+                  <div class="item_reply" v-if="item.beReplied[0].content!==null">
+                    <a href>{{item.beReplied[0].user.nickname}}</a>
+                    <i></i>
+                    <img
+                      v-show="item.beReplied[0].user.vipRights!=null"
+                      src="https://p1.music.126.net/y8pM-M1mytg6B1ThedCbJA==/109951163709550847.png?param=39y12"
+                      alt
+                    />
+                    :
+                    <span>{{item.beReplied[0].content}}</span>
+                    <em class="arr">◆</em>
+                    <em class="arr_clear">◆</em>
+                  </div>
+                  <div class="item_reply" v-else>
+                    评论被删除了
+                    <em class="arr">◆</em>
+                    <em class="arr_clear">◆</em>
+                  </div>
                 </div>
                 <div class="item_btns">
                   <span class="comment_date">{{formateDate(item.time,'Y年m月d日 H时i分')}}</span>
-                  <a href='#' class="item_like" @click="like(item.commentId)">
+                  <a
+                    href="#"
+                    v-show="(del_btn==item.commentId)&(item.user.userId==data.userId)"
+                    @click="removeComment(item.commentId)"
+                  >删除</a>
+                  <span v-show="del_btn&(item.user.userId==data.userId)">|</span>
+                  <a href="#" class="item_like" @click="like(item.commentId,item.liked)">
                     <i :class="item.liked?'liked_icon':'like_icon'"></i>
                     ({{item.likedCount|formatPlayTime}})
                   </a>
                   <span>|</span>
-                  <a href class="item_repbtn">回复</a>
+                  <a
+                    href="javascript:void(0)"
+                    class="item_repbtn"
+                    @click="replyCommentId=item.commentId"
+                  >回复</a>
+                </div>
+                <div class="reply_comment" v-show="item.commentId==replyCommentId">
+                  <div class="input_cnt">
+                    <textarea placeholder="评论" v-model="reply_comment_text"></textarea>
+                    <div class="input_btns">
+                      <i class="input_icon"></i>
+                      <i class="input_rel"></i>
+                      <a href class="input_submit" @click="replyComment(item.commentId)">评论</a>
+                      <span class="text_length">{{140-reply_comment_text.length}}</span>
+                    </div>
+                    <em class="arr">◆</em>
+                    <em class="arr_clear">◆</em>
+                  </div>
                 </div>
               </div>
             </div>
           </li>
         </ul>
       </div>
-      <div class="item_new" v-if='data.comments.length>0'>
+      <div class="item_new" v-if="data.comments.length>0">
         <h3>最新评论({{data.total}})</h3>
         <ul>
           <li v-for="item in data.comments" :key="item.commentId" class="clear-fix">
-            <div class="comments_item">
+            <div class="comments_item" @mouseover="del_btn=true" @mouseleave="del_btn=false">
               <div class="item_cvr">
                 <img :src="item.user.avatarUrl+'?param=50y50'" alt />
               </div>
@@ -92,26 +123,65 @@
                   />
                   :{{item.content}}
                 </div>
-                <div class="item_reply" v-if="item.beReplied.length>0">
-                  <a href>{{item.beReplied[0].user.nickname}}</a>
-                  <i></i>
-                  <img
-                    v-show="item.beReplied[0].user.vipRights!=null"
-                    src="https://p1.music.126.net/y8pM-M1mytg6B1ThedCbJA==/109951163709550847.png?param=39y12"
-                    alt
-                  />
-                  :{{item.beReplied[0].content}}
-                  <em class="arr">◆</em>
-                  <em class="arr_clear">◆</em>
+                <div v-if="item.beReplied.length>0">
+                  <div class="item_reply" v-if="item.beReplied[0].content!==null">
+                    <a href>{{item.beReplied[0].user.nickname}}</a>
+                    <i></i>
+                    <img
+                      v-show="item.beReplied[0].user.vipRights!=null"
+                      src="https://p1.music.126.net/y8pM-M1mytg6B1ThedCbJA==/109951163709550847.png?param=39y12"
+                      alt
+                    />
+                    :
+                    <span>{{item.beReplied[0].content}}</span>
+                    <em class="arr">◆</em>
+                    <em class="arr_clear">◆</em>
+                  </div>
+                  <div class="item_reply" v-else>
+                    评论被删除了
+                    <em class="arr">◆</em>
+                    <em class="arr_clear">◆</em>
+                  </div>
                 </div>
+
                 <div class="item_btns">
-                  <span class="comment_date">{{formateDate(item.time,'Y-m-d')}}</span>
-                  <a href class="item_like">
-                    <i class="like_icon"></i>
+                  <span class="comment_date">{{formateDate(item.time,'Y年m月d日 H时i分')}}</span>
+                  <a
+                    href="#"
+                    v-show="del_btn&(item.user.userId==data.userId)"
+                    @click="removeComment(item.commentId)"
+                  >删除</a>
+                  <span v-show="del_btn&(item.user.userId==data.userId)">|</span>
+                  <a href="#" class="item_like" @click="like(item.commentId,item.liked)">
+                    <i :class="item.liked?'liked_icon':'like_icon'"></i>
                     ({{item.likedCount|formatPlayTime}})
                   </a>
                   <span>|</span>
-                  <a href class="item_repbtn">回复</a>
+                  <a
+                    href="javascript:void(0)"
+                    class="item_repbtn"
+                    @click="replyCommentId=item.commentId"
+                  >回复</a>
+                </div>
+                <div class="reply_comment" v-show="item.commentId==replyCommentId">
+                  <div class="input_cnt">
+                    <textarea
+                      :placeholder="'回复'+item.user.nickname+':'"
+                      v-model="reply_comment_text"
+                    ></textarea>
+                    <div class="input_btns">
+                      <i class="input_icon"></i>
+                      <i class="input_rel"></i>
+                      <a
+                        href="javascript:void(0)"
+                        class="input_submit"
+                        @click="replyComment(item.commentId)"
+                      >评论</a>
+                      <span class="text_length">{{140-reply_comment_text.length}}</span>
+                    </div>
+                    <em class="arr">◆</em>
+                    <em class="arr_clear">◆</em>
+                  </div>
                 </div>
               </div>
             </div>
@@ -119,32 +189,35 @@
         </ul>
       </div>
       <el-pagination
-      class="main_page"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-sizes="[5, 10, 20, 40]"
-      :page-size="20"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="data.total"
-    ></el-pagination>
-
+        class="main_page"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[5, 10, 20, 40]"
+        :page-size="20"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="data.total"
+        v-show="data.total>pageSize"
+      ></el-pagination>
     </div>
   </div>
 </template>
 
 <script>
 import { formatDate } from "../../utils/common";
-import {request} from "../../network/request";
+import { request } from "../../network/request";
 export default {
-    data() {
-        return {
-            comment_text:'',
-            currentPage:1,
-            data:{},
-            pageSize:20
-        }
-    },
+  data() {
+    return {
+      comment_text: "",
+      reply_comment_text: "",
+      currentPage: 1,
+      data: {},
+      pageSize: 20,
+      del_btn: false,
+      replyCommentId: 0,
+    };
+  },
   props: {
     type: {
       type: String,
@@ -154,73 +227,188 @@ export default {
     //   type: Object,
     //   default: {},
     // },
-    sourceId:{
-        type:String
-    }
+    sourceId: {
+      type: String,
+    },
   },
   methods: {
-     like(id){
-        console.log(this.sourceId)
-        console.log(this.type)
-        console.log(id)
-     },
-     handleSizeChange(size) {
-         console.log(size)
-         this.pageSize = size         
-         this.getComments(this.sourceId)
-    //   this.$store.commit("updatePageLimit", size);
-    //   this.$store.dispatch("search", {
-    //     keyword: this.searchvalue,
-    //     type: this.type,
-    //     offset: 0
-    //   });
+    newComment() {
+      if (this.comment_text.length > 0) {
+        const type = this.getType();
+        request({
+          url: "/api/comment",
+          params: {
+            id: this.sourceId,
+            type: type,
+            t: 1,
+            content: this.comment_text,
+          },
+        })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            // console.log(err)
+          });
+      }
+    },
+    replyComment(id) {
+      if (this.reply_comment_text.length > 0) {
+        const type = this.getType();
+        request({
+          url: "/api/comment",
+          params: {
+            id: this.sourceId,
+            commentId: id,
+            type: type,
+            t: 2,
+            content: this.reply_comment_text,
+          },
+        })
+          .then((res) => {
+            console.log(res);
+            this.replyCommentId = -1;
+          })
+          .catch((err) => {
+            // console.log(err)
+          });
+      }
+    },
+    removeComment(id) {
+      const type = this.getType();
+      request({
+        url: "/api/comment",
+        params: {
+          id: this.sourceId,
+          commentId: id,
+          type: type,
+          t: 0,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          // console.log(err)
+        });
+    },
+    like(id, liked) {
+      let t = liked ? 0 : 1;
+      let type = this.getType();
+      const commentUrl = "/api/comment/like";
+      request({
+        url: commentUrl,
+        params: {
+          id: this.sourceId,
+          cid: id,
+          type: type,
+          t: t,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          if (res.data.code === 200) {
+            // this.getComments(this.sourceId)
+            // 由于服务器有做了缓存，所以数据没有能及时更新，以下的操作为在前端模拟操作
+            let a = this.data.comments.find((item) => {
+              console.log(item.commentId);
+              return item.commentId == id;
+            });
+            if (!a) {
+              a = this.data.hotComments.find((item) => {
+                console.log(item.commentId);
+                return item.commentId == id;
+              });
+            }
+            a.liked = !liked;
+            if (liked) {
+              a.likedCount -= 1;
+            } else {
+              a.likedCount += 1;
+            }
+          }
+        })
+        .catch((err) => {
+          // console.log(err)
+        });
+    },
+    getType() {
+      return {
+        music: 0,
+        mv: 1,
+        playlist: 2,
+        album: 3,
+        radio: 4,
+        video: 5,
+        dynamic: 6,
+      }[this.type];
+      //  let type = ''
+      //  switch(this.type){
+      //      case 'music':
+      //          type = 0
+      //          break;
+      //     case 'mv':
+      //         type = 1
+      //         break;
+      //     case 'playlist':
+      //         type = 2
+      //         break;
+      //     case 'album':
+      //         type = 3
+      //         break;
+      //     case 'radio':
+      //         type = 4
+      //         break;
+      //     case 'video':
+      //         type = 5
+      //         break;
+      //     case 'dynamic':
+      //         type = 6
+      //         break;
+      //  }
+      //  return type
+    },
+    handleSizeChange(size) {
+      console.log(size);
+      this.pageSize = size;
+      this.getComments(this.sourceId);
+      //   this.$store.commit("updatePageLimit", size);
+      //   this.$store.dispatch("search", {
+      //     keyword: this.searchvalue,
+      //     type: this.type,
+      //     offset: 0
+      //   });
     },
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
-      this.getComments(this.sourceId)
-    //   let offset = (this.currentPage - 1) * this.pageLimit;
-    //   this.$store
-    //     .dispatch("search", {
-    //       keyword: this.searchvalue,
-    //       type: 1,
-    //       offset: offset
-    //     })
-    //     .then(res => {
-    //       this.$router.push({
-    //         path: "/search",
-    //         query: {
-    //           keywords: this.searchvalue,
-    //           limit: 20,
-    //           offset: offset
-    //         }
-    //       });
-    //     });
+      this.getComments(this.sourceId);
     },
-    getComments(id){
-        const commentUrl = "/api/comment/"+this.type
-        request({
+    getComments(id) {
+      const commentUrl = "/api/comment/" + this.type;
+      request({
         url: commentUrl,
         params: {
           id: id,
-          limit:this.pageSize,
-          offset:(this.currentPage-1)*this.pageSize
-        }
-      }).then(res =>{
-          console.log('in comments')
-        console.log(res)
-        this.data = res.data
-      }).catch((err)=>{
-        // console.log(err)
+          limit: this.pageSize,
+          offset: (this.currentPage - 1) * this.pageSize,
+        },
       })
-    }
+        .then((res) => {
+          console.log(res);
+          this.data = res.data;
+        })
+        .catch((err) => {
+          // console.log(err)
+        });
+    },
   },
-  created () {
-      this.getComments(this.sourceId)
+  created() {
+    this.getComments(this.sourceId);
   },
   watch: {
-    $route(){
-        this.getComments(this.sourceId)
-    }  
+    $route() {
+      this.getComments(this.sourceId);
+    },
   },
   computed: {
     formateDate() {
@@ -241,10 +429,9 @@ export default {
         str = playtime;
       }
       return str;
-    }
+    },
   },
-}
-
+};
 </script>
 
 <style lang="css" scoped>
@@ -372,11 +559,11 @@ export default {
   background-position: -84px -64px;
 }
 
-.text_length{
-    float: right;
-    font-size: 12px;
-    line-height: 25px;
-    color: #666;
+.text_length {
+  float: right;
+  font-size: 12px;
+  line-height: 25px;
+  color: #666;
 }
 
 /* #############评论正文开始############## */
@@ -505,6 +692,49 @@ span {
   font-style: normal;
   font-size: 20px;
   color: #f4f4f4;
+}
+
+.reply_comment {
+  margin-top: 5px;
+  width: 100%;
+  background: #f8f8f8;
+  border: 1px solid #d9d9d9;
+  padding: 15px;
+  position: relative;
+}
+
+.reply_comment .input_cnt textarea {
+  width: 100%;
+  height: 33px;
+  padding: 6px;
+  font-size: 12px;
+  line-height: 19px;
+  border: 1px solid #d9d9d9;
+  resize: none;
+  outline: none;
+  overflow: initial;
+  border-radius: 2px;
+}
+
+.reply_comment .input_cnt .arr,
+.arr_clear {
+  position: absolute;
+
+  font-size: 20px;
+  font-style: normal;
+  z-index: 1;
+}
+
+.reply_comment .input_cnt .arr {
+  top: -11px;
+  right: 16px;
+  color: #d9d9d9;
+}
+
+.reply_comment .input_cnt .arr_clear {
+  top: -9px;
+  right: 16px;
+  color: #f8f8f8;
 }
 
 .comments_body .item_hot {

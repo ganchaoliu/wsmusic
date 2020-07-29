@@ -1,10 +1,8 @@
 <template>
   <div id="app" class="app">
-    <!-- <Header></Header> -->
     <net-ease-header class="header"></net-ease-header>
     <div class="clear-fix"></div>
     <router-view class="router_view"></router-view>
-    <!-- <audio-play></audio-play> -->
     <music-player
       class="music_player"
       v-show="$route.name!='mv' && $route.name!='video'&&$route.name!='mymv'"
@@ -16,14 +14,11 @@
 import Header from "./components/content/Header";
 import NetEaseHeader from "./components/content/NetEaseHeader";
 import MusicPlayer from "./components/content/MusicPlayer";
-// import AudioPlay from "./views/AudioPlay";
 export default {
   name: "App",
   components: {
-    Header,
     MusicPlayer,
     NetEaseHeader
-    // AudioPlay
   },
   // 将store状态保存到localStorage中
   created() {
