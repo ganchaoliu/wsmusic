@@ -146,14 +146,11 @@ export default {
       }
     },
     playloop(int) {
-      console.log("变更音乐");
       if (this.loop == loopM.Sequential) {
         if (int == -1) {
           this.play_pre();
-          console.log("上一曲");
         } else {
           this.play_next();
-          console.log("下一曲");
         }
       } else if (this.loop == loopM.Single) {
         this.play();
@@ -407,6 +404,9 @@ export default {
     }
   },
   watch: {
+    currentsong(){
+      this.play()
+    },
     isupdate: function(new_data, old_data) {
       //判断是添加播放列表还是删除
       if (new_data > old_data) {

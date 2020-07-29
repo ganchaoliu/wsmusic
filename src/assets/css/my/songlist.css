@@ -145,3 +145,15 @@
 .wbutton{
     margin-right: 10px;
 }
+
+.sub_comments{
+    padding: 20px;
+}
+
+a{
+    color: #333;
+}
+
+a:hover{
+    color: #333;
+}

@@ -26,12 +26,13 @@ body{
 }
 
 a{
-    color: var(--color-text);
+    color: #0c73c2;
     text-decoration: none;
 }
 
 a:hover{
-    color: #c20c0c;
+    color: #0c73c2;
+    text-decoration: underline;
 }
 
 .clear-fix::after{

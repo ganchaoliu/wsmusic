@@ -4,11 +4,14 @@
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     background-color: #fff;
+    padding-bottom: 40px;
 }
 
 .song_main .song_left{
+    width: 709px;
     height: 100%;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #ccc;    
+    padding: 47px 30px 40px 39px;
 }
 
 .song_main .song_right{
@@ -19,8 +22,7 @@
 }
 
 .song_main .song_top{
-    width: 709px;
-    padding: 47px 30px 40px 39px;
+    
     height: auto;
 }
 

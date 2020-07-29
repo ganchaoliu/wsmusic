@@ -17,6 +17,10 @@
                     <a href="#" class="v_btn">收藏({{mv_detail.data.subCount}})</a>
                     <a href="#" class="v_btn">转发({{mv_detail.data.shareCount}})</a> -->
                 </div>
+                <div class="mv_comments">
+                    <comments :sourceId="$route.query.id+''" type='mv'></comments>
+                </div>
+
             </div>
             <div class="mv_right">
                 <h3>
@@ -52,6 +56,7 @@
     import {request} from "../network/request";
     import { realFormatSecond } from "../utils/common"
     import WButton from "../components/common/WButton"
+    import Comments from "../views/comment/Comment"
 
     export default {
         name: "mv",
@@ -60,7 +65,7 @@
                 mv_url:'',
                 mv_detail:{data:{name:'',artistName:'',subCount:'',shareCount:'',publishTime:'',playCount:'',desc:''}},
                 mvs:[],
-                likedCount:0
+                likedCount:0,
             }
         },
         methods:{
@@ -85,6 +90,7 @@
                     console.log("mv详情")
                     console.log(res)
                     this.mv_detail = res.data
+                    document.title = this.mv_detail.data.name
                 })
                 request({
                     url:"/api/simi/mv",
@@ -134,7 +140,8 @@
             }
         },
         components: {
-            WButton
+            WButton,
+            Comments
         }
     }
 </script>

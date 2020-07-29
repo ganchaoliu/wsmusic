@@ -15,13 +15,14 @@
     padding-right:20px;
     width: 240px;
     height: inherit;
-    border-right: 1px solid #eee;
+    
 }
 
 .songlist_right{
     float: left;
     height: inherit;
     width: 740px;
+    border-left: 1px solid #eee;
 }
 
 .mycreate_sl ul li:hover{

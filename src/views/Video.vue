@@ -5,9 +5,10 @@
         <div class="mv_ltop">
           <div class="mv_title" v-if="mv_detail.data.title">
             <h2 :title="mv_detail.data.title">
-              <i></i>
-              {{mv_detail.data.creator.nickname}}
+              <!-- <i></i> -->
+              {{mv_detail.data.title}}
             </h2>
+            <span>by{{mv_detail.data.creator.nickname}}</span>
           </div>
           <span>{{mv_detail.data.artistName}}</span>
           <div class="mv_player">
@@ -22,10 +23,13 @@
           <a href class="v_btn">收藏({{mv_detail.data.subscribeCount}})</a>
           <a href class="v_btn">转发({{mv_detail.data.shareCount}})</a> -->
         </div>
+        <div class="mv_comments">
+                    <comments type='video' :sourceId='$route.query.id'></comments>
+                </div>
       </div>
       <div class="mv_right">
         <h3>
-          <span>MV简介</span>
+          <span>视频简介</span>
         </h3>
         <div class="mv_desc">
           <p>发布时间：{{mv_detail.data.publishTime}}</p>
@@ -58,7 +62,10 @@
 <script>
 import { request } from "../network/request";
 import { realFormatSecond } from "../utils/common";
-import WButton from "../components/common/WButton"
+import WButton from "../components/common/WButton";
+
+    import Comments from "../views/comment/Comment"
+
 
 
 
@@ -78,6 +85,7 @@ export default {
           desc: ""
         }
       },
+      comments:{},
       mvs: [],
       likedCount: 0
     };
@@ -103,6 +111,7 @@ export default {
         console.log("mv详情");
         console.log(res);
         this.mv_detail = res.data;
+        document.title = this.mv_detail.data.title
       });
       request({
         url: "/api/related/allvideo",
@@ -148,7 +157,8 @@ export default {
       return str;
     }
   },components: {
-    WButton
+    WButton,
+    Comments
   }
 };
 </script>

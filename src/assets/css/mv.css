@@ -1,8 +1,8 @@
 .mv_main{
     width: 980px;
-    height: 100%;
     margin: 0px auto;
     border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
     overflow: hidden;
     background-color: #fff;
     position: relative;
@@ -11,8 +11,9 @@
 .mv_main .mv_left{
     float: left;
     width: 709px;
-    height: 100%;
     padding: 20px 30px 40px 39px;
+    
+    border-right: 1px solid #ccc;
 }
 
 .mv_main .mv_left h2{
@@ -73,10 +74,8 @@
 }
 
 .mv_main .mv_right{
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
     float: right;
-    width: 270px;
+    width: 269px;
     height: 100%;
     padding: 20px 40px 40px 30px;
 }

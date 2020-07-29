@@ -50,6 +50,11 @@
         <div class="sub_sl_bd">
           <hot-song-list :HSongs="mySongList.tracks"></hot-song-list>
         </div>
+
+        <div class="sub_comments">
+          <comments :sourceId ='$route.query.id+""' type='playlist'></comments>
+        </div>
+
       </div>
     </div>
   </div>
@@ -62,6 +67,7 @@ import PlayButton from "../../components/common/PlayButton";
 import AddButton from "../../components/common/AddButton";
 import WButton from "../../components/common/WButton";
 import OptButtons from "../../components/common/OptButtons";
+import Comments from "../../views/comment/Comment";
 import HotSongList from "../../components/common/HotSongList";
 import { realFormatSecond } from "../../utils/common";
 
@@ -73,6 +79,7 @@ export default {
     WButton,
     OptButtons,
     HotSongList,
+    Comments
   },
   data() {
     return {
@@ -83,11 +90,12 @@ export default {
           nickname: "",
         },
         name: "",
-      },
+      },      
+      comments:{}
     };
   },
   methods: {
-    init() {
+    init(id) {
       this.getSongList(id);
     },
     async getSongList(id) {
@@ -172,14 +180,14 @@ export default {
     $route() {
       let id = this.$route.query.id;
       if (id !== undefined) {
-        this.getSongList(id);
+        this.init(id);
       }
     },
   },
   created() {
     let id = this.$route.query.id;
     if (id !== undefined) {
-      this.getSongList(id);
+      this.init(id);
     }
   },
   filters: {

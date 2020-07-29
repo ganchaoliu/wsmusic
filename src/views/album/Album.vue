@@ -59,7 +59,10 @@
             <song-list :Songs="songs"></song-list>
           </div>
         </div>
-        <div class="album_c"></div>
+        <div class="clear-fix"></div>
+        <div class="album_c clear-fix">
+          <comments :sourceId='$route.query.id+""' type='album'></comments>
+        </div>
       </div>
       <div class="album_right">
         <h3>喜欢这张专辑的人</h3>
@@ -75,6 +78,7 @@
 import PlayButton from "../../components/common/PlayButton";
 import AddButton from "../../components/common/AddButton";
 import WButton from "../../components/common/WButton";
+import Comments from "../../views/comment/Comment"
 import SongList from "./SongList";
 import { request } from "../../network/request";
 export default {
@@ -95,6 +99,7 @@ export default {
         shareCount: 0,
         subCount: 0,
       },
+      comments:{}
     };
   },
   components: {
@@ -102,6 +107,7 @@ export default {
     AddButton,
     WButton,
     SongList,
+    Comments
   },
   methods: {
     fav(){

@@ -58,7 +58,9 @@
             <a href>报错</a>
           </div>
         </div>
-        <div class="song_comments"></div>
+        <div class="song_comments">
+          <comment :data="comments" :sourceId='$route.query.ids+""' type='music'></comment>
+        </div>
       </div>
       <div class="song_right">
         <div class="right_con">
@@ -89,9 +91,11 @@
 
 <script>
   import {request} from '../network/request';
+  import { formatDate } from "../utils/common";
   import PlayButton from "../components/common/PlayButton";
   import AddButton from "../components/common/AddButton";
   import WButton from "../components/common/WButton";
+  import Comment from "./comment/Comment";
   import { mapMutations, mapState } from 'vuex';
 
 export default {
@@ -100,6 +104,7 @@ export default {
     PlayButton,
     AddButton,
     WButton,
+    Comment
   },
   data(){
     return{
@@ -113,6 +118,7 @@ export default {
       simiSongs:[],
       songs:[],
       lyric:[],
+      comments:{},
       hide:true
     }
     
@@ -128,6 +134,7 @@ export default {
       this.getSongDetail(songId)
       this.getSongLyric(songId)
       this.getSimiSong(songId)
+      // this.getComments(songId)
     },
     playsong(id, name, album, artist) {
       request({
@@ -213,6 +220,20 @@ export default {
       })
     },
 
+    getComments(id){
+      request({
+        url: "/api/comment/music",
+        params: {
+          id: id
+        }
+      }).then(res =>{
+        console.log(res)
+        this.comments = res.data
+      }).catch((err)=>{
+        // console.log(err)
+      })
+    },
+
     async getSongDetail(id){
       // console.log(id)
       await request({
@@ -282,7 +303,12 @@ export default {
         let newStr = artists.map((item,index)=>item.name).join('/')
               return newStr
       }
-    }
+    },
+    formateDate() {
+      return (date, format) => {
+        return formatDate(date, format)
+      }
+    },
 
   },
   created () {

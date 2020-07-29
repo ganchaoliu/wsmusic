@@ -69,6 +69,7 @@
     background-color: black;
     color: white;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .ne_nav li .select{
