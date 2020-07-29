@@ -24,9 +24,9 @@
               <p>发行时间：2020-06-10</p>
               <p v-show="album.company!==''">发行公司：{{album.company}}</p>
               <div class="album_btns">
-                <play-button></play-button>
-                <add-button style="margin-right:5px"></add-button>
-                <w-button type="fav" v-slot:value></w-button>
+                <play-button @click="play"></play-button>
+                <add-button style="margin-right:5px" @click="add"></add-button>
+                <w-button type="fav" :sub='false' @click='fav' v-slot:value></w-button>
                 <w-button type="share" v-slot:value>({{dynamic.shareCount}})</w-button>
                 <w-button type="download" v-slot:value></w-button>
                 <w-button type="comment" v-slot:value>({{dynamic.commentCount}})</w-button>
@@ -61,7 +61,12 @@
         </div>
         <div class="album_c"></div>
       </div>
-      <div class="album_right"></div>
+      <div class="album_right">
+        <h3>喜欢这张专辑的人</h3>
+        <ul>
+          <li></li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -99,6 +104,15 @@ export default {
     SongList,
   },
   methods: {
+    fav(){
+      console.log('w-button')
+    },
+    play(){
+      console.log('play_button')
+    },
+    add(){
+      console.log('add_button')
+    },
     getAlbumDynamic(aid) {
       request({
         url: "/api/album/detail/dynamic",

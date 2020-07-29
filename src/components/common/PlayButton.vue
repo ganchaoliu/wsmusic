@@ -1,15 +1,21 @@
 <template>
-  <div class="playbutton">
-    <a href='#' class="btn_play">
+  <div class="playbutton" @click="action">
+    <div href='#' class="btn_play">
       <i>
         <em class="play_btn"></em>播放
       </i>
-    </a>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    action(){
+      this.$emit('click')
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -62,6 +68,7 @@ export default {};
 }
 
 .btn_play:hover {
+  cursor: pointer;
   color: #fff;
   background-position: right -510px;
 }

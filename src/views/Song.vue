@@ -209,19 +209,19 @@ export default {
         console.log(res.data.songs)
         this.simiSongs = res.data.songs
       }).catch((err)=>{
-        console.log(err)
+        // console.log(err)
       })
     },
 
     async getSongDetail(id){
-      console.log(id)
+      // console.log(id)
       await request({
         url: "/api/song/detail",
         params: {
           ids: id
         }
       }).then(res =>{
-        console.log(res)
+        // console.log(res)
         let songs = res.data.songs[0]
         this.song.coverUrl = songs.al.picUrl
         this.song.name = songs.name
@@ -232,7 +232,7 @@ export default {
       })
     },
     async getSongLyric(id){
-      console.log(id)
+      // console.log(id)
       await request({
         url: "/api/lyric",
         params: {
@@ -247,7 +247,7 @@ export default {
           lyricValue.push(lyric[i].substring(pos + 1));
         }
         this.lyric = lyricValue
-        console.log(lyricValue)
+        // console.log(lyricValue)
       }).catch((err)=>{
         console.log(err)
       })

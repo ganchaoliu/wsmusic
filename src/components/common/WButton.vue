@@ -1,19 +1,27 @@
 <template>
-  <div class="wbutton">
-    <a href="#" :style="button_style" class="button_style">
+  <div class="wbutton" @click="action">
+    <div href :style="button_style" class="button_style">
       <slot name="icon">
         <em class="btn_icon" :class="button_icon"></em>
       </slot>
       <slot name="value">{{btn_text}}</slot>
-    </a>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  methods: {
+    action(){
+      this.$emit("click")
+    }
+  },
   props: {
     type: {
       type: String,
+    },
+    fav:{
+      type:Boolean
     },
     disable: {
       type: Boolean,
@@ -40,15 +48,13 @@ export default {
           break;
         case "subscribed":
             return "订阅";
-            break
-
-        
+            break        
       }
     },
     button_icon() {
       switch (this.type) {
         case "fav":
-          return "icon_fav";
+          return this.fav?"icon_faved":"icon_fav";
           break;
         case "comment":
           return "icon_comment";
@@ -149,6 +155,7 @@ export default {
   font-style: normal;
   color: #000;
   line-height: 31px;
+  cursor: pointer;
 }
 
 .btn_icon {

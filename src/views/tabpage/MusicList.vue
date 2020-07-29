@@ -37,7 +37,7 @@
       </div>
       <div class="td at">
         <!-- <router-link tag="a" :to="{name:'artist',query:{id:song.artists[0].id}}" :title="artist(song.artists)">{{artist(song.artists)}}</router-link> -->
-        <router-link tag="a" v-for="(item,index) in song.artists" :key='item+index' :to="{name:'artist',query:{id:item.id}}" :title="item.name">{{item.name}}</router-link>
+        <router-link tag="a" v-for="(item,index) in song.artists" :key='item.id+index' :to="{name:'artist',query:{id:item.id}}" :title="item.name">{{item.name}}</router-link>
       </div>
       <div class="td al">
         <router-link tag="a" :to="{name:'album',query:{id:song.album.id}}">《{{song.album.name}}》</router-link>

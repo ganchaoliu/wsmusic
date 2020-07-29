@@ -117,7 +117,15 @@ export default {
       }
     },
     play() {
-      this.$refs.audio.play();
+      let playPromise = this.$refs.audio.play();
+      if(playPromise){
+        playPromise.then(()=>{
+          console.log('音频加载成功')
+        }).catch((e)=>{
+          console.log('音频加载失败，重新加载')
+          this.play()
+        })
+      }
     },
     pause() {
       this.$refs.audio.pause();

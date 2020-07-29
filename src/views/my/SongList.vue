@@ -22,7 +22,7 @@
             <add-button style="margin-right:10px"></add-button>
             <w-button
               :type="$store.state.userData.account.id===mySongList.creator.userId?'fav':'subscribed'"
-              v-slot:value
+              v-slot:value :fav="true"
             >{{favorsub}}</w-button>
             <w-button type="share" v-slot:value>{{share_btn}}</w-button>
             <w-button type="download" v-slot:value>下载</w-button>
@@ -116,12 +116,6 @@ export default {
         return string.replace(/\r\n/g, "<br />").replace(/\n/g, "<br />");
       };
     },
-    artist() {
-      return function (artists) {
-        let newStr = artists.map((item, index) => item.name).join("/");
-        return newStr;
-      };
-    },
     comment_btn() {
       const userId = this.$store.state.userData.account.id;
       const id = this.mySongList.creator.userId;
@@ -129,7 +123,6 @@ export default {
         return "评论";
       } else {
         let commentCount = this.mySongList.commentCount;
-
         let str = "";
         if (commentCount > 100000) {
           str = (commentCount / 10000).toFixed(0) + "万";

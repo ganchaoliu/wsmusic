@@ -1,5 +1,6 @@
 # wsmusic 
-# 网易云音乐 Node.js API service
+# 需要本地先部署 网易云音乐 Node.js API service
+# Github:https://github.com/Binaryify/NeteaseCloudMusicApi
 
 ## Project setup
 ```

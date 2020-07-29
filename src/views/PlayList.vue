@@ -19,7 +19,8 @@
           <a @click="play(index)">{{song.name}}</a>
         </li>
         <li>
-          <a href="#">{{song.artist}}</a>
+          <!-- <a href="#">{{song.artist}}</a> -->
+          <router-link tag="a" v-for="(item,index) in song.artist" :key='item+index' :to="{name:'artist',query:{id:item.id}}" :title="item.name">{{item.name}}&nbsp;</router-link>
         </li>
         <li>
           <a href="#">{{song.album.name}}</a>
