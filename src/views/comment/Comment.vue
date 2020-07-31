@@ -17,7 +17,7 @@
           <div class="input_btns">
             <i class="input_icon"></i>
             <i class="input_rel"></i>
-            <a href class="input_submit" @click="newComment">评论</a>
+            <a href='javascript:void(0)' class="input_submit" @click="newComment">评论</a>
             <span class="text_length">{{140-comment_text.length}}</span>
           </div>
           <em class="arr">◇</em>
@@ -87,7 +87,10 @@
                 </div>
                 <div class="reply_comment" v-show="item.commentId==replyCommentId">
                   <div class="input_cnt">
-                    <textarea placeholder="评论" v-model="reply_comment_text"></textarea>
+                    <textarea 
+                      :placeholder="'回复'+item.user.nickname+':'" 
+                      v-model="reply_comment_text">
+                    </textarea>
                     <div class="input_btns">
                       <i class="input_icon"></i>
                       <i class="input_rel"></i>
@@ -106,8 +109,8 @@
       <div class="item_new" v-if="data.comments.length>0">
         <h3>最新评论({{data.total}})</h3>
         <ul>
-          <li v-for="item in data.comments" :key="item.commentId" class="clear-fix">
-            <div class="comments_item" @mouseover="del_btn=true" @mouseleave="del_btn=false">
+          <li v-for="(item,index) in data.comments" :key="item.commentId" class="clear-fix">
+            <div class="comments_item" @mouseover="del_btn=index" @mouseleave="del_btn=-1">
               <div class="item_cvr">
                 <img :src="item.user.avatarUrl+'?param=50y50'" alt />
               </div>
@@ -148,10 +151,10 @@
                   <span class="comment_date">{{formateDate(item.time,'Y年m月d日 H时i分')}}</span>
                   <a
                     href="#"
-                    v-show="del_btn&(item.user.userId==data.userId)"
+                    v-show="(del_btn)==index&&(item.user.userId==data.userId)"
                     @click="removeComment(item.commentId)"
                   >删除</a>
-                  <span v-show="del_btn&(item.user.userId==data.userId)">|</span>
+                  <span v-show="(del_btn)==index&&(item.user.userId==data.userId)">|</span>
                   <a href="#" class="item_like" @click="like(item.commentId,item.liked)">
                     <i :class="item.liked?'liked_icon':'like_icon'"></i>
                     ({{item.likedCount|formatPlayTime}})
@@ -195,7 +198,7 @@
         :current-page="currentPage"
         :page-sizes="[5, 10, 20, 40]"
         :page-size="20"
-        layout="total, sizes, prev, pager, next, jumper"
+        layout="prev, pager, next"
         :total="data.total"
         v-show="data.total>pageSize"
       ></el-pagination>
@@ -245,7 +248,10 @@ export default {
           },
         })
           .then((res) => {
-            console.log(res);
+            console.log('评论成功')
+            this.comment_text=''
+            this.getComments(this.sourceId)
+
           })
           .catch((err) => {
             // console.log(err)
@@ -267,10 +273,17 @@ export default {
         })
           .then((res) => {
             console.log(res);
-            this.replyCommentId = -1;
+            if(res.status==200){
+              console.log('评论成功')
+              this.getComments(this.sourceId)
+              this.replyCommentId = -1;
+            }
           })
           .catch((err) => {
             // console.log(err)
+            console.log(err)
+            this.replyCommentId = -1;
+            alert('该评论还在审核中哦，暂时不能回复')
           });
       }
     },
@@ -287,6 +300,7 @@ export default {
       })
         .then((res) => {
           console.log(res);
+          this.getComments(this.sourceId)
         })
         .catch((err) => {
           // console.log(err)
@@ -307,26 +321,27 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          if (res.data.code === 200) {
-            // this.getComments(this.sourceId)
-            // 由于服务器有做了缓存，所以数据没有能及时更新，以下的操作为在前端模拟操作
-            let a = this.data.comments.find((item) => {
-              console.log(item.commentId);
-              return item.commentId == id;
-            });
-            if (!a) {
-              a = this.data.hotComments.find((item) => {
-                console.log(item.commentId);
-                return item.commentId == id;
-              });
-            }
-            a.liked = !liked;
-            if (liked) {
-              a.likedCount -= 1;
-            } else {
-              a.likedCount += 1;
-            }
-          }
+          this.getComments(this.sourceId)
+          // if (res.data.code === 200) {
+          //   // this.getComments(this.sourceId)
+          //   // 由于服务器有做了缓存，所以数据没有能及时更新，以下的操作为在前端模拟操作
+          //   let a = this.data.comments.find((item) => {
+          //     console.log(item.commentId);
+          //     return item.commentId == id;
+          //   });
+          //   if (!a) {
+          //     a = this.data.hotComments.find((item) => {
+          //       console.log(item.commentId);
+          //       return item.commentId == id;
+          //     });
+          //   }
+          //   a.liked = !liked;
+          //   if (liked) {
+          //     a.likedCount -= 1;
+          //   } else {
+          //     a.likedCount += 1;
+          //   }
+          // }
         })
         .catch((err) => {
           // console.log(err)
@@ -385,12 +400,14 @@ export default {
     },
     getComments(id) {
       const commentUrl = "/api/comment/" + this.type;
+      const timestamp = Date.parse(new Date())
       request({
         url: commentUrl,
         params: {
           id: id,
           limit: this.pageSize,
           offset: (this.currentPage - 1) * this.pageSize,
+          timestamp:timestamp
         },
       })
         .then((res) => {
@@ -744,4 +761,15 @@ span {
 .comments_body .item_new {
   margin-bottom: 10px;
 }
+
+.main_page{
+  text-align: center;
+}
+
+.main_page a:hover{
+  text-align: center;
+}
+
+
+
 </style>

@@ -9,7 +9,7 @@ Router.prototype.push = function push (location) {
 Vue.use(Router)
 
 const Search=()=>import('../views/Search')
-const PlayList=()=>import('../views/PlayList')
+const MPList=()=>import('../views/MPList')
 const SongList=()=>import('../views/my/SongList')
 const Login = () => import('../views/Login')
 const MySongList = () => import('../views/MySongList')
@@ -22,21 +22,40 @@ const Discover = ()=>import('../views/discover/Discover')
 const Friend = ()=>import('../views/friend/Friend')
 const Song = ()=>import('../views/Song')
 const Album = ()=>import('../views/album/Album')
-
+const Toplist = () =>import('../views/discover/Toplist')
+const Main = () =>import('../views/discover/Main')
+const PlayList =()=>import('../views/discover/PlayList')
 
 
 const routes= [
   {
     path: '/',
-    redirect: '/discover'
+    redirect: '/discover/main'
   },
   {
     path: '/discover',
-    name: 'discover',
+    redirect: '/discover/main',
     component: Discover,
     meta:{
       title:'首页'
-    }
+    },
+    children:[
+      {
+        path: 'main',
+        name: 'discover',
+        component: Main,
+      },
+      {
+        path: 'toplist',
+        name: 'toplist',
+        component: Toplist,
+      },
+      {
+        path: 'playlist',
+        name: 'playlist',
+        component: PlayList,
+      },
+    ]
   },
   {
     path: '/search',
@@ -47,9 +66,9 @@ const routes= [
     }
   },
   {
-    path: '/playlist',
-    name: 'playlist',
-    component: PlayList
+    path: '/mplist',
+    name: 'mplist',
+    component: MPList
   },
   {
     path: '/login',

@@ -66,6 +66,7 @@ html,
   width: 100%;
   background-color:#f5f5f5;
   overflow-y: scroll;
+  padding-bottom: 50px;
 }
 
 .music_player {

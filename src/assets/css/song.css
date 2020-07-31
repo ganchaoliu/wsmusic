@@ -106,9 +106,8 @@
 .song_desc .song_title{
     font-size: 24px;
     color: #333;
-    height: 24px;
     line-height: 24px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .song_artist a{
@@ -220,21 +219,67 @@
 }
 
 .right_con h3{
+    width: 100%;
     border-bottom: 1px solid #ccc;
     padding: 10px 0px;
     font-size: 12px;
     font-weight: bold;
 }
 
-.simisong .song_desc{
-    float: left;
-    width: 156px;
-    height: 25px;
-    font-size: 12px;
-    background-color: yellow;
+.simisong{
+    margin-top: 10px;    
+    overflow: hidden;
 }
 
-.wbutton{
-    margin-right: 10px;
+.simisong .songdesc{
+    float: left;
+    width: 156px;
+    font-size: 12px;
+    line-height: 18px;
 }
+
+.simisong .songdesc a{
+    color: #333;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.simisong .songop{
+    float: right;
+    width: 36px;
+}
+
+.simisong .songop a{
+    display: inline-block;
+    width: 10px;
+    height: 11px;
+    background: url("../img/icon2.png") no-repeat 0px 9999px;
+}
+
+.simisong .songop a{
+    margin-top: 10px;
+    display: inline-block;
+    text-indent: 999px;
+    width: 10px;
+    height: 11px;
+    background: url("../img/icon2.png") no-repeat 0px 9999px;
+}
+
+.simisong .songop .btn_play{
+    background-position: -69px -455px;
+    margin-right: 16px;
+}
+
+.simisong .songop .btn_add{
+    background-position: -87px -454px;
+}
+
+
+.wbutton{
+    margin-right: 5px;
+}
+
+
 

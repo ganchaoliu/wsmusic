@@ -8,9 +8,12 @@
               <img :src="album.picUrl+'?param=177y177'" alt />
             </div>
             <div class="album_content">
-              <div class="a_title">
+              <div class="a_title clear-fix">
                 <em></em>
-                <h2>{{album.name}}</h2>
+                <div class="tit">
+                  <h2>{{album.name}}</h2>
+                  <p style="white-space:nowrap;color:#999;font-size:12px">{{album.alias.join('/')}}</p>
+                </div>
               </div>
               <p>
                 歌手：
@@ -27,14 +30,14 @@
                 <play-button @click="play"></play-button>
                 <add-button style="margin-right:5px" @click="add"></add-button>
                 <w-button type="fav" :sub='false' @click='fav' v-slot:value></w-button>
-                <w-button type="share" v-slot:value>({{dynamic.shareCount}})</w-button>
-                <w-button type="download" v-slot:value></w-button>
-                <w-button type="comment" v-slot:value>({{dynamic.commentCount}})</w-button>
+                <w-button type="share" v-slot:value>({{dynamic.shareCount|formatNumber}})</w-button>
+                <w-button type="download" v-slot:value ></w-button>
+                <w-button type="comment"  v-slot:value>({{dynamic.commentCount|formatNumber}})</w-button>
               </div>
             </div>
             <div class="clear-fix"></div>
           </div>
-          <div class="album_desc" v-show="album.description!==null">
+          <div class="album_desc" v-if="album.description!==null">
             <h3>专辑介绍：</h3>
             <p v-for="(item,index) in descArray" v-show="!(index>5&&hide)" :key="index">{{item}}</p>
             <p
@@ -53,9 +56,10 @@
             </div>
             <h3>包含歌曲列表</h3>
             <span>{{songs.length}}首歌</span>
+
           </div>
-          <div class="clear-fix"></div>
-          <div class="al_songlist">
+
+          <div class="al_songlist ">
             <song-list :Songs="songs"></song-list>
           </div>
         </div>
@@ -126,6 +130,7 @@ export default {
           id: aid,
         },
       }).then((res) => {
+        console.log('动态');
         console.log(res);
         this.dynamic = res.data;
       });
@@ -137,6 +142,8 @@ export default {
           id: aid,
         },
       }).then((res) => {
+        console.log('专辑信息');
+        console.log(res)
         this.album = res.data.album;
         this.songs = res.data.songs;
       });
@@ -161,6 +168,17 @@ export default {
     this.getAlbum(id);
     this.getAlbumDynamic(id);
   },
+  filters: {
+    formatNumber(playtime){
+      let str = "";
+      if (playtime > 10000) {
+        str = (playtime / 10000).toFixed(2) + "万";
+      } else {
+        str = playtime;
+      }
+      return str;
+    }
+  }
 };
 </script>
 

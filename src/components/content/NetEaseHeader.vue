@@ -58,12 +58,12 @@
     <div class="main_subnav_line" v-show="selectedNav!==1"></div>
     <div class="main_subnav" v-show="selectedNav===1" >
       <div class="subnav_bd">
-        <a href="#" class="subnav_item" :class="1===selectedSubNav?'subnav_selected':''" @click="subnavto(1)">推荐</a>
-        <a href="#" class="subnav_item" :class="2===selectedSubNav?'subnav_selected':''" @click="subnavto(2)">排行榜</a>
-        <a href="#" class="subnav_item" :class="3===selectedSubNav?'subnav_selected':''" @click="subnavto(3)">歌单</a>
-        <a href="#" class="subnav_item" :class="4===selectedSubNav?'subnav_selected':''" @click="subnavto(4)">主播电台</a>
-        <a href="#" class="subnav_item" :class="5===selectedSubNav?'subnav_selected':''" @click="subnavto(5)">歌手</a>
-        <a href="#" class="subnav_item" :class="6===selectedSubNav?'subnav_selected':''" @click="subnavto(6)">新碟上架</a>
+        <a href='#' class="subnav_item" :class="1===selectedSubNav?'subnav_selected':''" @click="subnavto(1)">推荐</a>
+        <a href='#' class="subnav_item" :class="2===selectedSubNav?'subnav_selected':''" @click="subnavto(2)">排行榜</a>
+        <a href='#' class="subnav_item" :class="3===selectedSubNav?'subnav_selected':''" @click="subnavto(3)">歌单</a>
+        <a href='#' class="subnav_item" :class="4===selectedSubNav?'subnav_selected':''" @click="subnavto(4)">主播电台</a>
+        <a href='#' class="subnav_item" :class="5===selectedSubNav?'subnav_selected':''" @click="subnavto(5)">歌手</a>
+        <a href='#' class="subnav_item" :class="6===selectedSubNav?'subnav_selected':''" @click="subnavto(6)">新碟上架</a>
       </div>
     </div>
     <el-dialog title="登陆" :visible.sync="dialogFormVisible">
@@ -172,6 +172,14 @@ export default {
     },
     subnavto(index){
       this.selectedSubNav = index
+      switch(index){
+        case 1: this.$router.push('/discover')
+        break;
+        case 2: this.$router.push('/discover/toplist')
+        break;
+        case 3: this.$router.push('/discover/playlist')
+        break;
+      }
     }
   },
   computed: {

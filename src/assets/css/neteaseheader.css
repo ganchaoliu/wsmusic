@@ -197,6 +197,7 @@
     line-height: 20px;
     border-radius: 20px;
     color: white;
+    text-decoration: none;
 }
 
 .main_subnav .subnav_bd .subnav_item:hover{

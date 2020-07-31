@@ -266,3 +266,14 @@
     top:-50px;
 }
 
+.el-slider .el-slider__runway .el-slider__bar{
+    background-color: #c20c0c !important;
+}
+
+.el-slider .el-slider__runway .el-slider__button{
+    width: 12px;
+    height: 12px;
+    background-color: #c20c0c;
+    border: 3px solid #fff;
+}
+

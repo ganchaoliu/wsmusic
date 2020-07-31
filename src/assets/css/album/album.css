@@ -53,18 +53,18 @@
 }
 
 .album_content .a_title em{
-    position: relative;
-    top: 4px;
-    display: inline-block;
+    float: left;
     margin-right: 8px;
     width: 54px;
     height: 24px;
     background: url('../../img/icon.png') no-repeat;
     background-position: 0 -186px;
 }
+.album_content .a_title .tit{
+    float: left;
+}
 
-.album_content .a_title h2{
-    display: inline-block;
+.album_content .a_title .tit h2{
     line-height: 24px;
     font-size: 20px;
     font-weight: normal;
@@ -72,7 +72,8 @@
 
 .album_content p{
     font-size: 12px;
-    margin-bottom: 10px;
+    line-height: 20px;
+    margin-bottom: 5px;
     color: #666;
 }
 
@@ -96,11 +97,16 @@
 
 /* ###########歌曲列表开始############ */
 
-.album_l{
-    margin-top: 20px;
+.album_l{    
+    margin-top: 30px;
+}
+
+
+.album_l .al_title{
     width: 639px;
     height: 33px;
     border-bottom: 2px solid #c20c0c;
+    overflow: hidden;
 }
 
 .album_l .al_title .outlink{

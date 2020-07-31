@@ -70,17 +70,16 @@
           </ul>
           <h3>相似歌曲</h3>
           <ul v-show="simiSongs.length>0">
-            <li v-for="(song) in simiSongs" :key="song.name">
-              <div class="simisong">
+            <li class="simisong" v-for="(song) in simiSongs" :key="song.name">
                 <div class="songdesc">
-                  <router-link tag="a" :to="{name:'song',query:{ids:song.id}}"> {{song.name}} </router-link>
-                  <p>{{song.artists[0].name}}</p>
+                  <router-link tag="a" :to="{name:'song',query:{ids:song.id}}" > {{song.name}} </router-link>
+                  <!-- <p>{{song.artists[0].name}}</p> -->
+                  <router-link tag="a" :to="{name:'artist',query:{id:song.artists[0].id}}" :title="song.artists[0].name" style="color:#999" > {{song.artists[0].name}} </router-link>
                 </div>
                 <div class="songop">
-                  <a href="#">播放</a>
-                  <a href="#">添加</a>                  
+                  <a href="#" class='btn_play'>播</a>
+                  <a href="#" class="btn_add">添</a>                  
                 </div>
-              </div>
             </li>
           </ul>
         </div>
@@ -242,12 +241,13 @@ export default {
           ids: id
         }
       }).then(res =>{
-        // console.log(res)
+        console.log(res)
         let songs = res.data.songs[0]
         this.song.coverUrl = songs.al.picUrl
         this.song.name = songs.name
         this.song.artist = songs.ar
         this.song.album = songs.al
+        document.title = this.song.name+'-'+songs.ar[0].name
       }).catch((err)=>{
         console.log(err)
       })

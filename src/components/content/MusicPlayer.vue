@@ -271,7 +271,7 @@ export default {
     },
     gotoplaylist() {
       this.$router.push({
-        path: "playlist"
+        path: "/mpList"
       });
     },
     //获取专辑封面

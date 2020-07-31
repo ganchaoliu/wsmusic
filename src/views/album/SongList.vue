@@ -15,8 +15,11 @@
         <div class="play_btn" @click="playsong(song.id,song.name,song.al,song.ar)"></div>
       </div>
       <div class="td sn">
-        <router-link tag="a" :to="{name:'song',query:{ids:song.id}}">{{song.name}}</router-link>
-        <router-link tag="a" v-if="song.mv!=0" :to="{name:'mv',query:{id:song.mv}}" class="song_mv"></router-link>
+        <span class="sn_tt">
+          <router-link tag="a" :to="{name:'song',query:{ids:song.id}}">{{song.name}}</router-link>
+          <span v-show="song.alia.length>0" :title="song.alia.join('/')">-{{song.alia.join('/')}}</span>
+         <router-link tag="a" v-if="song.mv!=0" :to="{name:'mv',query:{id:song.mv}}" class="song_mv"></router-link>
+        </span>
       </div>
       
       <div class="td dura" >        
@@ -192,7 +195,7 @@ export default {
 .hotsonglist .hot_song_item{
     /* width: 640px; */
     height: 43px;
-    padding: 10px 10px 8px 18px;
+    padding: 10px 10px 8px 10px;
     font-size: 12px;
     border: 1px solid #fff;
 }
@@ -229,18 +232,31 @@ export default {
     background-position: 0 -128px;
 }
 
-
 .hotsonglist .hot_song_item .sn{
-    width: 306px;
+      width: 306px;
+  }
+
+.hotsonglist .hot_song_item .sn .sn_tt{
     height: 23px;
     line-height: 23px;
-    font-size: 12px;    
+    font-size: 12px;  
+    margin-right: -25px;
+    padding-right: 25px;
+    position: relative;
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
 }
 
+.hotsonglist .hot_song_item .sn span{
+  font-size: 12px;
+  color: #999;
+}
+
 .hotsonglist .hot_song_item .sn .song_mv{
+  position: absolute;
+  top: 0;
+  right: 0;
     vertical-align: middle;
     margin-left: 3px;
     display:inline-block;

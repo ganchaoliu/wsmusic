@@ -87,6 +87,7 @@
 
 .sl_head .sub_sl_detail .description{
     margin-top: 10px;
+    font-size: 12px;
 }
 
 /* ################歌曲列表开始#################### */
@@ -143,7 +144,7 @@
 }
 
 .wbutton{
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .sub_comments{
