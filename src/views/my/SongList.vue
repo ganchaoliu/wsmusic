@@ -51,7 +51,7 @@
           <hot-song-list :HSongs="mySongList.tracks"></hot-song-list>
         </div>
 
-        <div class="sub_comments">
+        <div class="sub_comments" v-if="$route.query.id!==undefined">
           <comments :sourceId ='$route.query.id+""' type='playlist'></comments>
         </div>
 

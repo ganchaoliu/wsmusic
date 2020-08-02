@@ -64,10 +64,10 @@
       </div>
       <div class="song_right">
         <div class="right_con">
-          <h3>包含这首歌的歌单</h3>
+          <!-- <h3>包含这首歌的歌单</h3>
           <ul>
             <li></li>
-          </ul>
+          </ul> -->
           <h3>相似歌曲</h3>
           <ul v-show="simiSongs.length>0">
             <li class="simisong" v-for="(song) in simiSongs" :key="song.name">
@@ -77,8 +77,8 @@
                   <router-link tag="a" :to="{name:'artist',query:{id:song.artists[0].id}}" :title="song.artists[0].name" style="color:#999" > {{song.artists[0].name}} </router-link>
                 </div>
                 <div class="songop">
-                  <a href="#" class='btn_play'>播</a>
-                  <a href="#" class="btn_add">添</a>                  
+                  <a href="javascript:void(0)" class='btn_play' @click="playsong(song.id, song.name, song.album, song.artists)">播</a>
+                  <a href="javascript:void(0)" class="btn_add" @click="addtoplaylist(song.id, song.name, song.album, song.artists)">添</a>                  
                 </div>
             </li>
           </ul>
@@ -315,7 +315,7 @@ export default {
     this.init()
   },
   watch: {
-    songid:function(){
+    $route(){
       this.init()
     }
   }

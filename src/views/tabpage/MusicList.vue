@@ -53,7 +53,7 @@
       :current-page="currentPage"
       :page-sizes="[5, 10, 20, 40]"
       :page-size="$store.state.pageLimit"
-      layout="total, sizes, prev, pager, next, jumper"
+      layout="prev, pager, next"
       :total="$store.state.songCount"
     ></el-pagination>
     </div>

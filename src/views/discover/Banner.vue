@@ -59,6 +59,7 @@ export default {
       request({
         url: "/api/banner",
       }).then((res) => {
+        console.log(res)
         this.banner_data = res.data.banners;
       });
     },
@@ -78,6 +79,22 @@ export default {
       switch (type) {
         case 3000:
           window.open(url, "_blank");
+          break;
+         case 1:
+          this.$router.push({
+            path:'/song',
+            query:{
+              ids:this.banner_data[this.banimg_index].targetId
+            }
+          })
+          break;
+          case 10:
+          this.$router.push({
+            path:'/album',
+            query:{
+              id:this.banner_data[this.banimg_index].targetId
+            }
+          })
           break;
       }
     },

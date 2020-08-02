@@ -22,18 +22,6 @@ const store = new Vuex.Store({
         hasMore: false,
         pageLimit: 20,        
         searchResult: {},
-        // volume: 50,
-        // playlist: [],
-        // currentsong: {
-        //     id: '',
-        //     name: '',
-        //     song: {
-        //         url: ''
-        //     },
-        //     playing: false,
-        //     album: {},
-        //     artist: ''
-        // },
         loginStatus: false,
         userData: {},
     },

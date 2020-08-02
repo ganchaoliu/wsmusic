@@ -13,11 +13,11 @@
           />
         </div>
         <div class="input_cnt">
-          <textarea placeholder="评论" v-model="comment_text"></textarea>
+          <textarea placeholder="评论" v-model="comment_text" @click="checkIfLogin"></textarea>
           <div class="input_btns">
             <i class="input_icon"></i>
             <i class="input_rel"></i>
-            <a href='javascript:void(0)' class="input_submit" @click="newComment">评论</a>
+            <a href="javascript:void(0)" class="input_submit" @click="newComment">评论</a>
             <span class="text_length">{{140-comment_text.length}}</span>
           </div>
           <em class="arr">◇</em>
@@ -82,15 +82,15 @@
                   <a
                     href="javascript:void(0)"
                     class="item_repbtn"
-                    @click="replyCommentId=item.commentId"
+                    @click="showReply(item.commentId)"
                   >回复</a>
                 </div>
                 <div class="reply_comment" v-show="item.commentId==replyCommentId">
                   <div class="input_cnt">
-                    <textarea 
-                      :placeholder="'回复'+item.user.nickname+':'" 
-                      v-model="reply_comment_text">
-                    </textarea>
+                    <textarea
+                      :placeholder="'回复'+item.user.nickname+':'"
+                      v-model="reply_comment_text"
+                    ></textarea>
                     <div class="input_btns">
                       <i class="input_icon"></i>
                       <i class="input_rel"></i>
@@ -107,7 +107,10 @@
         </ul>
       </div>
       <div class="item_new" v-if="data.comments.length>0">
-        <h3>最新评论({{data.total}})</h3>
+        <h3>
+          最新评论({{data.total}})
+          <div ref="new"></div>
+        </h3>
         <ul>
           <li v-for="(item,index) in data.comments" :key="item.commentId" class="clear-fix">
             <div class="comments_item" @mouseover="del_btn=index" @mouseleave="del_btn=-1">
@@ -163,7 +166,7 @@
                   <a
                     href="javascript:void(0)"
                     class="item_repbtn"
-                    @click="replyCommentId=item.commentId"
+                    @click="showReply(item.commentId)"
                   >回复</a>
                 </div>
                 <div class="reply_comment" v-show="item.commentId==replyCommentId">
@@ -235,56 +238,75 @@ export default {
     },
   },
   methods: {
+    checkIfLogin() {
+      const login = this.$store.state.loginStatus;
+      if (!login) {
+        alert("请先登陆");
+        return false;
+      } else {
+        return true;
+      }
+    },
     newComment() {
-      if (this.comment_text.length > 0) {
-        const type = this.getType();
-        request({
-          url: "/api/comment",
-          params: {
-            id: this.sourceId,
-            type: type,
-            t: 1,
-            content: this.comment_text,
-          },
-        })
-          .then((res) => {
-            console.log('评论成功')
-            this.comment_text=''
-            this.getComments(this.sourceId)
-
+      if (this.checkIfLogin()) {
+        if (this.comment_text.length > 0){
+          const type = this.getType();
+          request({
+            url: "/api/comment",
+            params: {
+              id: this.sourceId,
+              type: type,
+              t: 1,
+              content: this.comment_text,
+            },
           })
-          .catch((err) => {
-            // console.log(err)
-          });
+            .then((res) => {
+              console.log("评论成功");
+              this.comment_text = "";
+              this.getComments(this.sourceId);
+            })
+            .catch((err) => {
+              // console.log(err)
+            });
+        }
+      }
+    },
+    showReply(id) {
+      if (this.checkIfLogin()) {
+        this.replyCommentId = id;
+        this.reply_comment_text = "";
       }
     },
     replyComment(id) {
-      if (this.reply_comment_text.length > 0) {
-        const type = this.getType();
-        request({
-          url: "/api/comment",
-          params: {
-            id: this.sourceId,
-            commentId: id,
-            type: type,
-            t: 2,
-            content: this.reply_comment_text,
-          },
-        })
-          .then((res) => {
-            console.log(res);
-            if(res.status==200){
-              console.log('评论成功')
-              this.getComments(this.sourceId)
-              this.replyCommentId = -1;
-            }
+      if (this.checkIfLogin()) {
+        if (this.reply_comment_text.length > 0) {
+          const type = this.getType();
+          request({
+            url: "/api/comment",
+            params: {
+              id: this.sourceId,
+              commentId: id,
+              type: type,
+              t: 2,
+              content: this.reply_comment_text,
+            },
           })
-          .catch((err) => {
-            // console.log(err)
-            console.log(err)
-            this.replyCommentId = -1;
-            alert('该评论还在审核中哦，暂时不能回复')
-          });
+            .then((res) => {
+              console.log(res);
+              if (res.status == 200) {
+                console.log("评论成功");
+                this.handleCurrentChange(1);
+                this.reply_comment_text = "";
+                this.replyCommentId = -1;
+              }
+            })
+            .catch((err) => {
+              // console.log(err)
+              console.log(err);
+              this.replyCommentId = -1;
+              alert("该评论还在审核中哦，暂时不能回复");
+            });
+        }
       }
     },
     removeComment(id) {
@@ -300,52 +322,54 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          this.getComments(this.sourceId)
+          this.getComments(this.sourceId);
         })
         .catch((err) => {
           // console.log(err)
         });
     },
     like(id, liked) {
-      let t = liked ? 0 : 1;
-      let type = this.getType();
-      const commentUrl = "/api/comment/like";
-      request({
-        url: commentUrl,
-        params: {
-          id: this.sourceId,
-          cid: id,
-          type: type,
-          t: t,
-        },
-      })
-        .then((res) => {
-          console.log(res);
-          this.getComments(this.sourceId)
-          // if (res.data.code === 200) {
-          //   // this.getComments(this.sourceId)
-          //   // 由于服务器有做了缓存，所以数据没有能及时更新，以下的操作为在前端模拟操作
-          //   let a = this.data.comments.find((item) => {
-          //     console.log(item.commentId);
-          //     return item.commentId == id;
-          //   });
-          //   if (!a) {
-          //     a = this.data.hotComments.find((item) => {
-          //       console.log(item.commentId);
-          //       return item.commentId == id;
-          //     });
-          //   }
-          //   a.liked = !liked;
-          //   if (liked) {
-          //     a.likedCount -= 1;
-          //   } else {
-          //     a.likedCount += 1;
-          //   }
-          // }
+      if (this.checkIfLogin()) {
+        let t = liked ? 0 : 1;
+        let type = this.getType();
+        const commentUrl = "/api/comment/like";
+        request({
+          url: commentUrl,
+          params: {
+            id: this.sourceId,
+            cid: id,
+            type: type,
+            t: t,
+          },
         })
-        .catch((err) => {
-          // console.log(err)
-        });
+          .then((res) => {
+            console.log(res);
+            this.getComments(this.sourceId);
+            // if (res.data.code === 200) {
+            //   // this.getComments(this.sourceId)
+            //   // 由于服务器有做了缓存，所以数据没有能及时更新，以下的操作为在前端模拟操作
+            //   let a = this.data.comments.find((item) => {
+            //     console.log(item.commentId);
+            //     return item.commentId == id;
+            //   });
+            //   if (!a) {
+            //     a = this.data.hotComments.find((item) => {
+            //       console.log(item.commentId);
+            //       return item.commentId == id;
+            //     });
+            //   }
+            //   a.liked = !liked;
+            //   if (liked) {
+            //     a.likedCount -= 1;
+            //   } else {
+            //     a.likedCount += 1;
+            //   }
+            // }
+          })
+          .catch((err) => {
+            // console.log(err)
+          });
+      }
     },
     getType() {
       return {
@@ -399,27 +423,33 @@ export default {
       this.getComments(this.sourceId);
     },
     getComments(id) {
-      const commentUrl = "/api/comment/" + this.type;
-      const timestamp = Date.parse(new Date())
-      request({
-        url: commentUrl,
-        params: {
-          id: id,
-          limit: this.pageSize,
-          offset: (this.currentPage - 1) * this.pageSize,
-          timestamp:timestamp
-        },
-      })
-        .then((res) => {
-          console.log(res);
-          this.data = res.data;
+      if (id !== "undefined" && id !== "" && id !== null) {
+        const commentUrl = "/api/comment/" + this.type;
+        const timestamp = Date.parse(new Date());
+        request({
+          url: commentUrl,
+          params: {
+            id: id,
+            limit: this.pageSize,
+            offset: (this.currentPage - 1) * this.pageSize,
+            timestamp: timestamp,
+          },
         })
-        .catch((err) => {
-          // console.log(err)
-        });
+          .then((res) => {
+            console.log(res);
+            this.data = res.data;
+            if (this.replyCommentId == -1) {
+              this.$refs.new.scrollIntoView({ behavior: "smooth" });
+            }
+          })
+          .catch((err) => {
+            // console.log(err)
+          });
+      }
     },
   },
   created() {
+    console.log(this.sourceId);
     this.getComments(this.sourceId);
   },
   watch: {
@@ -762,14 +792,11 @@ span {
   margin-bottom: 10px;
 }
 
-.main_page{
+.main_page {
   text-align: center;
 }
 
-.main_page a:hover{
+.main_page a:hover {
   text-align: center;
 }
-
-
-
 </style>

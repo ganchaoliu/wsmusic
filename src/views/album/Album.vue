@@ -146,6 +146,7 @@ export default {
         console.log(res)
         this.album = res.data.album;
         this.songs = res.data.songs;
+        document.title=this.album.name+'-专辑-'+'网易云音乐'
       });
     },
   },

@@ -40,25 +40,42 @@
             <a href class="artist_btn_add">+</a>
             <a href class="artist_btn_fav">
               <i>收藏热门50</i>
-            </a> -->
+            </a>-->
           </div>
-          <component :is="zujian" keep-alive :HSongs='hotSongs'></component>
+          <component :is="zujian" keep-alive :HSongs="hotSongs"></component>
         </div>
       </div>
       <div class="artist_right">
-        <h3>
-          <span>相似歌手</span>
-        </h3>
-        <ul class="simi_artists">
-          <li v-for="(item,index) in simiArtist" :key="index" class="simi_artist_item">
-            <router-link tag="a" :to="{name:'artist',query:{id:item.id}}">
-              <img :src="getSimiArtistCvr(item.picUrl)" alt />
-            </router-link>
-            <router-link tag="a" :to="{name:'artist',query:{id:item.id}}" :title="item.name">
-              <p>{{item.name}}</p>
-            </router-link>
-          </li>
-        </ul>
+        <div v-if="simiArtist.length>0" class="clear-fix">
+          <h3>
+            <span>相似歌手</span>
+          </h3>
+          <ul class="simi_artists">
+            <li v-for="(item,index) in simiArtist" :key="index" class="simi_artist_item">
+              <router-link tag="a" :to="{name:'artist',query:{id:item.id}}">
+                <img :src="getSimiArtistCvr(item.picUrl)" alt />
+              </router-link>
+              <router-link tag="a" :to="{name:'artist',query:{id:item.id}}" :title="item.name">
+                <p>{{item.name}}</p>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+        <div v-else>
+          <h3>
+            <span>热门歌手</span>
+          </h3>
+          <ul class="simi_artists">
+            <li v-for="(item,index) in hotArtistComputed(21)" :key="index" class="simi_artist_item">
+              <router-link tag="a" :to="{name:'artist',query:{id:item.id}}">
+                <img :src="getSimiArtistCvr(item.picUrl)" alt />
+              </router-link>
+              <router-link tag="a" :to="{name:'artist',query:{id:item.id}}" :title="item.name">
+                <p>{{item.name}}</p>
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -79,42 +96,58 @@ export default {
       artist: {
         name: "",
         alias: [],
-        followed: false
+        followed: false,
       },
       hotSongs: [],
       zujian: "HotSongList",
-      simiArtist: []
+      simiArtist: [],
+      hotArtist:[]
     };
   },
   methods: {
     async init() {
       await this.getSimiArtist();
       await this.getArtist();
+      this.getHotArtist()
     },
     follow(follow) {
       request({
         url: "/api/artist/sub",
         params: {
           id: this.artist.id,
-          t: follow
-        }
-      }).then(res => {
+          t: follow,
+        },
+      }).then((res) => {
         console.log(res);
         if (res.data.code == 200) {
           this.artist.followed = !this.artist.followed;
         }
       });
     },
-     getSimiArtist() {
+    getSimiArtist() {
       request({
         url: "/api/simi/artist",
         params: {
-          id: this.$route.query.id
-        }
-      }).then(res => {
+          id: this.$route.query.id,
+        },
+      }).then((res) => {
         console.log(res);
         if (res.data.code == 200) {
           this.simiArtist = res.data.artists;
+        }
+      });
+    },
+    getHotArtist() {
+      request({
+        url: "/api/top/artists",
+        params: {
+          offset: 0,
+          limit:30
+        },
+      }).then((res) => {
+        console.log(res);
+        if (res.data.code == 200) {
+          this.hotArtist = res.data.artists;
         }
       });
     },
@@ -122,28 +155,33 @@ export default {
       request({
         url: "/api/artists",
         params: {
-          id: this.$route.query.id
-        }
-      }).then(res => {
+          id: this.$route.query.id,
+        },
+      }).then((res) => {
         this.artist = res.data.artist;
         this.hotSongs = res.data.hotSongs;
-        console.log('歌手');
+        console.log("歌手");
         console.log(res);
-        console.log('热门歌曲');
+        console.log("热门歌曲");
         console.log(this.hotSongs);
       });
-    }
+    },
   },
   computed: {
     getImgUrl() {
-      return url => {
+      return (url) => {
         return url + "?param=640y300";
       };
     },
     getSimiArtistCvr() {
-      return url => {
+      return (url) => {
         return url + "?param=50y50";
       };
+    },
+    hotArtistComputed(){
+      return(num)=>{
+        return this.hotArtist.slice(0,num)
+      }
     }
   },
   created() {
@@ -152,14 +190,14 @@ export default {
   watch: {
     $route() {
       this.init();
-    }
+    },
   },
   components: {
     HotSongList,
     PlayButton,
     AddButton,
     WButton,
-  }
+  },
 };
 </script>
 
