@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="album clear-fix">
+    <div class="album clear-fix" v-if="!loadingErr">
       <div class="album_left">
         <div class="album_h">
           <div class="album_info">
@@ -75,6 +75,7 @@
         </ul>
       </div>
     </div>
+    <error v-else></error>
   </div>
 </template>
 
@@ -85,6 +86,7 @@ import WButton from "../../components/common/WButton";
 import Comments from "../../views/comment/Comment"
 import SongList from "./SongList";
 import { request } from "../../network/request";
+const Error = ()=>import ('../../components/common/Error')
 export default {
   data() {
     return {
@@ -103,7 +105,8 @@ export default {
         shareCount: 0,
         subCount: 0,
       },
-      comments:{}
+      comments:{},
+      loadingErr:false
     };
   },
   components: {
@@ -111,7 +114,8 @@ export default {
     AddButton,
     WButton,
     SongList,
-    Comments
+    Comments,
+    Error
   },
   methods: {
     fav(){
@@ -135,19 +139,37 @@ export default {
         this.dynamic = res.data;
       });
     },
+    loading(){
+      let songId = this.$route.query.id
+      if(songId === undefined||songId===''){
+        this.loadingErr = true
+        return false
+      }else{
+        this.loadingErr = false
+        return true
+      }
+    },
     getAlbum(aid) {
-      request({
-        url: "/api/album",
-        params: {
-          id: aid,
-        },
-      }).then((res) => {
-        console.log('专辑信息');
-        console.log(res)
-        this.album = res.data.album;
-        this.songs = res.data.songs;
-        document.title=this.album.name+'-专辑-'+'网易云音乐'
-      });
+      const status = this.loading()
+      if(status){
+        request({
+          url: "/api/album",
+          params: {
+            id: aid,
+          },
+        }).then((res) => {
+          console.log('专辑信息');
+          console.log(res)
+          this.album = res.data.album;
+          this.songs = res.data.songs;
+          document.title=this.album.name+'-专辑-'+'网易云音乐'
+        }).catch(err=>{
+          console.log(err)
+          this.loadingErr=true
+        });
+      }else{
+        console.log('loading失败')
+      }
     },
   },
   computed: {

@@ -60,6 +60,7 @@
     <div class="loading" v-else>
       <span>数据加载中。。。</span>
     </div>
+    <add-play-list v-show="showAddPLDialog" @close='showAddPLDialog=false' :opId='favSongId'></add-play-list>
   </div>
 </template>
 
@@ -68,13 +69,16 @@ import { realFormatSecond } from "../../utils/common";
 import { request } from "../../network/request";
 import { mapMutations, mapState } from 'vuex';
 import OptButtons from '../../components/common/OptButtons'
+import AddPlayList from '../../components/common/AddPlayList'
 export default {
   data() {
     return {
       opt_btns_show: false,
       currentPage: 1,
       type:1,
-      loading:false
+      loading:false,
+      showAddPLDialog:false,
+      favSongId:-1
     };
   },
   methods: {
@@ -187,7 +191,13 @@ export default {
         });
     },
     fav(id) {
-      console.log("收藏" + id);
+      if(this.$store.state.loginStatus){ 
+        this.favSongId = id         
+        this.showAddPLDialog = true
+      }else{
+          this.showAddPLDialog=false
+          this.$store.commit("updateShowLogin", true);
+      }
     },
   },
   filters: {
@@ -218,7 +228,8 @@ export default {
       }
   },
   components: {
-    OptButtons
+    OptButtons,
+    AddPlayList
   }
 };
 </script>

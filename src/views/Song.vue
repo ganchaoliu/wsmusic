@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="song_main clear-fix">
+    <div class="song_main clear-fix" v-if="!loadingErr">
       <div class="clear-fix"></div>
       <div class="song_left left">
         <div class="song_top">
@@ -34,7 +34,7 @@
                 
               </p>
               <div class="song_operation">
-                <play-button @click="playsong(songId, song.name, song.album.name, song.artist)"></play-button>
+                <play-button @click="playsong(songId, song.name, song.album, song.artist)"></play-button>
                 <add-button style="margin-right:10px"></add-button>
                 <w-button type="fav" ></w-button>
                 <w-button type="share" >
@@ -46,7 +46,7 @@
               <div class="song_lyric_content" >
                 <div class="show_lyric" v-html="showLyric(0)">
                 </div>
-                <div class="hide_lyric" v-html="hideLyric(15)" v-show="!hide" @click='hide = !hide'>
+                <div class="hide_lyric" v-html="hideLyric(15)" v-show="!hide" @click='hide = !hide' title="点击我隐藏">
                 </div>
                 <p class="hideOperation" @click='hide = !hide' v-text="hide?'展开':'收起'"></p>
               </div>
@@ -85,6 +85,7 @@
         </div>
       </div>
     </div>
+    <error v-else ></error>
   </div>
 </template>
 
@@ -96,6 +97,7 @@
   import WButton from "../components/common/WButton";
   import Comment from "./comment/Comment";
   import { mapMutations, mapState } from 'vuex';
+  const Error = ()=>import ('../components/common/Error')
 
 export default {
   name:'Song',
@@ -103,10 +105,12 @@ export default {
     PlayButton,
     AddButton,
     WButton,
-    Comment
+    Comment,
+    Error
   },
   data(){
     return{
+      loadingErr:false,
       songId:0,
       song:{
         coverUrl:'',
@@ -127,13 +131,26 @@ export default {
       'updateCurrentSong':'musicplayer/updateCurrentSong',
       'updatePlaylist':'musicplayer/updatePlaylist'
       }),
-    init(){
+    loading(){
       let songId = this.$route.query.ids
-      this.songId =songId
-      this.getSongDetail(songId)
-      this.getSongLyric(songId)
-      this.getSimiSong(songId)
-      // this.getComments(songId)
+      if(songId === undefined||songId===''){
+        this.loadingErr = true
+        return false
+      }else{
+        this.loadingErr = false
+        return true
+      }
+    },
+    init(){
+      let status = this.loading()
+      if(status){
+        let songId = this.$route.query.ids
+        this.songId =songId
+        this.getSongDetail(songId)
+        this.getSongLyric(songId)
+        this.getSimiSong(songId)
+        // this.getComments(songId)
+      }
     },
     playsong(id, name, album, artist) {
       request({
@@ -249,6 +266,7 @@ export default {
         this.song.album = songs.al
         document.title = this.song.name+'-'+songs.ar[0].name
       }).catch((err)=>{
+        this.loadingErr = true
         console.log(err)
       })
     },

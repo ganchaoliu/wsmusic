@@ -23,7 +23,12 @@ const store = new Vuex.Store({
         pageLimit: 20,        
         searchResult: {},
         loginStatus: false,
-        userData: {},
+        showLogin:false,
+        userData: {
+            account:{
+                id:-1
+            }
+        },
     },
     mutations,
     actions,

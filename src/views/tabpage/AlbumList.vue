@@ -20,6 +20,7 @@
         :page-size="$store.state.pageLimit"
         layout="total, sizes, prev, pager, next, jumper"
         :total="albumCount"
+        v-if="albumCount>20"
       ></el-pagination>
   </div>
 </template>

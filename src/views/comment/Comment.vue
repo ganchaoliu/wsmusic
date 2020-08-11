@@ -10,6 +10,12 @@
           <img
             src="http://p4.music.126.net/4mvePD_-tB2aN2-q4d8IDg==/109951165071028162.jpg?param=50y50"
             alt
+            v-show="$store.state.loginStatus"
+          />
+          <img
+            src="../../assets/img/default_avatar.jpg"
+            alt
+            v-show="!$store.state.loginStatus"
           />
         </div>
         <div class="input_cnt">
@@ -37,7 +43,7 @@
 
               <div class="item_cnt">
                 <div class="item_title">
-                  <a href class="item_owner">{{item.user.nickname}}</a>
+                  <a href='javascript:void(0)' class="item_owner">{{item.user.nickname}}</a>
                   <i></i>
                   <img
                     v-show="item.user.vipRights!=null"
@@ -48,7 +54,7 @@
                 </div>
                 <div v-if="item.beReplied.length>0">
                   <div class="item_reply" v-if="item.beReplied[0].content!==null">
-                    <a href>{{item.beReplied[0].user.nickname}}</a>
+                    <a href='javascript:void(0)'>{{item.beReplied[0].user.nickname}}</a>
                     <i></i>
                     <img
                       v-show="item.beReplied[0].user.vipRights!=null"
@@ -69,12 +75,12 @@
                 <div class="item_btns">
                   <span class="comment_date">{{formateDate(item.time,'Y年m月d日 H时i分')}}</span>
                   <a
-                    href="#"
+                    href="javascript:void(0)"
                     v-show="(del_btn==item.commentId)&(item.user.userId==data.userId)"
                     @click="removeComment(item.commentId)"
                   >删除</a>
                   <span v-show="del_btn&(item.user.userId==data.userId)">|</span>
-                  <a href="#" class="item_like" @click="like(item.commentId,item.liked)">
+                  <a href="javascript:void(0)" class="item_like" @click="like(item.commentId,item.liked)">
                     <i :class="item.liked?'liked_icon':'like_icon'"></i>
                     ({{item.likedCount|formatPlayTime}})
                   </a>
@@ -94,7 +100,7 @@
                     <div class="input_btns">
                       <i class="input_icon"></i>
                       <i class="input_rel"></i>
-                      <a href class="input_submit" @click="replyComment(item.commentId)">评论</a>
+                      <a href='javascript:void(0)' class="input_submit" @click="replyComment(item.commentId)">评论</a>
                       <span class="text_length">{{140-reply_comment_text.length}}</span>
                     </div>
                     <em class="arr">◆</em>
@@ -120,7 +126,7 @@
 
               <div class="item_cnt">
                 <div class="item_title">
-                  <a href class="item_owner">{{item.user.nickname}}</a>
+                  <a href='javascript:void(0)' class="item_owner">{{item.user.nickname}}</a>
                   <i></i>
                   <img
                     v-show="item.user.vipRights!=null"
@@ -241,7 +247,7 @@ export default {
     checkIfLogin() {
       const login = this.$store.state.loginStatus;
       if (!login) {
-        alert("请先登陆");
+        this.$store.commit('updateShowLogin',true)
         return false;
       } else {
         return true;
@@ -566,7 +572,6 @@ export default {
   font-size: 20px;
   font-style: normal;
   color: #fff;
-  z-index: 2;
 }
 
 .input_cnt .input_btns {

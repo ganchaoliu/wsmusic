@@ -108,6 +108,7 @@
     width: 30px;
     height: 30px;    
     position: relative;
+    cursor: pointer;
 }
 
 .ne_head .head_img img{

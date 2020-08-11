@@ -22,11 +22,11 @@
             <add-button style="margin-right:10px"></add-button>
             <w-button
               :type="$store.state.userData.account.id===mySongList.creator.userId?'fav':'subscribed'"
-              v-slot:value :fav="true"
-            >{{favorsub}}</w-button>
-            <w-button type="share" v-slot:value>{{share_btn}}</w-button>
-            <w-button type="download" v-slot:value>下载</w-button>
-            <w-button type="comment" v-slot:value>{{comment_btn}}</w-button>
+               :fav="true"
+            ><template v-slot:value>{{favorsub}}</template></w-button>
+            <w-button type="share" ><template v-slot:value>{{share_btn}}</template></w-button>
+            <w-button type="download"></w-button>
+            <w-button type="comment"><template v-slot:value>{{comment_btn}}</template></w-button>
           </div>
           <div class="clear-fix"></div>
           <div class="tags" v-show="mySongList.tags.length>0">

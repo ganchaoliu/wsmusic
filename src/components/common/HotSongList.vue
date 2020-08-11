@@ -25,8 +25,8 @@
         <opt-buttons 
           :class="index === opt_btns_show?'showOptBtns':'hideOptBtns'" 
           @add='addtoplaylist(song.id,song.name,song.al,song.ar)'
-          @fav='fav(song.id)'
-          :btns='["add","fav","share","download"]'>
+          @del='del(song.id)'
+          :btns='["add","share","download","delete"]'>
         </opt-buttons>
       </div>
       </div>
@@ -40,6 +40,7 @@
       <div class="clear-fix"></div>
       
     </div>
+    <add-play-list v-show="showAddPLDialog" @close='showAddPLDialog=false' :opId='delSongId'></add-play-list>
     <!-- <el-pagination
       class="main_page"
       @size-change="handleSizeChange"
@@ -59,13 +60,17 @@ import { request } from "../../network/request";
 import { mapState,mapMutations } from 'vuex';
 import OptButtons from '../../components/common/OptButtons'
 
+import AddPlayList from '../../components/common/AddPlayList'
+
 export default {
   name: "HotSongList",
   data() {
     return {
       opt_btns_show: false,
       currentPage: 1,
-      type: 1
+      type: 1,      
+      showAddPLDialog:false,
+      delSongId:-1
     };
   },
   props: {
@@ -107,6 +112,15 @@ export default {
           alert("url为空无法播放");
         }
       });
+    },
+    del(id) {
+      if(this.$store.state.loginStatus){ 
+        this.delSongId = id         
+        this.showAddPLDialog = true
+      }else{
+          this.showAddPLDialog=false
+          this.$store.commit("updateShowLogin", true);
+      }
     },
      /*
      * 添加歌曲到播放列表
@@ -154,9 +168,6 @@ export default {
     removeActive() {
       this.opt_btns_show = -1;
     },
-    fav(id) {
-      console.log("收藏" + id);
-    }
   },
   filters: {
     formatSecond(second = 0) {
@@ -170,7 +181,8 @@ export default {
     ...mapState('musicplayer',['playlist','currentsong'])
   },
   components: {    
-  OptButtons
+  OptButtons,
+  AddPlayList
   }
 };
 </script>

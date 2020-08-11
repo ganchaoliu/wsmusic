@@ -126,12 +126,12 @@
 }
 
 .artist_tab ul li:hover{
-    border-top: 2px solid #31c27c;
+    border-top: 2px solid #c20c0c;
     cursor: pointer;
 }
 
 .artist_tab .tab_selected{
-    border-top: 2px solid #31c27c;
+    border-top: 2px solid #c20c0c;
     background-color: #fff;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;

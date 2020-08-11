@@ -282,8 +282,11 @@ export default {
           id: id
         }
       }).then(res => {
+        console.log('专辑'+id)
         this.album_pic = res.data.album.picUrl;
         this.album_pic_list.push(res.data.album.picUrl)
+      }).catch(err=>{
+        console.log('专辑'+id)
       });
     },
     //获取歌词信息

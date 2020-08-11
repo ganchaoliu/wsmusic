@@ -29,4 +29,7 @@ export default{
             }
             state.searchHistory.splice(0,0,payload)
         },
+        updateShowLogin(state,payload){
+            state.showLogin = payload
+        }
 }

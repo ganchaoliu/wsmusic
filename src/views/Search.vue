@@ -4,7 +4,7 @@
     <div class="search_body">
       <div class="search_input">
         <input type="text" v-model="searchValue" @keyup.enter="search(type)" />
-        <a href></a>
+        <a href='javascript:void(0)' @click="search(type)"></a>
       </div>
       <div class="search_history">
         <a href="#" v-for="(his,index) in searchHistory" :key="index" @click="history(his)">{{his}}</a>

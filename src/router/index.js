@@ -118,7 +118,7 @@ const routes= [
     name: 'video',
     component: Video,
     meta:{
-      title:'视频'
+      title:'video'
     }
   },
   {

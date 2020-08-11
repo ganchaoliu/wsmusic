@@ -21,7 +21,7 @@
                 class="list_item clear-fix"
               >
                 <div class="left_img">
-                  <img :src="item.coverImgUrl" alt />
+                  <img :src="item.coverImgUrl+'?param=40y40'" alt />
                 </div>
                 <div class="left_detail">
                   <p>{{item.name}}</p>
@@ -41,7 +41,7 @@
                 class="clear-fix"
               >
                 <div class="left_img">
-                  <img :src="item.coverImgUrl" alt />
+                  <img :src="item.coverImgUrl+'?param=40y40'" alt />
                 </div>
                 <div class="left_detail">
                   <p>{{item.name}}</p>

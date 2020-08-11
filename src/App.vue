@@ -1,12 +1,13 @@
 <template>
   <div id="app" class="app">
-    <net-ease-header class="header"></net-ease-header>
+    <net-ease-header class="header" ></net-ease-header>
     <div class="clear-fix"></div>
-    <router-view class="router_view"></router-view>
+    <router-view class="router_view" ></router-view>
     <music-player
       class="music_player"
       v-show="$route.name!='mv' && $route.name!='video'&&$route.name!='mymv'"
     ></music-player>
+    <login v-show="$store.state.showLogin"></login>
   </div>
 </template>
 
@@ -14,11 +15,24 @@
 import Header from "./components/content/Header";
 import NetEaseHeader from "./components/content/NetEaseHeader";
 import MusicPlayer from "./components/content/MusicPlayer";
+import Login from "./views/Login";
 export default {
   name: "App",
+  data(){
+    return{
+      showLog:true
+    }
+  },
+  methods: {
+    showLogin(event){
+      console.log(event)
+      this.showLog=event
+    }
+  },
   components: {
     MusicPlayer,
-    NetEaseHeader
+    NetEaseHeader,
+    Login
   },
   // 将store状态保存到localStorage中
   created() {

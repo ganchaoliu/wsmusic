@@ -32,11 +32,11 @@
         </li>
       </ul>
       <div class="ne_head">
-        <div class="head_img" @click="dialogFormVisible = true" v-if="$store.state.loginStatus">
+        <div class="head_img" @click="showLogin" v-if="$store.state.loginStatus">
           <img :src="$store.state.userData.profile.avatarUrl" alt />
           <i>99+</i>
         </div>
-        <div class="head_img" @click="dialogFormVisible = true" v-else>
+        <div class="head_img" @click="showLogin" v-else>
           <img src="../../assets/img/g.jpg" alt />
           <i>99+</i>
         </div>
@@ -51,8 +51,12 @@
             placeholder="音乐/视频/电台/用户/MV"
             v-model="searchValue"
             @keyup.enter="searchMusic"
+            autocomplete="off"
           />
         </span>
+        <ul class="history" v-show="false">
+          <li v-for="item in $store.state.searchHistory" :key="item">{{item}}</li>
+        </ul>
       </div>
     </div>
     <div class="main_subnav_line" v-show="selectedNav!==1"></div>
@@ -103,6 +107,11 @@ export default {
     };
   },
   methods: {
+    showLogin(){
+      if(!this.$store.state.loginStatus){
+        this.$store.commit('updateShowLogin',true)
+      }
+    },
     searchMusic() {
         this.selectedNav=-1
       if (this.searchValue != "") {
@@ -159,7 +168,12 @@ export default {
       this.$router.push(page);
       if(page==='mysonglist'){
           this.selectedNav = 2
-          this.$router.push('/mysonglist')
+          const login = this.$store.state.loginStatus
+          if(login){
+            this.$router.push('/mysonglist')
+          }else{
+            this.$store.commit('updateShowLogin',true)
+          }
       }
       if(page==='discover'){
           this.selectedNav = 1

@@ -5,34 +5,34 @@
         <h2>云音乐特色榜</h2>
         <ul v-if="toplist.length>0">
           <li v-for="item in tese" :key="item.id" class="item clear-fix">
-            <router-link :to="{name:'toplist',query:{id:item.id}}" tag='a'>
-                <div class="item_detail">
-              <div class="left">
-                <img :src="item.coverImgUrl" alt />
+            <router-link :to="{name:'toplist',query:{id:item.id}}" tag="a">
+              <div class="item_detail">
+                <div class="left">
+                  <img :src="item.coverImgUrl+'?param=40y40'" alt />
+                </div>
+                <p>{{item.name}}</p>
+                <p>{{item.updateFrequency}}</p>
               </div>
-              <p>{{item.name}}</p>
-              <p>{{item.updateFrequency}}</p>
-            </div>
             </router-link>
           </li>
         </ul>
         <h2>全球媒体榜</h2>
         <ul>
-           <li v-for="item in global" :key="item.id" class="item clear-fix">
-            <router-link :to="{name:'toplist',query:{id:item.id}}" tag='a'>
-                <div class="item_detail">
-              <div class="left">
-                <img :src="item.coverImgUrl" alt />
+          <li v-for="item in global" :key="item.id" class="item clear-fix">
+            <router-link :to="{name:'toplist',query:{id:item.id}}" tag="a">
+              <div class="item_detail">
+                <div class="left">
+                  <img :src="item.coverImgUrl+'?param=40y40'" alt />
+                </div>
+                <p>{{item.name}}</p>
+                <p>{{item.updateFrequency}}</p>
               </div>
-              <p>{{item.name}}</p>
-              <p>{{item.updateFrequency}}</p>
-            </div>
             </router-link>
           </li>
         </ul>
       </div>
       <div class="main_right">
-          <song-list></song-list>
+        <song-list></song-list>
       </div>
     </div>
   </div>
@@ -54,15 +54,14 @@ export default {
       }).then((res) => {
         console.log(res);
         this.toplist = res.data.list;
-        if(this.$route.query.id == undefined){
-            this.$router.push({
-                path:'toplist',
-                query:{
-                    id:this.toplist[0].id
-                }
-            })
+        if (this.$route.query.id == undefined) {
+          this.$router.push({
+            path: "toplist",
+            query: {
+              id: this.toplist[0].id,
+            },
+          });
         }
-        
       });
     },
   },
@@ -104,15 +103,14 @@ export default {
     },
   },
   components: {
-      SongList
-  }
+    SongList,
+  },
 };
 </script>
 
 <style lang="css" scoped>
-
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
 .toplist {
@@ -135,9 +133,9 @@ a{
   padding-top: 30px;
 }
 
-.toplist .toplist_main .main_left h2{
-    font-size: 14px;
-    padding: 0px 0px 10px 20px;
+.toplist .toplist_main .main_left h2 {
+  font-size: 14px;
+  padding: 0px 0px 10px 20px;
 }
 
 .toplist .toplist_main .main_left .item {
