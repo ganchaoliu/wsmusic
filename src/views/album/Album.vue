@@ -29,10 +29,10 @@
               <div class="album_btns">
                 <play-button @click="play"></play-button>
                 <add-button style="margin-right:5px" @click="add"></add-button>
-                <w-button type="fav" :sub='false' @click='fav' v-slot:value></w-button>
-                <w-button type="share" v-slot:value>({{dynamic.shareCount|formatNumber}})</w-button>
-                <w-button type="download" v-slot:value ></w-button>
-                <w-button type="comment"  v-slot:value>({{dynamic.commentCount|formatNumber}})</w-button>
+                <w-button type="fav" :sub='false' ></w-button>
+                <w-button type="share" ><template>({{dynamic.shareCount|formatNumber}})</template></w-button>
+                <w-button type="download" ></w-button>
+                <w-button type="comment" @click="goToComment"><template>({{dynamic.commentCount|formatNumber}})</template></w-button>
               </div>
             </div>
             <div class="clear-fix"></div>
@@ -65,7 +65,7 @@
         </div>
         <div class="clear-fix"></div>
         <div class="album_c clear-fix">
-          <comments :sourceId='$route.query.id+""' type='album'></comments>
+          <comments :sourceId='$route.query.id+""' type='album' ref="comment" :opId='opId'></comments>
         </div>
       </div>
       <div class="album_right">
@@ -84,6 +84,7 @@ import PlayButton from "../../components/common/PlayButton";
 import AddButton from "../../components/common/AddButton";
 import WButton from "../../components/common/WButton";
 import Comments from "../../views/comment/Comment"
+import AddPlayList from "../../views/dialog/AddPlayList"
 import SongList from "./SongList";
 import { request } from "../../network/request";
 const Error = ()=>import ('../../components/common/Error')
@@ -115,10 +116,13 @@ export default {
     WButton,
     SongList,
     Comments,
-    Error
+    Error,
+    AddPlayList
   },
   methods: {
-    fav(){
+    fav(id){
+      this.showAddPlDialog = true
+      this.opId = id
       console.log('w-button')
     },
     play(){
@@ -126,6 +130,9 @@ export default {
     },
     add(){
       console.log('add_button')
+    },
+    goToComment(){
+      this.$refs.comment.goToComment()
     },
     getAlbumDynamic(aid) {
       request({

@@ -36,11 +36,11 @@
               <div class="song_operation">
                 <play-button @click="playsong(songId, song.name, song.album, song.artist)"></play-button>
                 <add-button style="margin-right:10px"></add-button>
-                <w-button type="fav" ></w-button>
+                <w-button type="fav" @click="fav(songId)"></w-button>
                 <w-button type="share" >
                 </w-button>
                 <w-button type="download" >下载</w-button>
-                <w-button type="comment" ></w-button>
+                <w-button type="comment" @click="goToComment"></w-button>
               </div>
 
               <div class="song_lyric_content" >
@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="song_comments">
-          <comment :data="comments" :sourceId='$route.query.ids+""' type='music'></comment>
+          <comment :data="comments" :sourceId='$route.query.ids+""' type='music' ref="comment"></comment>
         </div>
       </div>
       <div class="song_right">
@@ -84,6 +84,7 @@
           </ul>
         </div>
       </div>
+      <add-play-list v-show="showAddPLDialog" :opId='songId' @close='showAddPLDialog=false'></add-play-list>
     </div>
     <error v-else ></error>
   </div>
@@ -96,6 +97,7 @@
   import AddButton from "../components/common/AddButton";
   import WButton from "../components/common/WButton";
   import Comment from "./comment/Comment";
+  import AddPlayList from './dialog/AddPlayList'
   import { mapMutations, mapState } from 'vuex';
   const Error = ()=>import ('../components/common/Error')
 
@@ -106,7 +108,8 @@ export default {
     AddButton,
     WButton,
     Comment,
-    Error
+    Error,
+    AddPlayList
   },
   data(){
     return{
@@ -122,7 +125,8 @@ export default {
       songs:[],
       lyric:[],
       comments:{},
-      hide:true
+      hide:true,
+      showAddPLDialog:false
     }
     
   },
@@ -151,6 +155,12 @@ export default {
         this.getSimiSong(songId)
         // this.getComments(songId)
       }
+    },
+    goToComment(){
+      this.$refs.comment.goToComment()
+    },
+    close(){
+      this.showAddPLDialog=false
     },
     playsong(id, name, album, artist) {
       request({
@@ -291,6 +301,9 @@ export default {
         console.log(err)
       })
     },
+    fav(id){
+      this.showAddPLDialog=true
+    }
   },
   computed:{
     ...mapState('musicplayer',['currentsong','playlist']),

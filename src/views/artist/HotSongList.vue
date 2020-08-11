@@ -35,16 +35,7 @@
       </div>
       <div class="clear-fix"></div>
     </div>
-    <!-- <el-pagination
-      class="main_page"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-sizes="[5, 10, 20, 40]"
-      :page-size="$store.state.pageLimit"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="$store.state.songCount"
-    ></el-pagination> -->
+    <add-play-list v-show="showAddPlDialog" @close='showAddPlDialog=false' :opId='opId'></add-play-list>
   </div>
 </template>
 
@@ -53,6 +44,7 @@ import { realFormatSecond } from "../../utils/common";
 import { request } from "../../network/request";
 import { mapState,mapMutations } from 'vuex';
 import OptButtons from '../../components/common/OptButtons'
+import AddPlayList from '../../views/dialog/AddPlayList'
 
 export default {
   name: "HotSongList",
@@ -60,7 +52,9 @@ export default {
     return {
       opt_btns_show: false,
       currentPage: 1,
-      type: 1
+      type: 1,
+      showAddPlDialog:false,
+      opId:-1
     };
   },
   props: {
@@ -150,6 +144,8 @@ export default {
       this.opt_btns_show = -1;
     },
     fav(id) {
+      this.showAddPlDialog=true
+      this.opId = id
       console.log("收藏" + id);
     }
   },
@@ -165,7 +161,8 @@ export default {
     ...mapState('musicplayer',['playlist','currentsong'])
   },
   components: {    
-  OptButtons
+  OptButtons,
+  AddPlayList
   }
 };
 </script>

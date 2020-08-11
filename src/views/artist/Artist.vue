@@ -31,7 +31,7 @@
           <div class="artist_btns">
             <play-button></play-button>
             <add-button style="margin-right:10px"></add-button>
-            <w-button type="fav" v-slot:value>收藏热门50</w-button>
+            <w-button type="fav" ><template>收藏热门50</template></w-button>
             <!-- <a href class="artist_btn_play">
               <i>
                 <em class="play_btn"></em>播放

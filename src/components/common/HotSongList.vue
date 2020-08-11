@@ -25,8 +25,9 @@
         <opt-buttons 
           :class="index === opt_btns_show?'showOptBtns':'hideOptBtns'" 
           @add='addtoplaylist(song.id,song.name,song.al,song.ar)'
+          @fav='fav(song.id)'
           @del='del(song.id)'
-          :btns='["add","share","download","delete"]'>
+          :btns='btnArray'>
         </opt-buttons>
       </div>
       </div>
@@ -76,6 +77,10 @@ export default {
   props: {
     HSongs:{
       type:Array
+    },
+    isCreator:{
+      type:Boolean,
+      default:false
     }
   },
   methods: {
@@ -178,7 +183,15 @@ export default {
     // hotSongs() {
     //   return this.$parent.hotSongs;
     // },
-    ...mapState('musicplayer',['playlist','currentsong'])
+    ...mapState('musicplayer',['playlist','currentsong']),
+    btnArray(){
+      if(this.isCreator){
+        return ["add","share","download","delete"]
+      }else{
+        return ["add","fav","share","download"]
+      }
+      
+    }
   },
   components: {    
   OptButtons,

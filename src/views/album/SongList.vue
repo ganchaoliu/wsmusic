@@ -53,6 +53,8 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="$store.state.songCount"
     ></el-pagination> -->
+    
+    <add-play-list v-show="showAddPLDialog" @close='showAddPLDialog=false' :opId='opId'></add-play-list>
   </div>
 </template>
 
@@ -61,6 +63,7 @@ import { realFormatSecond } from "../../utils/common";
 import { request } from "../../network/request";
 import { mapState,mapMutations } from 'vuex';
 import OptButtons from '../../components/common/OptButtons'
+import AddPlayList from '../dialog/AddPlayList'
 
 export default {
   name: "HotSongList",
@@ -68,7 +71,9 @@ export default {
     return {
       opt_btns_show: false,
       currentPage: 1,
-      type: 1
+      type: 1,
+      showAddPlDialog:false,
+      opId:-1,
     };
   },
   props: {
@@ -173,7 +178,8 @@ export default {
     ...mapState('musicplayer',['playlist','currentsong'])
   },
   components: {    
-  OptButtons
+    OptButtons,
+    AddPlayList
   }
 };
 </script>

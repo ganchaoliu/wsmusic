@@ -26,7 +26,7 @@
             ><template v-slot:value>{{favorsub}}</template></w-button>
             <w-button type="share" ><template v-slot:value>{{share_btn}}</template></w-button>
             <w-button type="download"></w-button>
-            <w-button type="comment"><template v-slot:value>{{comment_btn}}</template></w-button>
+            <w-button type="comment" @click="goToComment"><template v-slot:value>{{comment_btn}}</template></w-button>
           </div>
           <div class="clear-fix"></div>
           <div class="tags" v-show="mySongList.tags.length>0">
@@ -48,11 +48,11 @@
           <span class="playcount">播放：{{mySongList.playCount}}次</span>
         </div>
         <div class="sub_sl_bd">
-          <hot-song-list :HSongs="mySongList.tracks"></hot-song-list>
+          <hot-song-list :HSongs="mySongList.tracks" :isCreator="$store.state.userData.account.id===mySongList.creator.userId?true:false"></hot-song-list>
         </div>
 
         <div class="sub_comments" v-if="$route.query.id!==undefined">
-          <comments :sourceId ='$route.query.id+""' type='playlist'></comments>
+          <comments :sourceId ='$route.query.id+""' type='playlist' ref="comment"></comments>
         </div>
 
       </div>
@@ -97,6 +97,10 @@ export default {
   methods: {
     init(id) {
       this.getSongList(id);
+    },
+    goToComment(){
+      console.log("跳转到评论区");
+      this.$refs.comment.goToComment()
     },
     async getSongList(id) {
       await request({

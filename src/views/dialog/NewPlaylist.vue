@@ -12,6 +12,17 @@
 
 <script>
 export default {
+  data(){
+    return {
+      show:true
+    }
+  },
+  methods: {
+    close(){
+      this.$emit('close')
+      this.show=false
+    }
+  },
   directives: {
     drag: {
       bind(el) {

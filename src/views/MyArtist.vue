@@ -10,7 +10,7 @@
             <div class="cvr">
               <!--                            <a href=""><img :src="item.picUrl" alt="" class="singerimg"></a>-->
               <router-link :to="{path:'/artists',query:{id:item.id}}">
-                <img :src="item.picUrl" alt class="singerimg" />
+                <img :src="item.picUrl+'?param=80y80'" alt class="singerimg" />
               </router-link>
             </div>
             <div class="detail">

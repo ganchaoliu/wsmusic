@@ -1,7 +1,7 @@
 <template>
   <div class="comments">
     <div class="comments_input">
-      <div class="input_header">
+      <div class="input_header" ref="com_input">
         <h3>评论</h3>
         <span>共{{data.total}}条评论</span>
       </div>
@@ -18,7 +18,7 @@
             v-show="!$store.state.loginStatus"
           />
         </div>
-        <div class="input_cnt">
+        <div class="input_cnt" >
           <textarea placeholder="评论" v-model="comment_text" @click="checkIfLogin"></textarea>
           <div class="input_btns">
             <i class="input_icon"></i>
@@ -252,6 +252,9 @@ export default {
       } else {
         return true;
       }
+    },
+    goToComment(){
+      this.$refs.com_input.scrollIntoView();
     },
     newComment() {
       if (this.checkIfLogin()) {
