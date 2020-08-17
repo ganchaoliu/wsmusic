@@ -35,7 +35,7 @@
       </div>
       <div class="clear-fix"></div>
     </div>
-    <add-play-list v-show="showAddPlDialog" @close='showAddPlDialog=false' :opId='opId'></add-play-list>
+    <add-play-list :visiable="showAddPlDialog" @close='showAddPlDialog=false' :opId='opId+""'></add-play-list>
   </div>
 </template>
 

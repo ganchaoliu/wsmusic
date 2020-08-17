@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="song_main clear-fix" v-if="!loadingErr">
-      <div class="clear-fix"></div>
       <div class="song_left left">
         <div class="song_top">
           <div class="song_lyric">
@@ -48,7 +47,7 @@
                 </div>
                 <div class="hide_lyric" v-html="hideLyric(15)" v-show="!hide" @click='hide = !hide' title="点击我隐藏">
                 </div>
-                <p class="hideOperation" @click='hide = !hide' v-text="hide?'展开':'收起'"></p>
+                <p class="hideOperation" v-show="lyric.length>15" @click='hide = !hide' v-text="hide?'展开':'收起'"></p>
               </div>
             </div>
             <div class="clear-fix"></div>
@@ -84,7 +83,7 @@
           </ul>
         </div>
       </div>
-      <add-play-list v-show="showAddPLDialog" :opId='songId' @close='showAddPLDialog=false'></add-play-list>
+      <add-play-list :visiable="showAddPLDialog" :opId='songId' @close='showAddPLDialog=false'></add-play-list>
     </div>
     <error v-else ></error>
   </div>

@@ -54,7 +54,7 @@
       :total="$store.state.songCount"
     ></el-pagination> -->
     
-    <add-play-list v-show="showAddPLDialog" @close='showAddPLDialog=false' :opId='opId'></add-play-list>
+    <add-play-list :visiable="showAddPLDialog" @close='showAddPLDialog=false' :opId='opId'></add-play-list>
   </div>
 </template>
 
@@ -74,6 +74,7 @@ export default {
       type: 1,
       showAddPlDialog:false,
       opId:-1,
+      showAddPLDialog:false
     };
   },
   props: {
@@ -164,7 +165,10 @@ export default {
     },
     fav(id) {
       console.log("收藏" + id);
-    }
+      this.opId = id
+      this.showAddPLDialog=true
+    },
+
   },
   filters: {
     formatSecond(second = 0) {

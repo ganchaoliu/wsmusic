@@ -24,7 +24,7 @@
                   <img :src="item.coverImgUrl+'?param=40y40'" alt />
                 </div>
                 <div class="left_detail">
-                  <p>{{item.name}}</p>
+                  <p :title="item.name">{{item.name}}</p>
                   <p>{{item.trackCount}}首</p>
                 </div>
               </router-link>
@@ -44,7 +44,7 @@
                   <img :src="item.coverImgUrl+'?param=40y40'" alt />
                 </div>
                 <div class="left_detail">
-                  <p>{{item.name}}</p>
+                  <p :title="item.name">{{item.name}}</p>
                   <p>{{item.trackCount}}首</p>
                 </div>
               </router-link>
@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="songlist_right">
-        <router-view></router-view>
+        <router-view @update='childUpdate'></router-view>
       </div>
     </div>
   </div>
@@ -82,6 +82,10 @@ export default {
     showMycollectList() {
       this.cll_show = !this.cll_show;
     },
+    childUpdate(){
+      this.init()
+      console.log(' 子组件 更新');
+    },
     async getCollectArtist() {
       await request({
         url: "/api/artist/sublist"
@@ -103,11 +107,14 @@ export default {
       request({
         url: "/api/user/playlist",
         params: {
-          uid: userId
+          uid: userId,
+          timestamp:Date.parse(new Date())
         }
       }).then(res => {
         this.initData = res.data;
         let playlist = res.data.playlist;
+        this.myCreate_Songlist=[]
+        this.myCollect_Songlist=[]
         playlist.forEach(value => {
           if (value.userId === userId) {
             this.myCreate_Songlist.push(value);
@@ -118,19 +125,19 @@ export default {
         console.log(res);
       });
     },
-    init() {}
+    init() {
+      if (this.$store.state.loginStatus) {
+        let userId = this.$store.state.userData.account.id;
+        this.getCollectArtist();
+        this.getCollectMV();
+        this.getSonglist(userId);
+      } else {
+        this.$state.commit('updateShowLogin',true)
+      }
+    }
   },
   beforeMount() {
-    console.log("SongList挂载时执行");
-    if (this.$store.state.loginStatus) {
-      let userId = this.$store.state.userData.account.id;
-      this.getCollectArtist();
-      this.getCollectMV();
-      this.getSonglist(userId);
-    } else {
-      alert("请先登陆");
-      this.$router.push("/login");
-    }
+    this.init()
   },
   watch: {
     myCreate_Songlist(){

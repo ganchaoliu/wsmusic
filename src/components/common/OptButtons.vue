@@ -24,7 +24,7 @@ export default {
       this.$emit("download");
     },
     del() {
-      this.$emit("delete");
+      this.$emit("del");
     },
   },
   props: {

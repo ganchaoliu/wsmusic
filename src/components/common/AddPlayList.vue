@@ -1,11 +1,11 @@
 <template>
-  <div class="addplaylist" >
+  <div class="addplaylist" v-if="!isNew">
     <div class="head" v-drag>
       <i class="close_ico" @click="close"></i>
       <span>添加到歌单</span>
     </div>
     <div class="main">
-      <div class="newpl">
+      <div class="newpl" @click="isNew=true">
         <i class="add_ico"></i>新歌单
       </div>
       <ul class="mypl">
@@ -24,8 +24,8 @@
         </li>
       </ul>
     </div>
-    <new-playlist></new-playlist>
-  </div>
+  </div>  
+  <new-playlist v-else @addPlaylist='addToPlayList(id)' :opId='opId'></new-playlist>
 </template>
 
 <script>
@@ -37,6 +37,7 @@ export default {
       myCreate_Songlist: [],
       myCollect_Songlist: [],
       initData: {},
+      isNew:false
     };
   },
   props: {
@@ -87,13 +88,13 @@ export default {
           console.log(err);
         });
     },
-    addToPlayList(tracksId) {
+    addToPlayList(id) {
       if (this.opId !== -1) {
         request({
           url: "/api/playlist/tracks",
           params: {
             op: "add",
-            pid: tracksId,
+            pid: id,
             tracks: this.opId,
           },
         })

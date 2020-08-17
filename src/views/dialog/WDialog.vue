@@ -1,18 +1,15 @@
 <template>
-  <div class="newplaylist" v-show="show">
+  <div class="w_dialog" v-show="show">
     <div class="head" v-drag>
       <i class="close_ico" @click="close"></i>
       <span>新建歌单</span>
     </div>
     <div class="main">
-      <div class="input_ctn">
-        <label for="plname">歌单名：</label><input type="text" id="plname" v-model="name">  
-      </div>
-      <div class="buttons">
+      <slot name="input"></slot>
+    </div>
+    <div class="footer">
         <w-button type='confirm' :icon='false' @click="create"></w-button>
         <w-button type='cancel' :icon='false' @click="close"></w-button>
-      </div>
-      
     </div>
   </div>
 </template>
@@ -23,18 +20,24 @@ import {request} from '../../network/request'
 export default {
   data(){
     return {
+      show:true,
       name:''
     }
   },
   props: {
-    show:{
-      type:Boolean,
-      default:false
-    }
+    visiable:{
+        type:Boolean,
+        default:false
+    } ,
+    title:{
+        type:String,
+        default:'WDialog'
+    } 
   },
   methods: {
     close(){
       this.$emit('close')
+      this.show=false
     },
     create(){
       if(this.name!==''){
@@ -82,7 +85,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.newplaylist {
+.w_dialog {
   width: 480px;
   background-color: #fff;
   border-radius: 3px 3px 0 0;
@@ -93,7 +96,7 @@ export default {
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);
 }
 
-.newplaylist .head {
+.w_dialog .head {
   width: 480px;
   height: 38px;
   border-bottom: 1px solid #000;
@@ -107,7 +110,7 @@ export default {
   padding-left: 18px;
 }
 
-.newplaylist .head .close_ico {
+.w_dialog .head .close_ico {
   position: absolute;
   right: 15px;
   top: 15px;
@@ -118,19 +121,5 @@ export default {
   cursor: pointer;
 }
 
-.newplaylist .main{
-  margin-left: 30px;
-  padding: 30px 0px;
-}
-
-.newplaylist .main .buttons{
-  margin-top: 15px;
-  text-align: right;
-  padding-right: 30px;
-}
-
-.newplaylist .main .buttons .wbutton{
-  margin-right: 10px;
-}
 
 </style>

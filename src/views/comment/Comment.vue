@@ -26,7 +26,7 @@
             <a href="javascript:void(0)" class="input_submit" @click="newComment">评论</a>
             <span class="text_length">{{140-comment_text.length}}</span>
           </div>
-          <em class="arr">◇</em>
+          <em class="arr">◆</em>
           <em class="arr_clear">◆</em>
         </div>
       </div>
@@ -44,7 +44,7 @@
               <div class="item_cnt">
                 <div class="item_title">
                   <a href='javascript:void(0)' class="item_owner">{{item.user.nickname}}</a>
-                  <i></i>
+                  <i v-show="false"></i>
                   <img
                     v-show="item.user.vipRights!=null"
                     src="https://p1.music.126.net/y8pM-M1mytg6B1ThedCbJA==/109951163709550847.png?param=39y12"
@@ -272,7 +272,8 @@ export default {
             .then((res) => {
               console.log("评论成功");
               this.comment_text = "";
-              this.getComments(this.sourceId);
+              this.getComments(this.sourceId);              
+              this.$refs.new.scrollIntoView({ behavior: "smooth" });
             })
             .catch((err) => {
               // console.log(err)
@@ -565,13 +566,12 @@ export default {
   font-size: 20px;
   font-style: normal;
   color: #cdcdcd;
-  z-index: 1;
 }
 
 .input_body .input_cnt .arr_clear {
   position: absolute;
   top: 10px;
-  left: -5px;
+  left: -4px;
   font-size: 20px;
   font-style: normal;
   color: #fff;
@@ -742,7 +742,7 @@ span {
 
 .item_reply .arr_clear {
   position: absolute;
-  top: -9px;
+  top: -8px;
   left: 15px;
   font-style: normal;
   font-size: 20px;
@@ -777,17 +777,16 @@ span {
 
   font-size: 20px;
   font-style: normal;
-  z-index: 1;
 }
 
 .reply_comment .input_cnt .arr {
-  top: -11px;
+  top: -12px;
   right: 16px;
   color: #d9d9d9;
 }
 
 .reply_comment .input_cnt .arr_clear {
-  top: -9px;
+  top: -10px;
   right: 16px;
   color: #f8f8f8;
 }

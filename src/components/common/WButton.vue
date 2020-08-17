@@ -82,13 +82,13 @@ export default {
             return "添加";
             break  
         case "confirm":
-          this.btn_type = 'btn_blue'
-          this.btn_style_type = 'btn_style_blue'
+          this.btn_type = 'btn_white'
+          this.btn_style_type = 'btn_style_white'
             return "确认";
             break 
         case "cancel":
-          this.btn_type = 'btn_blue'
-          this.btn_style_type = 'btn_style_blue'
+          this.btn_type = 'btn_white'
+          this.btn_style_type = 'btn_style_white'
             return "取消";
             break    
       }

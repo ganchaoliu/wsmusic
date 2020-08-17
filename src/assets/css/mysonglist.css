@@ -94,4 +94,7 @@ p{
     font-size: 12px;
     font-family: "Microsoft YaHei UI";
     margin-bottom: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

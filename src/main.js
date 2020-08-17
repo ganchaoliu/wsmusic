@@ -20,14 +20,13 @@ router.beforeEach((to,from,next)=>{
   if(to.name=='toplist'){
     console.log('设置显示')
   }
-  // console.log(from)
   
   if(to.meta.title=='video'||to.meta.title=='MV'){
     console.log('播放视频')
     store.state.musicplayer.music_player.pause()
   }else{
     console.log('播放音乐')
-    store.state.musicplayer.music_player.play()
+    // store.state.musicplayer.music_player.play()
   }
   next()
 })

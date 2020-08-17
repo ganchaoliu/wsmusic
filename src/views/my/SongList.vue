@@ -22,11 +22,17 @@
             <add-button style="margin-right:10px"></add-button>
             <w-button
               :type="$store.state.userData.account.id===mySongList.creator.userId?'fav':'subscribed'"
-               :fav="true"
-            ><template v-slot:value>{{favorsub}}</template></w-button>
-            <w-button type="share" ><template v-slot:value>{{share_btn}}</template></w-button>
+              :fav="true"
+            >
+              <template v-slot:value>{{favorsub}}</template>
+            </w-button>
+            <w-button type="share">
+              <template v-slot:value>{{share_btn}}</template>
+            </w-button>
             <w-button type="download"></w-button>
-            <w-button type="comment" @click="goToComment"><template v-slot:value>{{comment_btn}}</template></w-button>
+            <w-button type="comment" @click="goToComment">
+              <template v-slot:value>{{comment_btn}}</template>
+            </w-button>
           </div>
           <div class="clear-fix"></div>
           <div class="tags" v-show="mySongList.tags.length>0">
@@ -48,13 +54,17 @@
           <span class="playcount">播放：{{mySongList.playCount}}次</span>
         </div>
         <div class="sub_sl_bd">
-          <hot-song-list :HSongs="mySongList.tracks" :isCreator="$store.state.userData.account.id===mySongList.creator.userId?true:false"></hot-song-list>
+          <hot-song-list
+            :HSongs="mySongList.tracks"
+            @update="updateAfterDel"
+            :pid="$route.query.id"
+            :isCreator="$store.state.userData.account.id===mySongList.creator.userId?true:false"
+          ></hot-song-list>
         </div>
 
         <div class="sub_comments" v-if="$route.query.id!==undefined">
-          <comments :sourceId ='$route.query.id+""' type='playlist' ref="comment"></comments>
+          <comments :sourceId="$route.query.id+''" type="playlist" ref="comment"></comments>
         </div>
-
       </div>
     </div>
   </div>
@@ -79,7 +89,7 @@ export default {
     WButton,
     OptButtons,
     HotSongList,
-    Comments
+    Comments,
   },
   data() {
     return {
@@ -90,23 +100,23 @@ export default {
           nickname: "",
         },
         name: "",
-      },      
-      comments:{}
+      },
+      comments: {},
     };
   },
   methods: {
     init(id) {
       this.getSongList(id);
     },
-    goToComment(){
-      console.log("跳转到评论区");
-      this.$refs.comment.goToComment()
+    goToComment() {
+      this.$refs.comment.goToComment();
     },
     async getSongList(id) {
       await request({
         url: "/api/playlist/detail",
         params: {
           id: id,
+          timestamp: Date.parse(new Date()),
         },
       })
         .then((res) => {
@@ -115,6 +125,14 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    updateAfterDel(add) {
+      console.log('HSong删除了');
+      let id = this.$route.query.id;
+      if (id !== undefined) {
+        this.init(id);
+      }
+      this.$emit('update')
     },
   },
   computed: {

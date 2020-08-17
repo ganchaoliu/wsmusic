@@ -7,7 +7,7 @@
       class="music_player"
       v-show="$route.name!='mv' && $route.name!='video'&&$route.name!='mymv'"
     ></music-player>
-    <login v-show="$store.state.showLogin"></login>
+    <login v-if="$store.state.showLogin"></login>
   </div>
 </template>
 

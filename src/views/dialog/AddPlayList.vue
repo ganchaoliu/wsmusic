@@ -1,49 +1,58 @@
 <template>
-  <div class="addplaylist" >
-    <div class="head" v-drag>
-      <i class="close_ico" @click="close"></i>
-      <span>添加到歌单</span>
-    </div>
-    <div class="main">
-      <div class="newpl">
-        <i class="add_ico"></i>新歌单
+  <div class="addplaylist" v-if="visiable">
+      <div class="head" v-drag>
+        <i class="close_ico" @click="close"></i>
+        <span>{{title}}</span>
       </div>
-      <ul class="mypl">
-        <li
-          class="mypl_item"
-          @click="addToPlayList(item.id)"
-          v-for="item in myCreate_Songlist"
-          :key="item.id"
-        >
-          <div class="pl_cvr">
-            <img :src="item.coverImgUrl+'?param=40y40'" alt="cvr" />
-          </div>
-          <p class="item_title">{{item.name}}</p>
-          <p class="item_count">{{item.trackCount}}</p>
-          <div class="clear-fix"></div>
-        </li>
-      </ul>
-    </div>
-    <new-playlist></new-playlist>
+      <div class="main">
+        <div class="newpl" @click="isNew=true">
+          <i class="add_ico"></i>新歌单
+        </div>
+        <ul class="mypl">
+          <li
+            class="mypl_item"
+            @click="addToPlayList(item.id)"
+            v-for="item in myCreate_Songlist"
+            :key="item.id"
+          >
+            <div class="pl_cvr">
+              <img :src="item.coverImgUrl+'?param=40y40'" alt="cvr"/>
+            </div>
+            <p class="item_title">{{item.name}}</p>
+            <p class="item_count">{{item.trackCount}}</p>
+            <div class="clear-fix"></div>
+          </li>
+        </ul>
+      </div>
+      <new-playlist @addPlaylist='addToPlayList' v-show="isNew" @close='isNew=false'></new-playlist>
   </div>
+    
 </template>
 
 <script>
 import { request } from "../../network/request";
-import NewPlaylist from "../../views/dialog/NewPlaylist"
+import NewPlaylist from "../../views/dialog/NewPlaylist";
 export default {
   data() {
     return {
       myCreate_Songlist: [],
       myCollect_Songlist: [],
       initData: {},
+      isNew: false,
     };
   },
   props: {
+    visiable:{
+      type:Boolean,
+      default:false
+    },
     opId: {
       type: Number,
       default: -1,
     },
+    title:{
+      type:String
+    }
   },
   methods: {
     init() {
@@ -53,6 +62,9 @@ export default {
       } else {
         this.$store.commit("updateShowLogin", true);
       }
+    },
+    changeToAdd() {
+      this.isNew = true;
     },
     drag(event) {
       let mouseX = event.pageX;
@@ -68,12 +80,13 @@ export default {
         url: "/api/user/playlist",
         params: {
           uid: userId,
+          timestamp:Date.parse(new Date())
         },
       })
         .then((res) => {
           this.initData = res.data;
           let playlist = res.data.playlist;
-          this.myCreate_Songlist = []
+          this.myCreate_Songlist = [];
           playlist.forEach((value) => {
             if (value.userId === userId) {
               this.myCreate_Songlist.push(value);
@@ -101,14 +114,16 @@ export default {
             console.log(res);
             if (res.data.body.code == 200) {
               alert("收藏成功");
-            }else if(res.data.body.code == 502){
-                alert("歌单内歌曲重复");
+              this.$emit('added')
+              this.init()
+            } else if (res.data.body.code == 502) {
+              alert("歌单内歌曲重复");
             }
-            this.close()
+            this.close();
           })
           .catch((err) => {
             console.log(err);
-            this.close()
+            this.close();
           });
       }
     },
@@ -138,17 +153,23 @@ export default {
       },
     },
   },
-  created() {
+  mounted () {
     this.init();
   },
+  computed: {
+    status(){
+      return this.favId
+    }
+  },
   watch: {
-      favId(){
-          this.init()
-      }
+    status() {
+      console.log('id变动了');
+      this.init();
+    },
   },
   components: {
-      NewPlaylist
-  }
+    NewPlaylist,
+  },
 };
 </script>
 
@@ -187,6 +208,13 @@ export default {
   background: url("../../assets/img/layer.png") no-repeat;
   background-position: 0 -95px;
   cursor: pointer;
+}
+
+.main{
+    max-height: 375px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 0px;
 }
 
 .main .newpl {

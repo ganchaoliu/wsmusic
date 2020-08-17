@@ -17,7 +17,7 @@
                 :preview-src-list="album_pic_list">
         </el-image>
 <!--        <img :src="album_pic" />-->
-        <a href="/song?id=1363948882" hidefocus="true" class="mask"></a>
+        <!-- <a href="/song?id=1363948882" hidefocus="true" class="mask"></a> -->
       </div>
 
       <div class="play">
@@ -120,9 +120,7 @@ export default {
       let playPromise = this.$refs.audio.play();
       if(playPromise){
         playPromise.then(()=>{
-          console.log('音频加载成功')
         }).catch((e)=>{
-          console.log('音频加载失败，重新加载')
           this.play()
         })
       }
